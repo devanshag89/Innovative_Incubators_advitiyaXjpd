@@ -2,10 +2,10 @@ import React from "react";
 
 const LoginForm = () => {
   return (
-    <div className="bg-blue-400 h-screen w-screen">
+    <div className="bg-white h-screen w-screen">
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0">
         <div
-          className="flex rounded-lg shadow-lg w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
+          className="flex rounded-lg shadow-2xl w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
           style={{ height: "500px" }}
         >
           {/* Left Content */}
@@ -68,7 +68,7 @@ const LoginForm = () => {
             className="hidden md:block md:w-1/2 rounded-r-lg"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1515965885361-f1e0095517ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80')",
+                "url('https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9fda3c124033301.60fb358ada582.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center center",
             }}
