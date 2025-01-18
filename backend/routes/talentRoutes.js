@@ -1,5 +1,5 @@
 const express = require("express");
-const { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile } = require("../controllers/talentController");
+const { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile, getTalent } = require("../controllers/talentController");
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
@@ -36,4 +36,5 @@ router.post("/talentlogin", talentLogin);
 // Add Talent profile with photo
 router.post('/addtalent', upload.single('profilePhoto'), addTalentProfile);
 
+router.get('/gettalent',getTalent);
 module.exports = router;

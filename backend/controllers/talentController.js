@@ -118,4 +118,26 @@ const addTalentProfile = async (req, res) => {
   }
 };
 
-module.exports = { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile };
+const getTalent=async(req,res)=>{
+   try{
+    const { email } = req.query;
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required as a query parameter' });
+    }
+    const talent = await Talent.findOne({ email });
+
+    if (!talent) {
+      return res.status(404).json({ error: 'Talent profile not found' });
+    }
+
+    res.status(200).json({ message: 'Talent profile retrieved successfully', talent });
+  } 
+  catch (err) {
+    console.error('Error retrieving talent profile:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+
+
+}
+
+module.exports = { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile,getTalent };

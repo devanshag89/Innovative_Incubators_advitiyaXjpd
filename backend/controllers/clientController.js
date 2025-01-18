@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Client = require("../models/Client");
 const HireRequest = require("../models/HireRequest");
-const Talent = require("../models/Talent");
+const Talent =require('../models/talent')
 const sendNotification = require("../utils/sendNotification");
 
 // Client Registration
@@ -37,6 +37,7 @@ const clientSignup = async (req, res) => {
 // Client Login
 const clientLogin = async (req, res) => {
   const { email, password } = req.body;
+  
   try {
     // Find client by email
     const client = await Client.findOne({ email });
@@ -49,10 +50,11 @@ const clientLogin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
+     
 
     // Generate JWT token
     const token = jwt.sign({ id: client._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-
+  
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     res.status(500).json({ message: "Error during login", error: error.message });

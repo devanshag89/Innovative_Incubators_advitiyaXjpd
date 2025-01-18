@@ -13,5 +13,6 @@ const talentSchema = new mongoose.Schema({
   otpExpiry: { type: Date, required: false },
 });
 
+const Talent = mongoose.models.Talent || mongoose.model('Talent', talentSchema);
 
-module.exports = mongoose.model('Talent', talentSchema);
+module.exports = Talent;
