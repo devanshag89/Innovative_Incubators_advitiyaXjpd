@@ -54,7 +54,7 @@ const LoginForm = () => {
                 <div className="text-center">
                     <a
                       className="no-underline hover:underline text-blue-dark text-xs"
-                      href="/talentsignup"
+                      href="/talent-signup"
                     >
                       Or! SignUp?
                     </a>

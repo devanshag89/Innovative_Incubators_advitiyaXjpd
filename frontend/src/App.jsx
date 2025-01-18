@@ -15,10 +15,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/talent/login' Component={LoginForm}/>
+          <Route path='/talent-login' Component={LoginForm}/>
           <Route path='/' Component={Dashboard}/>
           <Route path='/talent' Component={TalentDashboard}/>
-          <Route path='/talent/signup' Component={SignupForm}/>
+          <Route path='/talent-signup' Component={SignupForm}/>
           <Route path='/admin/login' Component={AdminLogin}/>
           <Route path='/admin/' Component={AdminDashboard}/>
           <Route path='/completeprofile' Component={CompleteProfile}/>

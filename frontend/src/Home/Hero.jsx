@@ -26,7 +26,7 @@ const Hero = ({ id }) => {
       {/* Buttons Section */}
       <div className="flex flex-col md:flex-row gap-4 mt-8 z-10 relative">
         {/* Home Button */}
-        <a href="/talentlogin" className="bg-white border border-gray-300 shadow-md hover:shadow-lg hover:bg-green-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4">
+        <a href="/talent-login" className="bg-white border border-gray-300 shadow-md hover:shadow-lg hover:bg-green-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4">
           <span className="text-gray-700 font-medium">
             Got talent to offer?
           </span>
