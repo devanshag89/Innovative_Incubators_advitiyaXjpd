@@ -1,9 +1,6 @@
+import 
 
-
-
-  
-
-  
+import LoginForm from "./Talent/Login"
 
 function App() {
   return (
