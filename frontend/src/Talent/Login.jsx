@@ -11,7 +11,8 @@ const LoginForm = () => {
           {/* Left Content */}
           <div className="flex flex-col w-full md:w-1/2 p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center font-thin">Welcome Back</h1>
+              <h1 className="text-4xl text-center font-bold text-gray-700">ShowcaseX</h1>
+              <h1 className="text-xl text-center font-normal mt-4">Login as a Talent</h1>
               <div className="w-full mt-4">
                 <form className="form-horizontal w-3/4 mx-auto" method="POST" action="#">
                   <div className="flex flex-col mt-4">
@@ -33,18 +34,15 @@ const LoginForm = () => {
                       placeholder="Password"
                     />
                   </div>
-                  <div className="flex items-center mt-4">
-                    <input
-                      type="checkbox"
-                      name="remember"
-                      id="remember"
-                      className="mr-2"
-                    />
-                    <label htmlFor="remember" className="text-sm text-grey-dark">
-                      Remember Me
-                    </label>
+                  <div className="text-right">
+                    <a
+                      className="no-underline hover:underline text-blue-dark text-xs"
+                      href="#"
+                    >
+                      Forgot Your Password?
+                    </a>
                   </div>
-                  <div className="flex flex-col mt-8">
+                  <div className="flex flex-col mt-4">
                     <button
                       type="submit"
                       className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
@@ -53,13 +51,13 @@ const LoginForm = () => {
                     </button>
                   </div>
                 </form>
-                <div className="text-center mt-4">
-                  <a
-                    className="no-underline hover:underline text-blue-dark text-xs"
-                    href="#"
-                  >
-                    Forgot Your Password?
-                  </a>
+                <div className="text-center">
+                    <a
+                      className="no-underline hover:underline text-blue-dark text-xs"
+                      href="/talentsignup"
+                    >
+                      Or! SignUp?
+                    </a>
                 </div>
               </div>
             </div>
