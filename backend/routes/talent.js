@@ -59,8 +59,8 @@ router.post('/addtalent',upload.single('profilePhoto'),async (req,res)=>{
 
 })
 
-// router.get('/gettalent',async(req,res)=>{
-//     const user=await talentSchema.findById({})
-// })
+router.get('/gettalent',async(req,res)=>{
+     
+})
 
 module.exports=router;
