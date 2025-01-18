@@ -2,7 +2,17 @@ const router=require('express').Router();
 const talentSchema=require('../models/talent');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
-const cloudinary=require('../config/cloudinary')
+
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,  
+  api_key: process.env.CLOUDINARY_API_KEY,       
+  api_secret: process.env.CLOUDINARY_API_SECRET,  
+});
+ 
+
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
@@ -14,7 +24,8 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage });
  
 
-router.post('/addTalent',upload.single('profilePhoto'),async (req,res)=>{
+ 
+router.post('/addtalent',upload.single('profilePhoto'),async (req,res)=>{
     try{
   
    const{name,
@@ -28,7 +39,7 @@ router.post('/addTalent',upload.single('profilePhoto'),async (req,res)=>{
   const profilePhoto = req.file ? req.file.path : null;
 
 
-  const newTalent = new Talent({
+  const newTalent = new talentSchema({
     name,
     email,
     phoneNo,
@@ -39,6 +50,7 @@ router.post('/addTalent',upload.single('profilePhoto'),async (req,res)=>{
   });
 
   await newTalent.save();
+  res.status(201).json({ message: 'Talent profile created successfully', talent: newTalent });
         
 }catch(err){
     console.error('Error creating talent profile:', err);
@@ -46,5 +58,9 @@ router.post('/addTalent',upload.single('profilePhoto'),async (req,res)=>{
 }
 
 })
+
+// router.get('/gettalent',async(req,res)=>{
+//     const user=await talentSchema.findById({})
+// })
 
 module.exports=router;
