@@ -1,7 +1,11 @@
 
-function App() {
+
+
   
 
+  
+
+function App() {
   return (
     <>
       <h1>ShowcaseX</h1>
