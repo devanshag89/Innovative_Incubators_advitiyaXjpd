@@ -11,6 +11,8 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
+//readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/'+route)));
+
 
 const server = () => {
     app.listen(port, () => {
