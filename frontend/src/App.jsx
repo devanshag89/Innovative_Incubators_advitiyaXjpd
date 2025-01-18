@@ -1,6 +1,6 @@
-import 
 
-import LoginForm from "./Talent/Login"
+import './index.css';
+
 
 function App() {
   return (
