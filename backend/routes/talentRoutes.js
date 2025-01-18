@@ -1,15 +1,39 @@
 const express = require("express");
-const { talentSignup, verifyTalentOTP, talentLogin } = require("../controllers/talentController");
+const { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile } = require("../controllers/talentController");
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'talent_profiles',
+    allowed_formats: ['jpg', 'jpeg', 'png'],
+  },
+});
+
+const upload = multer({ storage });
 
 const router = express.Router();
 
-// Talent Signup
-router.post("/signup", talentSignup);
+// Talent Signup route
+router.post("/talentsignup", talentSignup);
 
-// Verify OTP
-router.post("/verify-otp", verifyTalentOTP);
+// Verify OTP route
+router.post("/talentverify-otp", verifyTalentOTP);
 
-// Talent Login
-router.post("/login", talentLogin);
+// Talent Login route
+router.post("/talentlogin", talentLogin);
+
+// Add Talent profile with photo
+router.post('/addtalent', upload.single('profilePhoto'), addTalentProfile);
 
 module.exports = router;

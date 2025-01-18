@@ -1,11 +1,11 @@
 require('dotenv').config();
-const express = require("express");
-const cors = require("cors");
-const { db } = require("./config/db");
-const { readdirSync } = require("fs");
+const express = require('express');
+const cors = require('cors');
+const { db } = require('./config/db');
+const { readdirSync } = require('fs');
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(cors());
@@ -17,7 +17,7 @@ readdirSync("./routes").map((route) => app.use("/api/v1", require("./routes/" + 
 // Server function
 const server = () => {
   app.listen(port, () => {
-    console.log("Server is listening on port 4000");
+    console.log(`Server is listening on port ${port}`);
     db();
   });
 };

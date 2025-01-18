@@ -4,10 +4,10 @@ const { clientSignup, clientLogin, hireTalent } = require("../controllers/client
 const router = express.Router();
 
 // Client Signup route
-router.post("/signup", clientSignup);
+router.post("/clientsignup", clientSignup);
 
 // Client Login route
-router.post("/login", clientLogin);
+router.post("/clientlogin", clientLogin);
 
 // Hire Talent route
 router.post("/hire", hireTalent);

@@ -9,9 +9,7 @@ const sendOTP = async (email) => {
   const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
   const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
 
-  // Optionally integrate email notification here
   console.log(`OTP for ${email}: ${otp}`);
-
   return { otp, otpExpiry };
 };
 
@@ -97,4 +95,27 @@ const talentLogin = async (req, res) => {
   }
 };
 
-module.exports = { talentSignup, verifyTalentOTP, talentLogin };
+// Add Talent Profile with Photo
+const addTalentProfile = async (req, res) => {
+  try {
+    const {  phoneNo, category, skills, personalDescription } = req.body;
+    const profilePhoto = req.file ? req.file.path : null; // Profile photo URL from Cloudinary
+
+    const newTalent = new Talent({
+      phoneNo,
+      category,
+      skills,
+      personalDescription,
+      profilePhoto,
+    });
+
+    await newTalent.save();
+    res.status(201).json({ message: 'Talent profile created successfully', talent: newTalent });
+
+  } catch (err) {
+    console.error('Error creating talent profile:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+module.exports = { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile };
