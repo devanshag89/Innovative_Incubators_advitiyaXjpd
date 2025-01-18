@@ -44,9 +44,6 @@ const TalentDashboard = () => {
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Chatbox
               </h2>
-              <div className="flex items-center space-x-4">
-                <div className="relative w-24 h-24">{/* content */}</div>
-              </div>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm">

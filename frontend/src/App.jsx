@@ -6,6 +6,8 @@ import SignupForm from './Talent/Signup';
 import CompleteProfile from './Talent/Talentprofile';
 import Dashboard from './Home/Dashboard';
 import TalentDashboard from './Talent/TalentDashboard';
+import AdminLogin from './Admin/AdminLogin';
+import AdminDashboard from './Admin/AdminDashboard';
 
 
 function App() {
@@ -13,10 +15,12 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/talentlogin' Component={LoginForm}/>
+          <Route path='/talent/login' Component={LoginForm}/>
           <Route path='/' Component={Dashboard}/>
-          <Route path='/talentdashboard' Component={TalentDashboard}/>
-          <Route path='/talentsignup' Component={SignupForm}/>
+          <Route path='/talent' Component={TalentDashboard}/>
+          <Route path='/talent/signup' Component={SignupForm}/>
+          <Route path='/admin/login' Component={AdminLogin}/>
+          <Route path='/admin/' Component={AdminDashboard}/>
           <Route path='/completeprofile' Component={CompleteProfile}/>
         </Routes>
       </Router>
