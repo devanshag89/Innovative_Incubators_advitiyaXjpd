@@ -146,6 +146,7 @@ const addTalentProfile = async (req, res) => {
       profilePhoto,
       password: 'innovative'
     });
+    await newTalent.save();
 
     // Twilio Credentials from your account
     const accountSid = process.env.TWILIO_ACCOUNT_SID
@@ -200,5 +201,6 @@ const getTalent=async(req,res)=>{
 
 
 }
+
 
 module.exports = { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile,getTalent };

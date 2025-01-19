@@ -48,4 +48,6 @@ const rejectTalentProfile = async (req, res) => {
   }
 };
 
+
+
 module.exports = { approveTalentProfile,rejectTalentProfile };
