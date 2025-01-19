@@ -8,18 +8,26 @@ const LoginForm = () => {
           className="flex rounded-lg shadow-2xl w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
           style={{ height: "500px" }}
         >
-          {/* Left Content */}
+         
           <div className="flex flex-col w-full md:w-1/2 p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center font-bold text-gray-700">ShowcaseX</h1>
-              <h1 className="text-xl text-center font-normal mt-4">Login as a Talent</h1>
+              <h1 className="text-4xl text-center font-bold text-purple-700">
+                ShowcaseX
+              </h1>
+              <h2 className="text-xl text-center font-normal mt-4 text-purple-500">
+                Login as a Talent
+              </h2>
               <div className="w-full mt-4">
-                <form className="form-horizontal w-3/4 mx-auto" method="POST" action="#">
+                <form
+                  className="form-horizontal w-3/4 mx-auto"
+                  method="POST"
+                  action="#"
+                >
                   <div className="flex flex-col mt-4">
                     <input
                       id="email"
                       type="text"
-                      className="flex-grow h-8 px-2 border rounded border-grey-400"
+                      className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                       name="email"
                       placeholder="Email"
                     />
@@ -28,15 +36,15 @@ const LoginForm = () => {
                     <input
                       id="password"
                       type="password"
-                      className="flex-grow h-8 px-2 rounded border border-grey-400"
+                      className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                       name="password"
                       required
                       placeholder="Password"
                     />
                   </div>
-                  <div className="text-right">
+                  <div className="text-right mt-2">
                     <a
-                      className="no-underline hover:underline text-blue-dark text-xs"
+                      className="no-underline hover:underline text-purple-500 text-xs"
                       href="#"
                     >
                       Forgot Your Password?
@@ -45,34 +53,32 @@ const LoginForm = () => {
                   <div className="flex flex-col mt-4">
                     <button
                       type="submit"
-                      className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
+                      className="bg-purple-500 hover:bg-purple-700 text-white text-sm font-semibold py-2 px-4 rounded"
                     >
                       Login
                     </button>
                   </div>
                 </form>
-                <div className="text-center">
-                    <a
-                      className="no-underline hover:underline text-blue-dark text-xs"
-                      href="/talent-signup"
-                    >
-                      Or! SignUp?
-                    </a>
+                <div className="text-center mt-4">
+                  <a
+                    className="no-underline hover:underline text-purple-500 text-xs"
+                    href="/talent-signup"
+                  >
+                    Don't have an account?  SignUp
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Image */}
-          <div
-            className="hidden md:block md:w-1/2 rounded-r-lg"
-            style={{
-              backgroundImage:
-                "url('https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9fda3c124033301.60fb358ada582.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-          ></div>
+          {/* Image Section */}
+          <div className="hidden md:block md:w-1/2 rounded-r-lg">
+            <img
+              src="/images/login-img.png"
+              alt="A welcoming login illustration"
+              className="w-full h-full object-cover rounded-r-lg"
+            />
+          </div>
         </div>
       </div>
     </div>

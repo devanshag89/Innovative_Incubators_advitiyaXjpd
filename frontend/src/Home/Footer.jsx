@@ -3,11 +3,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 text-black py-1 px-2">
+    <footer className="bg-purple-200 text-black py-1 px-2">
       <div className="ml-10 mr-10">
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-2">
           
-          {/* Company Section */}
           <div className="p-6">
             <h2 className="font-bold text-lg">COMPANY</h2>
             <p className="mt-4 text-sm">
@@ -15,7 +14,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Contact Section */}
           <div className="p-6 space-y-6">
             <div>
               <h3 className="text-xl font-semibold flex items-center gap-2">
@@ -32,7 +30,7 @@ const Footer = () => {
             
           </div>
 
-          {/* Services Section */}
+          
           <div className="p-6">
             <h2 className="font-bold text-lg">SERVICES</h2>
             <p className="mt-4 text-sm">
