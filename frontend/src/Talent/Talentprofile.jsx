@@ -71,7 +71,7 @@ const CompleteProfile = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-purple-200 to-purple-300 p-8">
       {/* Left Section: Profile Picture and Basic Info */}
       <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg lg:w-1/3">
         {/* Profile Picture */}

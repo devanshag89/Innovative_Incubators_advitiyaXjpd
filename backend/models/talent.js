@@ -4,6 +4,7 @@ const talentSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    phoneNo: { type: String, required: false},
     category: { type: String, required: false },
     skills: { type: [String], required: false },
     personalDescription: { type: String, required: false },
@@ -20,15 +21,6 @@ const talentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-// Pre-save hook to handle empty `phoneNo`
-talentSchema.pre('save', function (next) {
-  if (this.phoneNo === '') {
-    this.phoneNo = null; // Convert empty strings to null
-  }
-  next();
-});
-
 
 
 const Talent = mongoose.models.Talent || mongoose.model('Talent', talentSchema);
