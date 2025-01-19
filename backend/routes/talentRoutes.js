@@ -1,9 +1,17 @@
 const express = require("express");
-const { talentSignup, verifyTalentOTP, talentLogin, addTalentProfile, getTalent } = require("../controllers/talentController");
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-require('dotenv').config();
+const {
+  talentSignup,
+  verifyTalentOTP,
+  talentLogin,
+  addTalentProfile,
+  approveTalent,
+  rejectTalent,
+  getTalent,
+} = require("../controllers/talentController");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
 
 // Cloudinary configuration
 cloudinary.config({
@@ -12,12 +20,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
+// Multer configuration for Cloudinary
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'talent_profiles',
-    allowed_formats: ['jpg', 'jpeg', 'png'],
+    folder: "talent_profiles",
+    allowed_formats: ["jpg", "jpeg", "png"],
   },
 });
 
@@ -35,7 +43,15 @@ router.post("/talentverify-otp", verifyTalentOTP);
 router.post("/talentlogin", talentLogin);
 
 // Add Talent profile with photo
-router.post('/addtalent', upload.single('profilePhoto'), addTalentProfile);
+router.post("/addtalent", upload.single("profilePhoto"), addTalentProfile);
 
-router.get('/gettalent',getTalent);
+// Approve Talent route (Admin)
+router.post("/approvetalent", approveTalent);
+
+// Reject Talent route (Admin)
+router.post("/rejecttalent", rejectTalent);
+
+// Get Talent by email
+router.get("/gettalenttalent", getTalent);
+
 module.exports = router;
