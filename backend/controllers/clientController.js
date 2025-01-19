@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Client = require("../models/Client");
 const HireRequest = require("../models/HireRequest");
-const Talent =require('../models/talent')
+const Talent =require('../models/Talent')
 const sendNotification = require("../utils/sendNotification");
 
 // Client Registration
