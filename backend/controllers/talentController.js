@@ -143,8 +143,12 @@ const addTalentProfile = async (req, res) => {
       profilePhoto,
     });
 
-    await newTalent.save();
-    res.status(201).json({ message: 'Talent profile created successfully', talent: newTalent });
+    if (global.io) {
+      global.io.emit('newTalent', { talent: newTalent });
+    }
+
+    // await newTalent.save();
+    res.status(201).json({ message: 'Talent profile sent successfully', talent: newTalent });
 
   } catch (err) {
     console.error('Error creating talent profile:', err);
