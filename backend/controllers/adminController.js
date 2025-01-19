@@ -1,5 +1,5 @@
-const Talent = require("../models/Talent");
-const nodemailer = require("nodemailer");
+const Talent = require("../models/talent");
+
 
 
 

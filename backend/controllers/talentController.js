@@ -4,7 +4,7 @@ const Talent = require("../models/talent");
 const sendNotification = require("../utils/sendNotification");
 const nodemailer = require('nodemailer'); 
 const crypto = require("crypto");
-const nodemailer = require("nodemailer");
+ 
 
 
 // Send OTP to Talent's email
