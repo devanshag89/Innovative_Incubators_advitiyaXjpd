@@ -1,36 +1,57 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Talent = require("../models/Talent");
+const Talent = require("../models/talent");
 const sendNotification = require("../utils/sendNotification");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+
 
 // Send OTP to Talent's email
 const sendOTP = async (email) => {
-  const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
-  const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
+  const otp = crypto.randomInt(100000, 999999).toString();
+  const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
-  console.log(`OTP for ${email}: ${otp}`);
-  return { otp, otpExpiry };
+  // Hash the OTP
+  const hashedOtp = await bcrypt.hash(otp, 12);
+
+  // Configure the email transporter
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL, // Use environment variable for email
+      pass: process.env.EMAIL_PASSWORD, // Use environment variable for password
+    },
+  });
+
+  // Email options
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Your OTP Code",
+    text: `Your OTP code is ${otp}. It is valid for 10 minutes.`,
+  };
+
+  await transporter.sendMail(mailOptions);
+    console.log(`OTP for ${email}: ${otp}`);
+    return { otp: hashedOtp, otpExpiry };
 };
 
-// Talent Signup
 const talentSignup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Check if talent already exists
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const existingTalent = await Talent.findOne({ email });
     if (existingTalent) {
       return res.status(400).json({ message: "Talent already registered" });
     }
 
-    // Send OTP
     const { otp, otpExpiry } = await sendOTP(email);
-
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Save talent with OTP and hashed password
     const newTalent = new Talent({
       name,
       email,
@@ -43,31 +64,44 @@ const talentSignup = async (req, res) => {
 
     res.status(201).json({ message: "Talent registered. OTP sent to email." });
   } catch (error) {
+    console.error("Signup Error:", error);
     res.status(500).json({ message: "Error during signup", error: error.message });
   }
 };
 
-// Verify OTP
 const verifyTalentOTP = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
     const talent = await Talent.findOne({ email });
 
-    if (!talent || talent.otp !== otp || new Date() > talent.otpExpiry) {
+    if (!talent) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const isOtpValid = await bcrypt.compare(otp, talent.otp);
+    if (!isOtpValid || new Date() > talent.otpExpiry) {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
 
-    // OTP verified, remove OTP fields
     talent.otp = undefined;
     talent.otpExpiry = undefined;
     await talent.save();
 
-    res.status(200).json({ message: "OTP verified. Signup complete." });
+    const token = jwt.sign({ id: talent._id, email: talent.email }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.status(200).json({
+      message: "OTP verified. Signup complete.",
+      token,
+    });
   } catch (error) {
+    console.error("OTP Verification Error:", error);
     res.status(500).json({ message: "Error verifying OTP", error: error.message });
   }
 };
+
 
 // Talent Login
 const talentLogin = async (req, res) => {

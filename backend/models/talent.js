@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const talentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  phoneNo: { type: String, required: false },
+  phoneNo: { type: String, required: false,},
   category: { type: String, required: false },
   skills: { type: [String], required: false },
   personalDescription: { type: String, required: false },
