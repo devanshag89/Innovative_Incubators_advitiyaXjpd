@@ -155,10 +155,6 @@ const talentLogin = async (req, res) => {
       return res.status(404).json({ message: "Talent not found" });
     }
 
-    // if (talent.approvalStatus !== "approved") {
-    //   return res.status(403).json({ message: "Your profile is not approved yet." });
-    // }
-
 
     // Check if the user is verified
     if (!talent.isOtpVerified) {
