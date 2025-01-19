@@ -71,7 +71,6 @@ const LoginForm = () => {
             </div>
           </div>
 
-          {/* Image Section */}
           <div className="hidden md:block md:w-1/2 rounded-r-lg">
             <img
               src="/images/login-img.png"

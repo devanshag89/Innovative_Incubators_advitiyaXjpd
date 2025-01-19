@@ -7,17 +7,14 @@ const Hero = ({ id }) => {
       className="h-screen flex flex-col justify-center items-center text-center px-4 relative mt-16 overflow-x-hidden"
       id={id}
     >
-      {/* Background Image */}
       <img
         src="/images/hero-banner.png"
         alt="background image"
         className="absolute top-0 left-0 w-full h-full object-cover" 
       />
 
-      {/* Dark Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
 
-      {/* Text Content */}
       <div className="relative z-10">
         <h1 className="text-4xl md:text-7xl font-bold text-white -mt-10 mb-3">
           Your Skills,{" "}
@@ -31,7 +28,6 @@ const Hero = ({ id }) => {
         </p>
       </div>
 
-      {/* Buttons */}
       <div className="flex flex-col md:flex-row gap-4 mt-8 z-10 relative">
         <a
           href="/talent-login"

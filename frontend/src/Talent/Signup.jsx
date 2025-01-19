@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const SignupForm = () => {
-  const [step, setStep] = useState(1); // Step 1: Signup, Step 2: OTP Verification
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,7 +32,7 @@ const SignupForm = () => {
       });
 
       setMessage(response.data.message);
-      setStep(2); // Move to OTP verification step
+      setStep(2); 
     } catch (error) {
       setMessage(
         error.response?.data?.message || "An error occurred during signup."
@@ -51,7 +51,7 @@ const SignupForm = () => {
 
       setMessage(response.data.message);
       if (response.status === 200) {
-        setStep(3); // Signup complete
+        setStep(3); 
       }
     } catch (error) {
       setMessage(
@@ -177,7 +177,6 @@ const SignupForm = () => {
             </div>
           </div>
 
-          {/* Right Image */}
           <div><img
           src="/images/login-img.png"
           alt="A welcoming login illustration"
