@@ -93,4 +93,6 @@ const hireTalent = async (req, res) => {
   }
 };
 
+
+
 module.exports = { clientSignup, clientLogin, hireTalent };
