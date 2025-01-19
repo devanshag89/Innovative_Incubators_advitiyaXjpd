@@ -11,7 +11,10 @@ const talentSchema = new mongoose.Schema({
   password: { type: String, required: true },
   otp: { type: String, required: false },
   otpExpiry: { type: Date, required: false },
-});
+  approvalStatus: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+}, { timestamps: true });
+
+
 
 const Talent = mongoose.models.Talent || mongoose.model('Talent', talentSchema);
 

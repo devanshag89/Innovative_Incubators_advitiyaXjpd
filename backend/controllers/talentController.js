@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Talent = require("../models/Talent");
 const sendNotification = require("../utils/sendNotification");
+const nodemailer = require('nodemailer'); 
 const crypto = require("crypto");
 
 // Send OTP to Talent's email
@@ -107,12 +108,32 @@ const addTalentProfile = async (req, res) => {
       skills,
       personalDescription,
       profilePhoto,
+      password:'innovative'
+
+    });
+ 
+  
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'supports2345@gmail.com', // Replace with your email
+        pass: 'innovative', // Replace with your email password
+      },
     });
 
-    if (global.io) {
-      global.io.emit('newTalent', { talent: newTalent });
-    }
+    const mailOptions = {
+      from: 'supports2345@gmail.com',
+      to: 'anushkamishra2309@gmail.com',
+      subject: 'New Talent Profile Request',
+      text: `A new talent profile has been created:\n
+      Phone No: ${phoneNo}\n
+      Category: ${category}\n
+      Skills: ${skills}\n
+      Description: ${personalDescription}\n
+      Please review the profile and approve or reject it.`,
+    };
 
+    await transporter.sendMail(mailOptions);
     // await newTalent.save();
     res.status(201).json({ message: 'Talent profile sent successfully', talent: newTalent });
 
