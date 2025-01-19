@@ -38,7 +38,7 @@ const Hero = ({ id }) => {
         </a>
         <Link
           to="/talent-signup"
-          className="bg-white border border-gray-300 shadow-md hover:shadow-lg hover:bg-purple-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4"
+          className="bg-white border border-gray-300 shadow-md hover:shadow-lg hover:bg-purple-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4 cursor-pointer"
         >
           <span className="text-purple-900 font-medium">Looking to hire talent?</span>
           <span className="text-purple-900 text-lg font-bold">&gt;</span>
