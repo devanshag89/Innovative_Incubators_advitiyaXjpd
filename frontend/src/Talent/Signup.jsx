@@ -70,10 +70,10 @@ const SignupForm = () => {
           {/* Left Content */}
           <div className="flex flex-col w-full p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center font-bold text-gray-700">ShowcaseX</h1>
+              <h1 className="text-4xl text-center font-bold text-purple-700">ShowcaseX</h1>
               {step === 1 && (
                 <>
-                  <h1 className="text-xl text-center font-normal mt-4">
+                  <h1 className="text-xl text-center font-normal mt-4 text-purple-500">
                     Signup as a Talent
                   </h1>
                   <form
@@ -84,7 +84,7 @@ const SignupForm = () => {
                       <input
                         id="name"
                         type="text"
-                        className="flex-grow h-8 px-2 border rounded border-grey-400"
+                        className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                         name="name"
                         placeholder="Name"
                         value={formData.name}
@@ -95,7 +95,7 @@ const SignupForm = () => {
                       <input
                         id="email"
                         type="email"
-                        className="flex-grow h-8 px-2 border rounded border-grey-400"
+                        className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                         name="email"
                         placeholder="Email"
                         value={formData.email}
@@ -106,7 +106,7 @@ const SignupForm = () => {
                       <input
                         id="password"
                         type="password"
-                        className="flex-grow h-8 px-2 rounded border border-grey-400"
+                        className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                         name="password"
                         required
                         placeholder="Password"
@@ -118,7 +118,7 @@ const SignupForm = () => {
                       <input
                         id="confirmPassword"
                         type="password"
-                        className="flex-grow h-8 px-2 rounded border border-grey-400"
+                        className="flex-grow h-8 px-2 border rounded border-grey-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                         name="confirmPassword"
                         required
                         placeholder="Confirm Password"
@@ -129,7 +129,7 @@ const SignupForm = () => {
                     <div className="flex flex-col mt-8">
                       <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
+                        className="bg-purple-500 hover:bg-purple-700 text-white text-sm font-semibold py-2 px-4 rounded"
                       >
                         Signup
                       </button>
@@ -178,15 +178,11 @@ const SignupForm = () => {
           </div>
 
           {/* Right Image */}
-          <div
-            className="hidden md:block md:w-1/2 rounded-r-lg"
-            style={{
-              backgroundImage:
-                "url('https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/9fda3c124033301.60fb358ada582.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
-            }}
-          ></div>
+          <div><img
+          src="/images/login-img.png"
+          alt="A welcoming login illustration"
+          className="w-full h-full object-cover rounded-r-lg"
+        /></div>
         </div>
       </div>
     </div>
