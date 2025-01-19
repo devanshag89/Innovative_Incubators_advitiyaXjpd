@@ -42,18 +42,22 @@ const talentSignup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
+    // Validate required fields
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    // Check if email already exists
     const existingTalent = await Talent.findOne({ email });
     if (existingTalent) {
       return res.status(400).json({ message: "Talent already registered" });
     }
 
-    const { otp, otpExpiry } = await sendOTP(email);
+    // Generate OTP and hash password
+    const { otp, otpExpiry } = await sendOTP(email); // Implement `sendOTP` logic separately
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    // Save talent
     const newTalent = new Talent({
       name,
       email,
@@ -64,12 +68,13 @@ const talentSignup = async (req, res) => {
 
     await newTalent.save();
 
-    res.status(201).json({ message: "Talent registered. OTP sent to email." });
+    res.status(201).json({ message: "Vrify OTP sent to your email." });
   } catch (error) {
     console.error("Signup Error:", error);
     res.status(500).json({ message: "Error during signup", error: error.message });
   }
 };
+
 
 const verifyTalentOTP = async (req, res) => {
   const { email, otp } = req.body;
@@ -88,6 +93,7 @@ const verifyTalentOTP = async (req, res) => {
 
     talent.otp = undefined;
     talent.otpExpiry = undefined;
+    talent.isOtpVerified = true;
     await talent.save();
 
     const token = jwt.sign({ id: talent._id, email: talent.email }, process.env.JWT_SECRET, {
@@ -116,6 +122,11 @@ const talentLogin = async (req, res) => {
       return res.status(404).json({ message: "Talent not found" });
     }
 
+    // Check if the user is verified
+    if (!talent.isOtpVerified) {
+      return res.status(400).json({ message: "Please verify your OTP before logging in." });
+    }
+
     // Verify password
     const isMatch = await bcrypt.compare(password, talent.password);
     if (!isMatch) {
@@ -130,6 +141,7 @@ const talentLogin = async (req, res) => {
     res.status(500).json({ message: "Error during login", error: error.message });
   }
 };
+
 
 
 

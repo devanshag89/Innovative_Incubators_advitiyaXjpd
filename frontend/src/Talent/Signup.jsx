@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1); // Tracks which step of the process we're on
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [otp, setOtp] = useState("");
-  const [message, setMessage] = useState("");
+  const [otp, setOtp] = useState(""); // OTP input field
+  const [message, setMessage] = useState(""); // Feedback message to user
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -25,14 +28,17 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await axios.post("https://localhost:4000/api/v1/talentsignup", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/talentsignup",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
 
       setMessage(response.data.message);
-      setStep(2); 
+      setStep(2); // Move to OTP verification step
     } catch (error) {
       setMessage(
         error.response?.data?.message || "An error occurred during signup."
@@ -40,18 +46,24 @@ const SignupForm = () => {
     }
   };
 
+  // Handle OTP verification form submission
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://localhost:4000/api/v1/talentverify-otp", {
-        email: formData.email,
-        otp,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/talentverify-otp",
+        {
+          email: formData.email,
+          otp,
+        }
+      );
 
       setMessage(response.data.message);
+
       if (response.status === 200) {
-        setStep(3); 
+        setStep(3); // Move to success step
+        navigate('/talent-login')
       }
     } catch (error) {
       setMessage(
@@ -67,10 +79,11 @@ const SignupForm = () => {
           className="flex rounded-lg shadow-2xl w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
           style={{ height: "500px" }}
         >
-          {/* Left Content */}
           <div className="flex flex-col w-full p-4">
             <div className="flex flex-col flex-1 justify-center mb-8">
-              <h1 className="text-4xl text-center font-bold text-purple-700">ShowcaseX</h1>
+              <h1 className="text-4xl text-center font-bold text-purple-700">
+                ShowcaseX
+              </h1>
               {step === 1 && (
                 <>
                   <h1 className="text-xl text-center font-normal mt-4 text-purple-500">
@@ -135,6 +148,14 @@ const SignupForm = () => {
                       </button>
                     </div>
                   </form>
+                  <div className="text-center mt-4">
+                    <a
+                      className="no-underline hover:underline text-purple-500 text-xs"
+                      href="/talent-login"
+                    >
+                      Already have an account? Login
+                    </a>
+                  </div>
                 </>
               )}
               {step === 2 && (
@@ -160,7 +181,7 @@ const SignupForm = () => {
                     <div className="flex flex-col mt-8">
                       <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded"
+                        className="bg-purple-500 hover:bg-purple-700 text-white text-sm font-semibold py-2 px-4 rounded"
                       >
                         Verify OTP
                       </button>
@@ -173,15 +194,16 @@ const SignupForm = () => {
                   Signup Complete!
                 </h1>
               )}
-              <div className="text-center text-red-500 mt-4">{message}</div>
+              <div className="text-center text-purple-500 mt-4">{message}</div>
             </div>
           </div>
-
-          <div><img
-          src="/images/login-img.png"
-          alt="A welcoming login illustration"
-          className="w-full h-full object-cover rounded-r-lg"
-        /></div>
+          <div>
+            <img
+              src="/images/login-img.png"
+              alt="A welcoming login illustration"
+              className="w-full h-full object-cover rounded-r-lg"
+            />
+          </div>
         </div>
       </div>
     </div>
