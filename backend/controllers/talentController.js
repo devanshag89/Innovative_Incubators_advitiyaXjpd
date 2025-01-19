@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Talent = require("../models/talent");
 const sendNotification = require("../utils/sendNotification");
 const nodemailer = require('nodemailer'); 
+const twilio = require('twilio'); 
 const crypto = require("crypto");
  
 
@@ -130,10 +131,11 @@ const talentLogin = async (req, res) => {
   }
 };
 
-// Add Talent Profile with Photo
+
+
 const addTalentProfile = async (req, res) => {
   try {
-    const {  phoneNo, category, skills, personalDescription } = req.body;
+    const { phoneNo, category, skills, personalDescription } = req.body;
     const profilePhoto = req.file ? req.file.path : null; // Profile photo URL from Cloudinary
 
     const newTalent = new Talent({
@@ -142,34 +144,34 @@ const addTalentProfile = async (req, res) => {
       skills,
       personalDescription,
       profilePhoto,
-      password:'innovative'
-
-    });
- 
-  
-    const transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: 'supports2345@gmail.com', // Replace with your email
-        pass: 'innovative', // Replace with your email password
-      },
+      password: 'innovative'
     });
 
-    const mailOptions = {
-      from: 'supports2345@gmail.com',
-      to: 'anushkamishra2309@gmail.com',
-      subject: 'New Talent Profile Request',
-      text: `A new talent profile has been created:\n
-      Phone No: ${phoneNo}\n
-      Category: ${category}\n
-      Skills: ${skills}\n
-      Description: ${personalDescription}\n
-      Please review the profile and approve or reject it.`,
-    };
+    // Twilio Credentials from your account
+    const accountSid = process.env.TWILIO_ACCOUNT_SID
+    const authToken = process.env.TWILIO_AUTH_TOKEN
+    const fromWhatsApp = `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`;  
+    const toWhatsApp = 'whatsapp:+917860254396'; 
 
-    await transporter.sendMail(mailOptions);
-    // await newTalent.save();
-    res.status(201).json({ message: 'Talent profile sent successfully', talent: newTalent });
+    // Initialize Twilio client
+    const client = new twilio(accountSid, authToken);
+
+    // Send WhatsApp message via Twilio
+    const message = await client.messages.create({
+      from: fromWhatsApp,
+      to: toWhatsApp,
+      body: `A new talent profile has been created:\n\n
+             Phone No: ${phoneNo}\n
+             Category: ${category}\n
+             Skills: ${skills}\n
+             Description: ${personalDescription}\n
+             Please review the profile and approve or reject it.`
+    });
+
+    console.log('WhatsApp notification sent:', message.sid);
+
+    // Respond back with success message
+    res.status(201).json({ message: 'Talent profile sent successfully via WhatsApp', talent: newTalent });
 
   } catch (err) {
     console.error('Error creating talent profile:', err);
