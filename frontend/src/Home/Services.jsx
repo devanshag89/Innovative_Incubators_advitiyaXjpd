@@ -47,23 +47,33 @@ const Services = ({ id }) => {
   ];
 
   return (
-    <div id={id}>
-      <h3 className="text-5xl font-bold justify-center text-center mb-5 pt-20">
+    <div id={id} className="relative">
+      {/* Background Image */}
+      <img
+        src="/images/hero_banner.png"
+        alt="background image"
+        className="absolute top-0 left-0 w-full h-full  " 
+      />
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
+      
+      <h3 className="text-5xl font-bold text-center mb-5 pt-20 text-white opacity-75">
         Our Services
       </h3>
-      <div className="flex flex-wrap justify-center gap-14 m-2 p-9">
+      
+      {/* Services Grid */}
+      <div className="flex flex-wrap justify-center gap-14 m-2 p-9 ">
         {purposes.map((purpose, index) => (
           <div
             key={index}
-            className="purpose-section max-w-xs w-1/3 rounded overflow-hidden shadow-lg border border-gray-200 opacity-75 transition-all duration-500"
+            className="purpose-section max-w-xs w-1/3 rounded overflow-hidden shadow-lg border bg-white  border-gray-200 opacity-75 transition-all duration-500"
           >
             <div
-              className={`${purpose.color} h-16 relative flex justify-center items-center`}
+              className={`bg-purple-300 h-16 relative flex justify-center items-center shadow-2xl border-purple-600`}
             >
-              <h3 className="text-lg font-bold ">{purpose.title}</h3>
+              <h3 className="text-xl font-semibold text-purple-600">{purpose.title}</h3>
             </div>
             <div className="p-4">
-              <p className="text-gray-600 ">{purpose.description}</p>
+              <p className="text-gray-600">{purpose.description}</p>
             </div>
           </div>
         ))}
