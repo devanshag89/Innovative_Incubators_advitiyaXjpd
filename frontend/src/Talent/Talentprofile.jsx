@@ -5,7 +5,7 @@ const CompleteProfile = () => {
 
   const {email,token} = useAuth();
 
-  const [selectedCategory, setSelectedCategory] = useState(""); // Tracks the currently selected category
+  const [SelectedSkills, setSelectedSkills] = useState(""); // Tracks the currently selected category
   const [profilePreview, setProfilePreview] = useState(null);
   const [name, setName] = useState("");
 
@@ -43,7 +43,7 @@ const CompleteProfile = () => {
     phone: "",
     bio: "",
     profilePicture: null,
-    selectedSubCategories: [], // Track selected subcategories globally
+    selectedSubSkills: [], // Track selected subcategories globally
   });
 
   const categories = {
@@ -220,44 +220,79 @@ const CompleteProfile = () => {
   };
 
   const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
+    setSelectedSkills(e.target.value);
   };
 
-  const handleSubCategoryChange = (subCategory) => {
+  const handlesubSkillChange = (subSkill) => {
     setFormData((prevData) => {
-      const selectedSubCategories = [...prevData.selectedSubCategories];
+      const selectedSubSkills = [...prevData.selectedSubSkills];
 
-      // Toggle the subcategory
-      if (selectedSubCategories.includes(subCategory)) {
+      // Toggle the subSkill
+      if (selectedSubSkills.includes(subSkill)) {
         return {
           ...prevData,
-          selectedSubCategories: selectedSubCategories.filter(
-            (item) => item !== subCategory
+          selectedSubSkills: selectedSubSkills.filter(
+            (item) => item !== subSkill
           ),
         };
       } else {
         return {
           ...prevData,
-          selectedSubCategories: [...selectedSubCategories, subCategory],
+          selectedSubSkills: [...selectedSubSkills, subSkill],
         };
       }
     });
   };
 
-  const handleRemoveSubCategory = (subCategory) => {
+  const handleRemovesubSkill = (subSkill) => {
     setFormData((prevData) => ({
       ...prevData,
-      selectedSubCategories: prevData.selectedSubCategories.filter(
-        (item) => item !== subCategory
+      selectedSubSkills: prevData.selectedSubSkills.filter(
+        (item) => item !== subSkill
       ),
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    alert("Profile Submitted!");
+  
+    // Ensure the necessary fields are filled out
+    if (!formData.phone || !formData.bio || !formData.profilePicture || formData.selectedSubSkills.length === 0) {
+      alert("Please fill out all fields and select at least one subcategory.");
+      return;
+    }
+  
+    try {
+      // Prepare the payload to be sent to the backend
+      const payload = {
+        email: email, // Comes from useAuth()
+        phone: formData.phone,
+        bio: formData.bio,
+        profilePicture: formData.profilePicture, // Profile picture URL
+        selectedSubSkills: formData.selectedSubSkills,
+      };
+  
+      // Send the data to the backend API
+      const response = await axios.post("http://localhost:4000/api/v1/addtalent", payload, {
+        headers: {
+          Authorization: `Bearer ${token}`, // If token-based authentication is used
+        },
+      });
+  
+      // Handle success response
+      if (response.status === 200) {
+        alert("Profile Updated Successfully!");
+        console.log("Updated User Data:", response.data.user); // Optional: log updated user info
+      } else {
+        alert("Failed to update profile. Please try again.");
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error updating profile:", error);
+      alert("An error occurred while updating your profile. Please try again later.");
+    }
   };
+  
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-purple-200 to-purple-300 p-8">
@@ -323,7 +358,7 @@ const CompleteProfile = () => {
             <select
               id="category"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={selectedCategory}
+              value={SelectedSkills}
               onChange={handleCategoryChange}
             >
               <option value="">Select a category</option>
@@ -336,23 +371,23 @@ const CompleteProfile = () => {
           </div>
 
           {/* Subcategories for Selected Category */}
-          {selectedCategory && (
+          {SelectedSkills && (
             <div className="mb-4">
               <h2 className="text-lg font-semibold mb-2">
-                Subcategories for {selectedCategory}
+                Subcategories for {SelectedSkills}
               </h2>
               <div className="grid grid-cols-2 gap-2">
-                {categories[selectedCategory].map((subCategory) => (
-                  <label key={subCategory} className="flex items-center space-x-2">
+                {categories[SelectedSkills].map((subSkill) => (
+                  <label key={subSkill} className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      value={subCategory}
-                      checked={formData.selectedSubCategories.includes(
-                        subCategory
+                      value={subSkill}
+                      checked={formData.selectedSubSkills.includes(
+                        subSkill
                       )}
-                      onChange={() => handleSubCategoryChange(subCategory)}
+                      onChange={() => handlesubSkillChange(subSkill)}
                     />
-                    <span>{subCategory}</span>
+                    <span>{subSkill}</span>
                   </label>
                 ))}
               </div>
@@ -360,19 +395,19 @@ const CompleteProfile = () => {
           )}
 
           {/* Display Selected Subcategories */}
-          {formData.selectedSubCategories.length > 0 && (
+          {formData.selectedSubSkills.length > 0 && (
             <div className="mb-4">
               <h2 className="text-gray-700 mb-2">Selected Subcategories:</h2>
               <div className="flex flex-wrap gap-2">
-                {formData.selectedSubCategories.map((subCategory) => (
+                {formData.selectedSubSkills.map((subSkill) => (
                   <span
-                    key={subCategory}
+                    key={subSkill}
                     className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full flex items-center space-x-2"
                   >
-                    <span>{subCategory}</span>
+                    <span>{subSkill}</span>
                     <button
                       type="button"
-                      onClick={() => handleRemoveSubCategory(subCategory)}
+                      onClick={() => handleRemovesubSkill(subSkill)}
                       className="text-red-500 hover:text-red-700 ml-2"
                     >
                       ✕

@@ -178,63 +178,39 @@ const talentLogin = async (req, res) => {
 
 // Add Talent Profile
 
-
-
-
 const addTalentProfile = async (req, res) => {
-  try {
-    const { phoneNo, category, skills, personalDescription } = req.body;
-    const profilePhoto = req.file ? req.file.path : null; // Profile photo URL from Cloudinary
+  const { email, phone, bio, profilePicture, selectedSubSkills } = req.body;
+  console.log(req.body);
+
+  // Validate required fields
+  if (!email || !phone || !bio || !profilePicture || !selectedSubSkills.length) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
 
   try {
-    const newTalent = new Talent({
-      phoneNo,
-      category,
-      skills,
-      personalDescription,
-      profilePhoto,
+    // Find the user by email
+    const user = await Talent.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Update the user's profile
+    user.phoneNo = phone;
+    user.personalDescription = bio;
+    user.profilePhoto = profilePicture;
+    user.skills = selectedSubSkills;
+
+    // Save the updated user to the database
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: updatedUser, // Return updated user details
     });
-
-    await newTalent.save();
-    res.status(201).json({ message: "Talent profile created successfully", talent: newTalent });
-  } catch (error) {
-    console.error("Error creating talent profile:", error);
-    res.status(500).json({ message: "Internal server error" });
-
-      password: 'innovative'
-    };
-    await newTalent.save();
-
-    // Twilio Credentials from your account
-    const accountSid = process.env.TWILIO_ACCOUNT_SID
-    const authToken = process.env.TWILIO_AUTH_TOKEN
-    const fromWhatsApp = `whatsapp:${process.env.TWILIO_WHATSAPP_NUMBER}`;  
-    const toWhatsApp = 'whatsapp:+917860254396'; 
-
-    // Initialize Twilio client
-    const client = new twilio(accountSid, authToken);
-
-    // Send WhatsApp message via Twilio
-    const message = await client.messages.create({
-      from: fromWhatsApp,
-      to: toWhatsApp,
-      body: `A new talent profile has been created:\n\n
-             Phone No: ${phoneNo}\n
-             Category: ${category}\n
-             Skills: ${skills}\n
-             Description: ${personalDescription}\n
-             Please review the profile and approve or reject it.`
-    });
-
-    console.log('WhatsApp notification sent:', message.sid);
-
-    // Respond back with success message
-    res.status(201).json({ message: 'Talent profile sent successfully via WhatsApp', talent: newTalent });
-
   } catch (err) {
-    console.error('Error creating talent profile:', err);
-    res.status(500).json({ error: 'Internal server error' });
-
+    console.error("Error updating profile:", err);
+    res.status(500).json({ message: "An error occurred while updating the profile." });
   }
 };
 
