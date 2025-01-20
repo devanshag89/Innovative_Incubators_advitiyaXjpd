@@ -8,6 +8,7 @@ import Dashboard from './Home/Dashboard';
 import TalentDashboard from './Talent/TalentDashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminDashboard from './Admin/AdminDashboard';
+import clientDashboard from './Client/ClientDashboard';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/admin/login' Component={AdminLogin}/>
           <Route path='/admin/' Component={AdminDashboard}/>
           <Route path='/completeprofile' Component={CompleteProfile}/>
+          <Route path='/clientDashboard' Component={clientDashboard}/>
         </Routes>
       </Router>
     </>

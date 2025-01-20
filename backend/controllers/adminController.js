@@ -1,6 +1,4 @@
-const Talent = require("../models/talent");
-
-
+const Talent = require("../models/Talent");
 
 
 const approveTalentProfile = async (req, res) => {
@@ -48,6 +46,40 @@ const rejectTalentProfile = async (req, res) => {
   }
 };
 
+const getApprovedTalents = async (req, res) => {
+  try {
+    // Fetch all records where status is "approved"
+    const approvedTalents = await Talent.find({ approvalStatus: "approved" });
+
+    // Send the retrieved records as a response
+    res.status(200).json({
+      message: "Approved talents retrieved successfully",
+      talents: approvedTalents,
+    });
+  } catch (error) {
+    console.error("Error fetching approved talents:", error);
+    res.status(500).json({
+      message: "Error retrieving approved talents",
+      error: error.message,
+    });
+  }
+};
+
+const getPendingTalents = async (req, res) => {
+  try {
+    // Fetch all records where status is "approved"
+    const approvedTalents = await Talent.find({ approvalStatus: "pending" });
+    // Send the retrieved records as a response
+    res.status(200).json({talents: approvedTalents});
+  } catch (error) {
+    console.error("Error fetching approved talents:", error);
+    res.status(500).json({
+      message: "Error retrieving approved talents",
+      error: error.message,
+    });
+  }
+};
 
 
-module.exports = { approveTalentProfile,rejectTalentProfile };
+
+module.exports = { approveTalentProfile, rejectTalentProfile, getApprovedTalents, getPendingTalents };
