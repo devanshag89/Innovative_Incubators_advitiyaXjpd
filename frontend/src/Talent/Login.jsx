@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../contexts/TalentContext";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // Handle input changes
   const handleChange = (e) => {
@@ -19,9 +21,10 @@ const LoginForm = () => {
       const response = await axios.post("http://localhost:4000/api/v1/talentlogin", formData); // Replace with your backend API URL
       
       if (response.status === 200) {
-        // Save the token to local storage (optional)
-        localStorage.setItem("token", response.data.token);
+        
+        const { token, email } = response.data;
 
+        login(token, email);
         // Redirect to dashboard or desired page
         navigate("/completeprofile");
       }

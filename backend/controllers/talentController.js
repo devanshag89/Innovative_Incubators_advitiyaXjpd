@@ -169,7 +169,8 @@ const talentLogin = async (req, res) => {
 
     const token = jwt.sign({ id: talent._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful", token, email });
+    console.log({ message: "Login successful", token, email });
   } catch (error) {
     res.status(500).json({ message: "Error during login", error: error.message });
   }

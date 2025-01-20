@@ -12,11 +12,13 @@ import clientDashboard from './Client/ClientDashboard';
 import Talents from './Admin/Talents';
 import Clients from './Admin/Clients';
 import Requests from './Admin/Requests';
+import AuthProvider from './contexts/TalentContext';
 
 
 function App() {
   return (
     <>
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path='/talent-login' Component={LoginForm}/>
@@ -40,6 +42,7 @@ function App() {
           <Route path="/completeprofile" Component={CompleteProfile} />
         </Routes>
       </Router>
+      </AuthProvider>
     </>
   );
 }
