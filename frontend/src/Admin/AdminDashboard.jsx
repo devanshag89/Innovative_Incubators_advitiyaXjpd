@@ -1,37 +1,58 @@
 import React from "react";
+import { Outlet, Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex h-screen">
-      <main className="flex-1 bg-gray-100 p-6">
-        <header className="flex justify-between items-center bg-white p-4 shadow rounded-md">
-          <h1 className="text-lg font-bold">Admin Dashboard</h1>
-          <div className="flex items-center space-x-4">
+    <div className="min-h-screen flex">
+      {/* Sidebar */}
+      <aside className="w-64 bg-purple-500 text-white h-screen pt-6 fixed">
+        <h1 className="text-4xl font-bold mb-8 ml-8 mb-24">ShowcaseX</h1>
+        <nav>
+          <ul className="mt-6">
+            <li className="mb-4">
+              <Link
+                to="talents"
+                className="block p-3 hover:bg-gray-100 hover:text-purple-700 text-white cursor-pointer font-semibold text-2xl text-center w-full transition-all duration-300"
+              >
+                Talents
+              </Link>
+            </li>
+            <li className="mb-4">
+              <Link to="clients" className="block p-3 hover:bg-gray-100 hover:text-purple-700 text-white cursor-pointer font-semibold text-2xl text-center w-full transition-all duration-300">
+                Clients
+              </Link>
+            </li>
+            <li className="mb-4">
+              <Link to="requests" className="block p-3 hover:bg-gray-100 hover:text-purple-700 text-white cursor-pointer font-semibold text-2xl text-center w-full transition-all duration-300">
+                Requests
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      
+      <div className="flex-1 ml-64">
+        
+        <header className="shadow-lg p-4 flex justify-between items-center sticky top-0">
+          <h3 className="text-3xl text-purple-900 font-semibold">Admin Dashboard</h3>
+          <div className="flex justify-between">
           <img
-              src="../images/admin.png"
-              alt="User"
-              className="w-10 h-10 rounded-full -mr-2"
-            />
-            <span className="material-icons">admin.1234@gmail.com</span>
-            
+            src="../images/admin.png"
+            alt="Admin"
+            className="w-14 h-14 rounded-full object-cover border-4 border-white  mr-2 -mt-1"
+          /> 
+          <h3 className="text-lg text-purple-900 mt-3">admin.1234@gmail.com</h3>
           </div>
+          
+          
         </header>
 
-        <section className="mt-6 grid grid-cols-3 gap-4">
-          <div className="bg-white p-4 shadow rounded-md">
-            <h2 className="text-sm text-gray-600">Count of talented people</h2>
-            <p className="text-lg font-bold">1.7M</p>
-          </div>
-          <div className="bg-white p-4 shadow rounded-md">
-            <h2 className="text-sm text-gray-600">Count hireres</h2>
-            <p className="text-lg font-bold">9M</p>
-          </div>
-        </section>
-        <section className="mt-6 bg-white p-4 shadow rounded-md">
-          <h2 className="text-lg font-bold">Technical Support</h2>
-          <p>Chart placeholder here</p>
-        </section>
-      </main>
+       
+        <main className="p-6">
+          <Outlet /> 
+        </main>
+      </div>
     </div>
   );
 };
