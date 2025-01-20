@@ -16,13 +16,13 @@ const AdminLogin = () => {
         }
     };
   return (
-    <div className="h-screen bg-gradient-to-b from-gray-800 to-gray-900 flex items-center justify-center">
-        <img
-        src="/images/hero_banner.png"
+    <div className="h-screen bg-gradient-to-b  flex items-center justify-center">
+        {/* <img
+        src="/images/hero-banner.png"
         alt="background image"
-        className="absolute top-0 left-0 w-full h-full  border-2 opacity-50"
-      />
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md opacity-90">
+        className="absolute top-0 left-0 w-full h-full border-2 opacity-30"
+      /> */}
+      <div className=" p-8 rounded-xl  w-full max-w-md shadow-2xl bg-gray-100">
         
         <div className="flex flex-col items-center">
           <img
@@ -30,7 +30,7 @@ const AdminLogin = () => {
             alt="Admin"
             className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md"
           />
-          <h2 className="mt-4 text-xl font-semibold text-gray-800">Admin Portal</h2>
+          <h2 className="mt-4 text-xl font-semibold text-purple-900">Admin Portal</h2>
         </div>
 
        
@@ -45,7 +45,7 @@ const AdminLogin = () => {
               placeholder="email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
-              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-700"
             />
           </div>
 
@@ -59,12 +59,12 @@ const AdminLogin = () => {
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
               placeholder="Password"
-              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-700"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-gray-900 text-white font-semibold py-2 mt-6 rounded-full hover:bg-black transition duration-200 opacity-100"
+            className="w-full bg-purple-500 text-white font-semibold py-2 mt-6 rounded-full hover:bg-purple-700 transition duration-200 opacity-100"
           >
             Login
           </button>
