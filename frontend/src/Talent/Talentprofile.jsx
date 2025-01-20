@@ -19,7 +19,7 @@ const CompleteProfile = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/gettalenttalent", {
+        const response = await axios.get("http://localhost:4000/api/v1/gettalent", {
           params: {
             email: email,  // Pass email as a query parameter
           },

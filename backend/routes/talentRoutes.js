@@ -4,8 +4,6 @@ const {
   verifyTalentOTP,
   talentLogin,
   addTalentProfile,
-  approveTalent,
-  rejectTalent,
   getTalent,
 } = require("../controllers/talentController");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
@@ -45,13 +43,7 @@ router.post("/talentlogin", talentLogin);
 // Add Talent profile with photo
 router.post("/addtalent", addTalentProfile);
 
-// Approve Talent route (Admin)
-router.post("/approvetalent", approveTalent);
-
-// Reject Talent route (Admin)
-router.post("/rejecttalent", rejectTalent);
-
 // Get Talent by email
-router.get("/gettalenttalent", getTalent);
+router.get("/gettalent", getTalent);
 
 module.exports = router;

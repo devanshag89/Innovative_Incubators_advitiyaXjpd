@@ -97,14 +97,6 @@ const talentSignup = async (req, res) => {
 
     await newTalent.save();
 
-    // Notify Admin
-    const adminEmail = process.env.ADMIN_EMAIL;
-    await sendEmail(
-      adminEmail,
-      "New Talent Registration",
-      `A new talent has registered:\nName: ${name}\nEmail: ${email}\nPlease review their profile.`
-    );
-
     // Send a single success response
     return res.status(201).json({ message: "Talent registered. OTP sent to email." });
   } catch (error) {
@@ -204,6 +196,13 @@ const addTalentProfile = async (req, res) => {
     // Save the updated user to the database
     const updatedUser = await user.save();
 
+    const adminEmail = process.env.ADMIN_EMAIL;
+    await sendEmail(
+      adminEmail,
+      "New Talent Registration",
+      `A new talent has registered:\nName: ${user.name}\nEmail: ${email}\nPhone: ${phone}\nSkills: ${selectedSubSkills}\nDiscription: ${bio}\nPlease review their profile.`
+    );
+
     res.status(200).json({
       message: "Profile updated successfully",
       user: updatedUser, // Return updated user details
@@ -214,49 +213,6 @@ const addTalentProfile = async (req, res) => {
   }
 };
 
-// Approve Talent
-const approveTalent = async (req, res) => {
-  const { talentId } = req.body;
-
-  try {
-    const talent = await Talent.findById(talentId);
-    if (!talent) {
-      return res.status(404).json({ message: "Talent not found" });
-    }
-
-    talent.approvalStatus = "approved";
-    await talent.save();
-
-    await sendEmail(talent.email, "Profile Approved", "Congratulations! Your profile has been approved.");
-
-    res.status(200).json({ message: "Talent approved successfully" });
-  } catch (error) {
-    console.error("Approval Error:", error);
-    res.status(500).json({ message: "Error during approval" });
-  }
-};
-
-// Reject Talent
-const rejectTalent = async (req, res) => {
-  const { talentId } = req.body;
-
-  try {
-    const talent = await Talent.findById(talentId);
-    if (!talent) {
-      return res.status(404).json({ message: "Talent not found" });
-    }
-
-
-    await sendEmail(talent.email, "Profile Rejected", "Unfortunately, your profile has been rejected.");
-
-    await Talent.findByIdAndDelete(talentId);
-
-    res.status(200).json({ message: "Talent rejected and removed successfully" });
-  } catch (error) {
-    console.error("Rejection Error:", error);
-    res.status(500).json({ message: "Error during rejection" });
-  }
-};
 
 // Get Talent by Email
 const getTalent = async (req, res) => {
@@ -280,7 +236,5 @@ module.exports = {
   verifyTalentOTP,
   talentLogin,
   addTalentProfile,
-  approveTalent,
-  rejectTalent,
   getTalent,
 };

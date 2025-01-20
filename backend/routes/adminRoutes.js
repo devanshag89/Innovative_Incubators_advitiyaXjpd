@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const {approveTalentProfile,rejectTalentProfile, getPendingTalents, getApprovedTalents} =require('../controllers/adminController')
+const {approveTalent,rejectTalent, getPendingTalents, getApprovedTalents} =require('../controllers/adminController')
 
 
  
-router.post('/approve-talent', approveTalentProfile);
-router.post('/reject-talent', rejectTalentProfile);
+router.post('/approve-talent', approveTalent);
+router.post('/reject-talent', rejectTalent);
 router.get('/get-pending-talents', getPendingTalents);
 router.get('/get-approved-talents', getApprovedTalents);
 
