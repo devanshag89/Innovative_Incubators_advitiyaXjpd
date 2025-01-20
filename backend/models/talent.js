@@ -8,7 +8,7 @@ const talentSchema = new mongoose.Schema(
     category: { type: String, required: false },
     skills: { type: [String], required: false },
     personalDescription: { type: String, required: false },
-    profilePhoto: { type: String, required: false }, // Cloudinary URL
+    profilePhoto: { type: Object, required: false },
     password: { type: String, required: true },
     otp: { type: String, required: false },
     otpExpiry: { type: Date, required: false },

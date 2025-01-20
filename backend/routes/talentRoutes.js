@@ -43,7 +43,7 @@ router.post("/talentverify-otp", verifyTalentOTP);
 router.post("/talentlogin", talentLogin);
 
 // Add Talent profile with photo
-router.post("/addtalent", upload.single("profilePhoto"), addTalentProfile);
+router.post("/addtalent", addTalentProfile);
 
 // Approve Talent route (Admin)
 router.post("/approvetalent", approveTalent);
