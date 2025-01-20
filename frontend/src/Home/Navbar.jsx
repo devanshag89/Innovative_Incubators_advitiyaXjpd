@@ -3,10 +3,16 @@ import { Link } from "react-scroll";
 
 function Navbar() {
   return (
-    <nav className="bg-purple-500 fixed w-full top-0 left-0 z-50 ">
+    <nav className="bg-black bg-opacity-60 fixed top-0 left-0 w-full z-50 shadow-none">
       <div className="container mx-auto px-10 flex justify-between items-center py-4">
-        <Link to="hero" spy={true} smooth={true} duration={500} className="cursor-pointer text-white hover:text-purple-900 cursor-pointer  font-semibold text-2xl">
-          ShowcaseX
+        <Link
+          to="hero"
+          spy={true}
+          smooth={true}
+          duration={500}
+          className="cursor-pointer text-white font-bold text-3xl"
+        >
+          Showcase<span className="text-orange-500">X</span>
         </Link>
 
         <ul className="hidden lg:flex space-x-8 mr-10">
@@ -16,7 +22,7 @@ function Navbar() {
               spy={true}
               smooth={true}
               duration={500}
-              className="cursor-pointer text-white hover:text-purple-900 cursor-pointer  font-semibold text-lg"
+              className="cursor-pointer text-white font-semibold text-lg hover:text-orange-500"
             >
               Home
             </Link>
@@ -27,7 +33,7 @@ function Navbar() {
               spy={true}
               smooth={true}
               duration={500}
-              className="cursor-pointer text-white hover:text-purple-900 cursor-pointer  font-semibold text-lg"
+              className="cursor-pointer text-white font-semibold text-lg hover:text-orange-500"
             >
               About Us
             </Link>
@@ -38,7 +44,7 @@ function Navbar() {
               spy={true}
               smooth={true}
               duration={500}
-              className="cursor-pointer text-white hover:text-purple-900 cursor-pointer  font-semibold text-lg"
+              className="cursor-pointer text-white font-semibold text-lg hover:text-orange-500"
             >
               Services
             </Link>
@@ -49,7 +55,7 @@ function Navbar() {
               spy={true}
               smooth={true}
               duration={500}
-              className="cursor-pointer text-white hover:text-purple-900 cursor-pointer  font-semibold text-lg"
+              className="cursor-pointer text-white font-semibold text-lg hover:text-orange-500"
             >
               Contact Us
             </Link>
