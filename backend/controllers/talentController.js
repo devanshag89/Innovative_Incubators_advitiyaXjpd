@@ -185,7 +185,6 @@ const addTalentProfile = async (req, res) => {
     const { phoneNo, category, skills, personalDescription } = req.body;
     const profilePhoto = req.file ? req.file.path : null; // Profile photo URL from Cloudinary
 
-
   try {
     const newTalent = new Talent({
       phoneNo,
@@ -193,7 +192,6 @@ const addTalentProfile = async (req, res) => {
       skills,
       personalDescription,
       profilePhoto,
-
     });
 
     await newTalent.save();
