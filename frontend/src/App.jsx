@@ -8,7 +8,6 @@ import TalentDashboard from './Talent/TalentDashboard';
 import Dashboard from './Home/Dashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminDashboard from './Admin/AdminDashboard';
-import ClientDashboard from './Client/ClientDashboard';
 import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
@@ -52,14 +51,10 @@ function App() {
           />
 
 
-          <Route path='/talent/login' Component={LoginForm}/>
+          
           <Route path='/talent' Component={TalentDashboard}/>
-          <Route path='/talent/signup' Component={SignupForm}/>
+          
           <Route path='/completeprofile' Component={CompleteProfile}/>
-
-
-          <Route path='/admin/login' Component={AdminLogin}/>
-          <Route path='/admin/' Component={AdminDashboard}/>
 
 
           
@@ -68,19 +63,14 @@ function App() {
           <Route path='/client/signup' Component={ClientSignup}/>
           {/* client login */}
 
-          <Route path="/admin/login" Component={AdminLogin} />
-
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-
+          <Route path='/admin/login' Component={AdminLogin}/>
           <Route path="/admin" element={<AdminDashboard />}>
             <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
             <Route path="requests" element={<RequestCandidateList />} />
           </Route>
 
-          {/* Client Routes */}
-          <Route path="/client" element={<ClientDashboard />} />
+    
         </Routes>
       </Router>
     </AuthProvider>
