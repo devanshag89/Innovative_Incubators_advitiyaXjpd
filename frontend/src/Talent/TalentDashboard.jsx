@@ -1,8 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 import TalentNavbar from "./TalentNavbar";
 import ProfileCard from "./ProfileCard";
 import { useAuth } from "../contexts/TalentContext";
+
 
 const TalentDashboard = () => {
   const { email, token } = useAuth(); // Get user email and token from auth context
@@ -83,6 +86,8 @@ const TalentDashboard = () => {
     }
   };
 
+  
+
   return (
     <>
       <TalentNavbar />
@@ -91,7 +96,7 @@ const TalentDashboard = () => {
           {/* Profile and Actions Section */}
           <section className="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Profile Card */}
-            <ProfileCard />
+            <ProfileCard/>
 
             {/* File Upload Section */}
             <div className="bg-white p-6 rounded-lg shadow-lg">

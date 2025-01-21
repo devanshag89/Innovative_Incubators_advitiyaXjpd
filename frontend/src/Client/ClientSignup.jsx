@@ -157,7 +157,7 @@ const SignupForm = () => {
                   <div className="text-center mt-4">
                     <a
                       className="no-underline hover:underline text-orange-500 text-xs"
-                      href="/talent-login"
+                      href="/client/login"
                     >
                       Already have an account? Login
                     </a>
@@ -205,7 +205,7 @@ const SignupForm = () => {
           </div>
           <div>
             <img
-              src="/images/Login-img.png"
+              src="/images/client.png"
               alt="A welcoming login illustration"
               className="w-full h-full  rounded-r-lg"
             />

@@ -10,13 +10,16 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState(localStorage.getItem('email') || null); // Store email in state
   const [token, setToken] = useState(localStorage.getItem('token') || null); // Store token in state
+  const [isProfileComplete, setisProfileComplete] = useState(localStorage.getItem('isProfileComplete') || null);
 
   // Set the email and token when the user logs in
-  const login = (token, email) => {
+  const login = (token, email,isProfileComplete) => {
     localStorage.setItem('token', token); // Store the token in localStorage
     localStorage.setItem('email', email); // Store the email in localStorage
+    localStorage.setItem('isProfileComplete', isProfileComplete);
     setToken(token); // Update token state
     setEmail(email); // Update email state
+    setisProfileComplete(isProfileComplete)
   };
 
   // Clear the user data on logout

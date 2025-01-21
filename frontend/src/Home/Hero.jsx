@@ -47,7 +47,7 @@ const Hero = ({ id }) => {
 
       <div className="flex flex-col md:flex-row gap-4 mt-8 z-10 relative">
         <motion.a
-          href="/talent/login"
+          href="/talent-login"
           className="bg-transparent text-orange-500 border border-orange-500 shadow-md hover:bg-orange-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4 transform hover:scale-105"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

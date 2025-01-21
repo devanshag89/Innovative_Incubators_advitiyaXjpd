@@ -315,21 +315,30 @@ const CompleteProfile = () => {
   
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-purple-200 to-purple-300 p-8">
-      {/* Left Section */}
-      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg lg:w-1/3">
+
+     <div
+      className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-orange-200 to-orange-300 p-8"
+      style={{
+        backgroundImage: `url("/images/Services-img.png")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        opacity: "0.9",
+      }}
+    > <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+      <div className="flex flex-col items-center p-6 bg-gray-200 rounded-lg shadow-lg lg:w-1/3 opacity-90">
         <div className="relative w-32 h-32">
           <img
             src={
               profilePreview ||
               "https://via.placeholder.com/150?text=Profile+Picture"
             }
-            alt="Profile Preview"
-            className="rounded-full w-full h-full object-cover border border-gray-300"
+            alt=""
+            className="rounded-full w-full h-full object-cover border border-gray-700"
           />
           <label
             htmlFor="profilePicture"
-            className="absolute bottom-0 right-0 bg-blue-500 text-white text-lg font-bold w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-600"
+            className="absolute bottom-0 right-0 bg-orange-500 text-white text-lg font-bold w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-orange-600"
           >
             +
             <input
@@ -343,13 +352,13 @@ const CompleteProfile = () => {
         </div>
         <div className="text-center mt-4">
           <h1 className="text-lg font-semibold">{name}</h1>
-          <p className="text-gray-600">{email}</p>
+          <p className="text-gray-700">{email}</p>
         </div>
       </div>
 
       {/* Right Section */}
-      <div className="p-6 bg-white rounded-lg shadow-lg lg:w-2/3 mt-6 lg:mt-0 lg:ml-6">
-        <h1 className="text-2xl font-bold mb-4 text-center">Complete Your Profile</h1>
+      <div className="p-6 bg-gray-200 rounded-lg shadow-lg lg:w-2/3 mt-6 lg:mt-0 lg:ml-6 opacity-90">
+        <h1 className="text-2xl font-bold mb-4 text-center text-orange-600">Complete Your Profile</h1>
         <form onSubmit={handleSubmit}>
           {/* Phone Number */}
           <div className="mb-4">
@@ -360,7 +369,7 @@ const CompleteProfile = () => {
               type="tel"
               id="phone"
               name="phone"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
               value={formData.phone}
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
@@ -377,7 +386,7 @@ const CompleteProfile = () => {
             </label>
             <select
               id="category"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
               value={SelectedSkills}
               onChange={handleCategoryChange}
             >
@@ -393,7 +402,7 @@ const CompleteProfile = () => {
           {/* Subcategories for Selected Category */}
           {SelectedSkills && (
             <div className="mb-4">
-              <h2 className="text-lg font-semibold mb-2">
+              <h2 className="text-lg font-semibold mb-2 text-gray-700">
                 Subcategories for {SelectedSkills}
               </h2>
               <div className="grid grid-cols-2 gap-2">
@@ -422,13 +431,13 @@ const CompleteProfile = () => {
                 {formData.selectedSubSkills.map((subSkill) => (
                   <span
                     key={subSkill}
-                    className="bg-blue-200 text-blue-800 px-3 py-1 rounded-full flex items-center space-x-2"
+                    className="bg-orange-200 text-orange-600 px-3 py-1 rounded-full flex items-center space-x-2"
                   >
                     <span>{subSkill}</span>
                     <button
                       type="button"
                       onClick={() => handleRemovesubSkill(subSkill)}
-                      className="text-red-500 hover:text-red-700 ml-2"
+                      className="text-orange-500 hover:text-orange-700 ml-2"
                     >
                       ✕
                     </button>
@@ -446,7 +455,7 @@ const CompleteProfile = () => {
             <textarea
               id="bio"
               name="bio"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
               value={formData.bio}
               onChange={(e) =>
                 setFormData({ ...formData, bio: e.target.value })
@@ -460,7 +469,7 @@ const CompleteProfile = () => {
           <div className="text-center">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600"
+              className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600"
             >
               Submit Profile
             </button>

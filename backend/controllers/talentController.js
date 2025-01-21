@@ -23,7 +23,7 @@ const sendEmail = async (to, subject, text) => {
   if (!to) {
     throw new Error("Recipient email is missing!");
   }
-
+  console.log(process.env.EMAIL)
   const mailOptions = {
     from: process.env.EMAIL,  // Sender's email address
     to,  // Recipient email (ensure it's not undefined)
@@ -159,7 +159,7 @@ const talentLogin = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: talent._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: talent._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
 
     res.status(200).json({
       message: "Login successful",

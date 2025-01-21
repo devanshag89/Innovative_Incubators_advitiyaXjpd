@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/TalentContext";
+
+
 function TalentNavbar() {
   const navigate = useNavigate();
    const {email}=useAuth();
