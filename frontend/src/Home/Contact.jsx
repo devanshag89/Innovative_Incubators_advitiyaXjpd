@@ -1,13 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios for making API requests
 import { motion } from 'framer-motion'; // Import motion from framer-motion
 import { useInView } from 'react-intersection-observer'; // Import intersection observer hook
 
 const Contact = ({ id }) => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    message: ''
+  });
+  const [statusMessage, setStatusMessage] = useState(''); // For showing success or error message
+
   // Hook to detect if the component is in view
   const { ref, inView } = useInView({
     triggerOnce: true, // Trigger animation only once when it comes into view
     threshold: 0.5, // Trigger when 50% of the element is in the viewport
   });
+
+  // Handle form field change
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Make a POST request to the backend API
+      const response = await axios.post('http://localhost:4000/api/v1/submit', formData);
+      setStatusMessage('Your message has been sent successfully!');
+      setFormData({
+        fullName: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      setStatusMessage('Something went wrong. Please try again.');
+    }
+  };
 
   return (
     <div id={id} className="pt-20 bg-gray-300">
@@ -53,7 +88,7 @@ const Contact = ({ id }) => {
             transition={{ duration: 0.8, type: "spring" }} // Animation settings
           >
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Form</h2>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="fullName" className="block text-gray-700 font-medium">
                   Full Name
@@ -61,6 +96,9 @@ const Contact = ({ id }) => {
                 <input
                   type="text"
                   id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
                   placeholder="Enter your name"
                   className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
@@ -72,6 +110,9 @@ const Contact = ({ id }) => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Enter your email"
                   className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
@@ -82,6 +123,9 @@ const Contact = ({ id }) => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   placeholder="Enter your message"
                   rows="4"
                   className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -94,6 +138,13 @@ const Contact = ({ id }) => {
                 Submit
               </button>
             </form>
+
+            {/* Display status message after submission */}
+            {statusMessage && (
+              <div className="mt-4 text-center text-gray-800">
+                <p>{statusMessage}</p>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

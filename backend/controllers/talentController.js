@@ -165,7 +165,7 @@ const talentLogin = async (req, res) => {
       message: "Login successful",
       token,
       email,
-      isProfileComplete: talent.isProfileComplete,  // Return profile completion status
+      isProfileComplete: talent.isProfileComplete,  
     });
     console.log({ message: "Login successful", token, email });
   } catch (error) {

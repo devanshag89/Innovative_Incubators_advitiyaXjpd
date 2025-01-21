@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/TalentContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const CompleteProfile = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const {email,token} = useAuth();
 
   const [SelectedSkills, setSelectedSkills] = useState(""); // Tracks the currently selected category
