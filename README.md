@@ -77,7 +77,6 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
    npm install
    
 3. **Set up environment variables in a .env file**
-   ```bash
   PORT=4000
   MONGO_URI=mongodb://localhost:27017/talentsphere
   CLOUDINARY_CLOUD_NAME=dhicut2yg
