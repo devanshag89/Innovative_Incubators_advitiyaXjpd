@@ -19,6 +19,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+
           {/* Public Routes */}
           <Route path='/talent-login' element={<LoginForm />} />
           <Route path='/talent-signup' element={<SignupForm />} />
@@ -32,14 +33,40 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
+
+
+        <Route path='/' Component={Dashboard}/>
+
+
+          <Route path='/talent/login' Component={LoginForm}/>
+          <Route path='/talent' Component={TalentDashboard}/>
+          <Route path='/talent-signup' Component={SignupForm}/>
+          <Route path='/completeprofile' Component={CompleteProfile}/>
+
+
+          <Route path='/admin/login' Component={AdminLogin}/>
+          <Route path='/admin/' Component={AdminDashboard}/>
+
+
+          
+          <Route path='/client' Component={clientDashboard}/>
+          {/* client login */}
+
+          <Route path="/admin/login" Component={AdminLogin} />
+
           <Route path="/admin" element={<AdminDashboard />}>
             <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
             <Route path="requests" element={<RequestCandidateList />} />
           </Route>
 
+
           {/* Client Routes */}
           <Route path="/clientDashboard" element={<ClientDashboard />} />
+
+
+          
+
         </Routes>
       </Router>
     </AuthProvider>
