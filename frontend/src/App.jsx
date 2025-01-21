@@ -8,7 +8,6 @@ import TalentDashboard from './Talent/TalentDashboard';
 import Dashboard from './Home/Dashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminDashboard from './Admin/AdminDashboard';
-import ClientDashboard from './Client/ClientDashboard';
 import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
