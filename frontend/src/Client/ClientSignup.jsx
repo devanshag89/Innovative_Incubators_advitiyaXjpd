@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
+const ClientSignup = () => {
   const [step, setStep] = useState(1); // Tracks which step of the process we're on
   const [formData, setFormData] = useState({
     name: "",
@@ -151,7 +151,7 @@ const SignupForm = () => {
                   <div className="text-center mt-4">
                     <a
                       className="no-underline hover:underline text-purple-500 text-xs"
-                      href="/talent-login"
+                      href="/client/login"
                     >
                       Already have an account? Login
                     </a>
@@ -210,4 +210,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default ClientSignup;

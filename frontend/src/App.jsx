@@ -13,6 +13,9 @@ import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
 import AuthProvider from './contexts/TalentContext';
+import ClientDashboard from './Client/ClientDashboard';
+import ClientLogin from './Client/ClientLogin';
+import ClientSignup from './Client/ClientSignup';
 
 
 function App() {
@@ -27,7 +30,7 @@ function App() {
 
           <Route path='/talent/login' Component={LoginForm}/>
           <Route path='/talent' Component={TalentDashboard}/>
-          <Route path='/talent-signup' Component={SignupForm}/>
+          <Route path='/talent/signup' Component={SignupForm}/>
           <Route path='/completeprofile' Component={CompleteProfile}/>
 
 
@@ -36,7 +39,9 @@ function App() {
 
 
           
-          <Route path='/client' Component={clientDashboard}/>
+          <Route path='/client' Component={ClientDashboard}/>
+          <Route path='/client/login' Component={ClientLogin}/>
+          <Route path='/client/signup' Component={ClientSignup}/>
           {/* client login */}
 
           <Route path="/admin/login" Component={AdminLogin} />
