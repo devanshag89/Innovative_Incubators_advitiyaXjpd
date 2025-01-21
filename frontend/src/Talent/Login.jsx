@@ -22,11 +22,12 @@ const LoginForm = () => {
       
       if (response.status === 200) {
         
-        const { token, email } = response.data;
+        const { token, email,isProfileComplete} = response.data;
 
-        login(token, email);
+        login(token, email,isProfileComplete);
         // Redirect to dashboard or desired page
-        navigate("/completeprofile");
+        if(isProfileComplete)navigate("/talent-dashboard");
+        else navigate("/completeprofile");
       }
     } catch (err) {
       console.error("Login Error:", err);

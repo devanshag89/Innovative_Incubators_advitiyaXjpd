@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../contexts/TalentContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const CompleteProfile = () => {
-
+  const navigate = useNavigate(); 
   const {email,token} = useAuth();
 
   const [SelectedSkills, setSelectedSkills] = useState(""); // Tracks the currently selected category
@@ -208,16 +209,39 @@ const CompleteProfile = () => {
     ],
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData((prevData) => ({
-        ...prevData,
-        profilePicture: file,
-      }));
-      setProfilePreview(URL.createObjectURL(file));
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "ShowCaseX"); // Replace with your Cloudinary upload preset
+      formData.append("cloud_name", "dmxznaplt"); // Replace with your Cloudinary cloud name
+  
+      try {
+        // Upload the image to Cloudinary
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/dmxznaplt/image/upload",
+          formData
+        );
+  
+        // Get the uploaded image URL
+        const imageUrl = response.data.secure_url;
+  
+        // Update the formData state with the image URL
+        setFormData((prevData) => ({
+          ...prevData,
+          profilePicture: imageUrl, // Store the URL in state
+        }));
+  
+        // Set the preview image
+        setProfilePreview(imageUrl);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("Failed to upload image. Please try again.");
+      }
     }
   };
+  
 
   const handleCategoryChange = (e) => {
     setSelectedSkills(e.target.value);
@@ -256,38 +280,34 @@ const CompleteProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Ensure the necessary fields are filled out
     if (!formData.phone || !formData.bio || !formData.profilePicture || formData.selectedSubSkills.length === 0) {
       alert("Please fill out all fields and select at least one subcategory.");
       return;
     }
   
     try {
-      // Prepare the payload to be sent to the backend
       const payload = {
-        email: email, // Comes from useAuth()
+        email, // Comes from useAuth()
         phone: formData.phone,
         bio: formData.bio,
-        profilePicture: formData.profilePicture, // Profile picture URL
+        profilePicture: formData.profilePicture,
         selectedSubSkills: formData.selectedSubSkills,
       };
   
-      // Send the data to the backend API
       const response = await axios.post("http://localhost:4000/api/v1/addtalent", payload, {
         headers: {
-          Authorization: `Bearer ${token}`, // If token-based authentication is used
+          Authorization: `Bearer ${token}`,
         },
       });
   
-      // Handle success response
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.isProfileComplete) {
         alert("Profile Updated Successfully!");
-        console.log("Updated User Data:", response.data.user); // Optional: log updated user info
+        console.log("Updated User Data:", response.data.user);
+        navigate("/talent-dashboard"); // Navigate only if the profile is complete
       } else {
         alert("Failed to update profile. Please try again.");
       }
     } catch (error) {
-      // Handle errors
       console.error("Error updating profile:", error);
       alert("An error occurred while updating your profile. Please try again later.");
     }

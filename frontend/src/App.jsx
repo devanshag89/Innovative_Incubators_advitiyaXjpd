@@ -4,46 +4,45 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './Talent/Login';
 import SignupForm from './Talent/Signup';
 import CompleteProfile from './Talent/Talentprofile';
-import Dashboard from './Home/Dashboard';
 import TalentDashboard from './Talent/TalentDashboard';
+import Dashboard from './Home/Dashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminDashboard from './Admin/AdminDashboard';
-import clientDashboard from './Client/ClientDashboard';
+import ClientDashboard from './Client/ClientDashboard';
 import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
 import AuthProvider from './contexts/TalentContext';
 
-
 function App() {
   return (
-    <>
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path='/talent-login' Component={LoginForm}/>
-          <Route path='/' Component={Dashboard}/>
-          <Route path='/talent' Component={TalentDashboard}/>
-          <Route path='/talent-signup' Component={SignupForm}/>
-          <Route path='/admin/login' Component={AdminLogin}/>
-          <Route path='/admin/' Component={AdminDashboard}/>
-          <Route path='/completeprofile' Component={CompleteProfile}/>
-          <Route path='/clientDashboard' Component={clientDashboard}/>
-          <Route path="/talent-login" Component={LoginForm} />
-          <Route path="/" Component={Dashboard} />
-          <Route path="/talent" Component={TalentDashboard} />
-          <Route path="/talent-signup" Component={SignupForm} />
-          <Route path="/admin/login" Component={AdminLogin} />
+          {/* Public Routes */}
+          <Route path='/talent-login' element={<LoginForm />} />
+          <Route path='/talent-signup' element={<SignupForm />} />
+      
+          {/* Home Routes */}
+          <Route path="/" element={<Dashboard />} />
+
+          {/* Talent Routes */}
+          <Route path="/talent-dashboard" element={<TalentDashboard />} />
+          <Route path="/completeprofile" element={<CompleteProfile />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />}>
             <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
             <Route path="requests" element={<RequestCandidateList />} />
           </Route>
-          <Route path="/completeprofile" Component={CompleteProfile} />
+
+          {/* Client Routes */}
+          <Route path="/clientDashboard" element={<ClientDashboard />} />
         </Routes>
       </Router>
-      </AuthProvider>
-    </>
+    </AuthProvider>
   );
 }
 

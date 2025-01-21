@@ -161,7 +161,12 @@ const talentLogin = async (req, res) => {
 
     const token = jwt.sign({ id: talent._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.status(200).json({ message: "Login successful", token, email });
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      email,
+      isProfileComplete: talent.isProfileComplete,  // Return profile completion status
+    });
     console.log({ message: "Login successful", token, email });
   } catch (error) {
     res.status(500).json({ message: "Error during login", error: error.message });
@@ -192,7 +197,9 @@ const addTalentProfile = async (req, res) => {
     user.personalDescription = bio;
     user.profilePhoto = profilePicture;
     user.skills = selectedSubSkills;
-
+  
+     user.isProfileComplete = true;
+     
     // Save the updated user to the database
     const updatedUser = await user.save();
 
@@ -205,6 +212,8 @@ const addTalentProfile = async (req, res) => {
 
     res.status(200).json({
       message: "Profile updated successfully",
+      isProfileComplete: updatedUser.isProfileComplete,
+      
       user: updatedUser, // Return updated user details
     });
   } catch (err) {
