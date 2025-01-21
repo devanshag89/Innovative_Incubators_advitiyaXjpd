@@ -1,15 +1,90 @@
+
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import React, { useState } from "react";
 import TalentNavbar from "./TalentNavbar";
 import ProfileCard from "./ProfileCard";
+import { useAuth } from "../contexts/TalentContext";
 
 
 const TalentDashboard = () => {
-  const recruiter = [
-    "Travel Images.psd",
-    "True Photos.jpg",
-    "Dashboard Struct.pdf",
-    "Character Illustration.zip",
-  ];
+  const { email, token } = useAuth(); // Get user email and token from auth context
+  const [media, setMedia] = useState({ skillVideos: [], posts: [] }); // State to store media
+  const [uploadType, setUploadType] = useState(""); // Media type (video or post)
+  const [file, setFile] = useState(null); // File to upload
+
+  // Fetch media on component mount
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1//getMedia", {
+          params: { email },
+        });
+        setMedia(response.data);
+      } catch (error) {
+        console.error("Error fetching media:", error);
+      }
+    };
+
+    fetchMedia();
+  }, [email]);
+
+  // Handle file upload
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!file || !uploadType) {
+      alert("Please select a file and upload type (video or post).");
+      return;
+    }
+
+    try {
+      // Upload to Cloudinary
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "ShowCaseX"); // Your Cloudinary upload preset
+      formData.append("cloud_name", "dmxznaplt"); // Your Cloudinary cloud name
+
+      const cloudinaryResponse = await axios.post(
+        "https://api.cloudinary.com/v1_1/dmxznaplt/upload",
+        formData
+      );
+
+      const mediaUrl = cloudinaryResponse.data.secure_url;
+
+      // Save media URL to the backend
+      const saveResponse = await axios.post(
+        "http://localhost:4000/api/v1/saveMedia",
+        {
+          email,
+          mediaUrl,
+          type: uploadType,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      alert(saveResponse.data.message);
+
+      // Update the media state
+      setMedia((prevMedia) => ({
+        ...prevMedia,
+        [uploadType === "video" ? "skillVideos" : "posts"]: [
+          ...prevMedia[uploadType === "video" ? "skillVideos" : "posts"],
+          mediaUrl,
+        ],
+      }));
+
+      setFile(null); // Reset file input
+      setUploadType(""); // Reset upload type
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      alert("Failed to upload file. Please try again.");
+    }
+  };
 
   
 
@@ -23,52 +98,81 @@ const TalentDashboard = () => {
             {/* Profile Card */}
             <ProfileCard/>
 
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                <span className="material-icons text-gray-600 text-4xl">add</span>
-                <p className="text-gray-500 text-sm mt-2">Add New</p>
+            {/* File Upload Section */}
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-lg font-semibold mb-4">Upload Media</h2>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">
+                  Select Media Type:
+                </label>
+                <select
+                  className="w-full px-4 py-2 border rounded-lg"
+                  value={uploadType}
+                  onChange={(e) => setUploadType(e.target.value)}
+                >
+                  <option value="">Select Type</option>
+                  <option value="video">Video</option>
+                  <option value="post">Post</option>
+                </select>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                <span className="material-icons text-green-500 text-4xl">photo</span>
-                <p className="text-gray-600 text-sm mt-2">Photos</p>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">Choose File:</label>
+                <input
+                  type="file"
+                  accept="image/*,video/*"
+                  onChange={handleFileChange}
+                  className="w-full px-4 py-2 border rounded-lg"
+                />
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                <span className="material-icons text-blue-500 text-4xl">photo</span>
-                <p className="text-gray-600 text-sm mt-2">Images</p>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                <span className="material-icons text-purple-500 text-4xl">photo</span>
-                <p className="text-gray-600 text-sm mt-2">Gallery</p>
-              </div>
+              <button
+                onClick={handleUpload}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              >
+                Upload
+              </button>
             </div>
           </section>
 
-          {/* Chatbox and Hire Requests */}
+          {/* Media Display Section */}
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Chatbox */}
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Chatbox</h2>
-              <p className="text-gray-500 text-sm">
-                Stay connected and interact with potential recruiters.
-              </p>
+            {/* Videos */}
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-lg font-semibold mb-4">Skill Videos</h2>
+              {media.skillVideos.length > 0 ? (
+                <ul className="space-y-4">
+                  {media.skillVideos.map((video, idx) => (
+                    <li key={idx}>
+                      <video
+                        controls
+                        src={video}
+                        className="w-full rounded-lg shadow-lg"
+                      ></video>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500">No videos uploaded yet.</p>
+              )}
             </div>
 
-            {/* Hire Requests */}
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Hire Requests</h2>
-              <ul className="space-y-4">
-                {recruiter.map((name, idx) => (
-                  <li key={idx} className="flex justify-between items-center border-b pb-4">
-                    <div className="flex items-center space-x-4">
-                      <p className="text-gray-700 font-medium">{name}</p>
-                    </div>
-                    <button className="px-4 py-1 text-sm bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition duration-200">
-                      Connect
-                    </button>
-                  </li>
-                ))}
-              </ul>
+            {/* Posts */}
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-lg font-semibold mb-4">Posts</h2>
+              {media.posts.length > 0 ? (
+                <ul className="space-y-4">
+                  {media.posts.map((post, idx) => (
+                    <li key={idx}>
+                      <img
+                        src={post}
+                        alt={`Post ${idx + 1}`}
+                        className="w-full rounded-lg shadow-lg"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500">No posts uploaded yet.</p>
+              )}
             </div>
           </section>
         </main>
