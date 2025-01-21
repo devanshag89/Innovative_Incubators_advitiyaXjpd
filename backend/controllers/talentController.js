@@ -23,7 +23,7 @@ const sendEmail = async (to, subject, text) => {
   if (!to) {
     throw new Error("Recipient email is missing!");
   }
-
+  console.log(process.env.EMAIL)
   const mailOptions = {
     from: process.env.EMAIL,  // Sender's email address
     to,  // Recipient email (ensure it's not undefined)

@@ -1,0 +1,220 @@
+export const talentCategories = [
+    {
+      category: "Creative Talents",
+      subcategories: [
+        "Artists",
+        "Photographers",
+        "Musicians",
+        "Writers",
+        "Designers",
+        "Dancers",
+        "Actors/Actresses",
+        "Filmmakers/Directors",
+        "Animators",
+        "Voiceover Artists",
+      ],
+    },
+    {
+      category: "Technology & Programming Talents",
+      subcategories: [
+        "Software Developers",
+        "Web Developers",
+        "Mobile App Developers",
+        "Game Developers",
+        "Data Scientists",
+        "Machine Learning Engineers",
+        "Cloud Engineers",
+        "Blockchain Developers",
+        "Cybersecurity Experts",
+        "Database Administrators",
+        "AI Specialists",
+      ],
+    },
+    {
+      category: "Business & Marketing Talents",
+      subcategories: [
+        "Entrepreneurs",
+        "Sales Experts",
+        "Digital Marketers",
+        "SEO/SEM Specialists",
+        "Content Creators/Managers",
+        "Brand Strategists",
+        "Public Relations Experts",
+        "Product Managers",
+        "Event Planners",
+        "Business Analysts",
+        "Project Managers",
+      ],
+    },
+    {
+      category: "Academic & Educational Talents",
+      subcategories: [
+        "Teachers/Instructors",
+        "Tutors",
+        "Research Scientists",
+        "Academic Writers",
+        "Online Course Creators",
+        "Language Experts/Translators",
+        "Curriculum Developers",
+      ],
+    },
+    {
+      category: "Healthcare & Medical Talents",
+      subcategories: [
+        "Doctors",
+        "Nurses",
+        "Therapists",
+        "Nutritionists",
+        "Personal Trainers",
+        "Pharmacists",
+        "Medical Researchers",
+        "Mental Health Professionals",
+      ],
+    },
+    {
+      category: "Culinary & Hospitality Talents",
+      subcategories: [
+        "Chefs",
+        "Bakers",
+        "Caterers",
+        "Food Stylists",
+        "Bartenders",
+        "Hospitality Managers",
+        "Event Catering",
+      ],
+    },
+    {
+      category: "Sports & Fitness Talents",
+      subcategories: [
+        "Athletes",
+        "Coaches",
+        "Yoga Instructors",
+        "Pilates Instructors",
+        "Sports Commentators",
+        "Fitness Influencers",
+      ],
+    },
+    {
+      category: "Crafts & Handicrafts Talents",
+      subcategories: [
+        "Crafters",
+        "Jewelry Designers",
+        "Tailors/Seamstresses",
+        "Leatherworkers",
+        "Florists",
+        "Interior Designers",
+      ],
+    },
+    {
+      category: "Public Service & Advocacy Talents",
+      subcategories: [
+        "Activists",
+        "Lawyers",
+        "Non-profit Workers",
+        "Social Workers",
+        "Community Leaders",
+        "Advocacy Writers",
+      ],
+    },
+    {
+      category: "Finance & Accounting Talents",
+      subcategories: [
+        "Accountants",
+        "Financial Advisors",
+        "Investment Analysts",
+        "Tax Specialists",
+        "Auditors",
+        "Risk Management Experts",
+      ],
+    },
+    {
+      category: "Fashion & Beauty Talents",
+      subcategories: [
+        "Fashion Designers",
+        "Stylists",
+        "Makeup Artists",
+        "Hair Stylists",
+        "Nail Artists",
+        "Cosmetic Surgeons",
+        "Photographers (Fashion)",
+        "Beauty Influencers",
+      ],
+    },
+    {
+      category: "Legal & Compliance Talents",
+      subcategories: [
+        "Lawyers",
+        "Paralegals",
+        "Compliance Officers",
+        "Legal Advisors",
+        "Contract Specialists",
+      ],
+    },
+    {
+      category: "Engineering Talents",
+      subcategories: [
+        "Mechanical Engineers",
+        "Electrical Engineers",
+        "Civil Engineers",
+        "Chemical Engineers",
+        "Aerospace Engineers",
+        "Automotive Engineers",
+        "Industrial Engineers",
+        "Environmental Engineers",
+      ],
+    },
+    {
+      category: "Social Media & Content Creation Talents",
+      subcategories: [
+        "Influencers",
+        "Vloggers",
+        "Content Writers/Bloggers",
+        "Podcasters",
+        "Streamers",
+      ],
+    },
+    {
+      category: "Tech Support & Customer Service Talents",
+      subcategories: [
+        "IT Support Specialists",
+        "Customer Service Representatives",
+        "Helpdesk Technicians",
+        "Product Support Experts",
+        "Chat Support Professionals",
+      ],
+    },
+    {
+      category: "Sales & Customer Relationship Talents",
+      subcategories: [
+        "Sales Executives",
+        "Account Managers",
+        "Customer Relationship Managers",
+        "Business Development Representatives",
+      ],
+    },
+    {
+      category: "Engineering Design & Architecture Talents",
+      subcategories: [
+        "Architects",
+        "Urban Planners",
+        "Interior Designers",
+        "Construction Managers",
+      ],
+    },
+    {
+      category: "Media & Journalism Talents",
+      subcategories: [
+        "Journalists",
+        "Editors",
+        "News Anchors",
+        "Content Creators (Video/Audio)",
+        "Public Speakers",
+        "Documentary Filmmakers",
+      ],
+    },
+  ];
+
+
+
+  
+  
