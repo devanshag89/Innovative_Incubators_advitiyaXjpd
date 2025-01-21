@@ -8,8 +8,11 @@ const {
 } = require("../controllers/talentController");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+const authMiddleware = require("../AuthMiddlewares/authMiddleware");
+
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
+
 
 // Cloudinary configuration
 cloudinary.config({
@@ -41,7 +44,7 @@ router.post("/talentverify-otp", verifyTalentOTP);
 router.post("/talentlogin", talentLogin);
 
 // Add Talent profile with photo
-router.post("/addtalent", addTalentProfile);
+router.post("/addtalent",authMiddleware,addTalentProfile);
 
 // Get Talent by email
 router.get("/gettalent", getTalent);

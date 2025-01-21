@@ -13,6 +13,7 @@ const talentSchema = new mongoose.Schema(
     otp: { type: String, required: false },
     otpExpiry: { type: Date, required: false },
     isOtpVerified: { type: Boolean, default: false },
+    isProfileComplete: { type: Boolean, default: false},
     approvalStatus: {
       type: String,
       enum: ['pending', 'approved', 'rejected'],
