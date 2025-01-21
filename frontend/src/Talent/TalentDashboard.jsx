@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import TalentNavbar from "./TalentNavbar";
 import ProfileCard from "./ProfileCard";
-import { useAuth } from "../contexts/TalentContext";
-import { useEffect } from "react";
-import axios from 'axios';
 
 
 const TalentDashboard = () => {
@@ -14,40 +11,7 @@ const TalentDashboard = () => {
     "Character Illustration.zip",
   ];
 
-  const [user,setUser] = useState();
-
-  const {email} = useAuth();
-  console.log(email)
-
-  useEffect(() => {
-    // Function to fetch user name by email
-    const fetchUser = async () => {
-      if (!email) {
-        setError("Email not found");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await axios.get("http://localhost:4000/api/v1/gettalent", {
-          params: {
-            email: email,  // Pass email as a query parameter
-          },
-        });
-        console.log(response.data);
-        setUser(response.data.talent); // Set the user's name in the state
-      } catch (err) {
-        console.error("Error fetching user data:", err);
-        setError("Failed to fetch user data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [email]);
-
-  console.log(user);
+  
 
   return (
     <>
@@ -57,7 +21,7 @@ const TalentDashboard = () => {
           {/* Profile and Actions Section */}
           <section className="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Profile Card */}
-            <ProfileCard user={user}/>
+            <ProfileCard/>
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
