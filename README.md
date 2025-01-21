@@ -75,6 +75,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 2. **Install dependencies:**  
    ```bash
    npm install
+   ```
    
 3. **Set up environment variables in a .env file**
   PORT=4000
@@ -88,10 +89,12 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 1. **Development Mode:**
    ```bash
    npm run dev
+   ```
 
 2. **Production Mode:**
   ```bash
    npm start
+```
 
 
 ## 📋 **Usage** 
