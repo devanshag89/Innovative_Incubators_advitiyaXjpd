@@ -21,25 +21,33 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path='/talent-login' Component={LoginForm}/>
-          <Route path='/' Component={Dashboard}/>
+
+        <Route path='/' Component={Dashboard}/>
+
+
+          <Route path='/talent/login' Component={LoginForm}/>
           <Route path='/talent' Component={TalentDashboard}/>
           <Route path='/talent-signup' Component={SignupForm}/>
+          <Route path='/completeprofile' Component={CompleteProfile}/>
+
+
           <Route path='/admin/login' Component={AdminLogin}/>
           <Route path='/admin/' Component={AdminDashboard}/>
-          <Route path='/completeprofile' Component={CompleteProfile}/>
-          <Route path='/clientDashboard' Component={clientDashboard}/>
-          <Route path="/talent-login" Component={LoginForm} />
-          <Route path="/" Component={Dashboard} />
-          <Route path="/talent" Component={TalentDashboard} />
-          <Route path="/talent-signup" Component={SignupForm} />
+
+
+          
+          <Route path='/client' Component={clientDashboard}/>
+          {/* client login */}
+
           <Route path="/admin/login" Component={AdminLogin} />
           <Route path="/admin" element={<AdminDashboard />}>
             <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
             <Route path="requests" element={<RequestCandidateList />} />
           </Route>
-          <Route path="/completeprofile" Component={CompleteProfile} />
+
+
+          
         </Routes>
       </Router>
       </AuthProvider>
