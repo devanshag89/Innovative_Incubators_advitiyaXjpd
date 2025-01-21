@@ -13,6 +13,7 @@ import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
 import AuthProvider from './contexts/TalentContext';
+import ProtectedRoute from './contexts/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
   return (
@@ -20,15 +21,29 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
-          <Route path='/talent/login' element={<LoginForm />} />
-          <Route path='/talent-signup' element={<SignupForm />} />
+          <Route path="/talent-login" element={<LoginForm />} />
+          <Route path="/talent-signup" element={<SignupForm />} />
 
           {/* Home Routes */}
           <Route path="/" element={<Dashboard />} />
 
-          {/* Talent Routes */}
-          <Route path="/talent-dashboard" element={<TalentDashboard />} />
-          <Route path="/completeprofile" element={<CompleteProfile />} />
+          {/* Protected Talent Routes */}
+          <Route
+            path="/talent-dashboard"
+            element={
+              <ProtectedRoute>
+                <TalentDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/completeprofile"
+            element={
+              <ProtectedRoute>
+                <CompleteProfile />
+              </ProtectedRoute>
+            }
+          />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
