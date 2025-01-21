@@ -9,9 +9,9 @@ import TalentDashboard from './Talent/TalentDashboard';
 import AdminLogin from './Admin/AdminLogin';
 import AdminDashboard from './Admin/AdminDashboard';
 import clientDashboard from './Client/ClientDashboard';
-import Talents from './Admin/Talents';
+import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
-import Requests from './Admin/Requests';
+import RequestCandidateList from './Admin/Requests';
 import AuthProvider from './contexts/TalentContext';
 
 
@@ -35,9 +35,9 @@ function App() {
           <Route path="/talent-signup" Component={SignupForm} />
           <Route path="/admin/login" Component={AdminLogin} />
           <Route path="/admin" element={<AdminDashboard />}>
-            <Route path="talents" element={<Talents />} />
+            <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
-            <Route path="requests" element={<Requests />} />
+            <Route path="requests" element={<RequestCandidateList />} />
           </Route>
           <Route path="/completeprofile" Component={CompleteProfile} />
         </Routes>
