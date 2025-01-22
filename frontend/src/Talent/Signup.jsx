@@ -63,7 +63,7 @@ const SignupForm = () => {
 
       if (response.status === 200) {
         setStep(3); // Move to success step
-        navigate('/talent/login')
+        navigate('/talent-login')
       }
     } catch (error) {
       setMessage(
@@ -205,7 +205,7 @@ const SignupForm = () => {
           </div>
           <div>
             <img
-              src="/images/Login-img.png"
+              src="/images/login-img.png"
               alt="A welcoming login illustration"
               className="w-full h-full  rounded-r-lg"
             />

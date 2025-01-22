@@ -27,13 +27,13 @@ const ContactMessages = () => {
 
   return (
     <div>
-      <h2>Contact Messages</h2>
+      <h2 className="text-4xl text-orange-600 font-bold">Contact Messages</h2>
       {messages.length === 0 ? (
         <p>No messages found.</p>
       ) : (
         <ul>
           {messages.map((message, index) => (
-            <li key={index} style={{ border: "1px solid #ccc", padding: "10px", margin: "10px 0" }}>
+            <li key={index} className="bg-gray-200 border border-gray-300 p-4 my-4 rounded-md">
               <p>
                 <strong>Name:</strong> {message.fullName}
               </p>

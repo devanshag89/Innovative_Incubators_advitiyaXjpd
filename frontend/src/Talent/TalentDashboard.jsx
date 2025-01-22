@@ -85,7 +85,7 @@ const TalentDashboard = () => {
 
         setMedia((prev) => ({
           ...prev,
-          [type === "video" ? "skillVideos" : "posts"]: prev[
+          [type === "video" ? "skillVideos" : "posts"]: prev[ 
             type === "video" ? "skillVideos" : "posts"
           ].filter((item) => item !== url),
         }));
@@ -138,11 +138,11 @@ const TalentDashboard = () => {
           </div>
 
           {/* Right Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-14 h-1/2">
+          <div className="grid lg:grid-cols-2 gap-8 mt-14">
             {media.skillVideos.map((video, idx) => (
               <div
                 key={idx}
-                className="relative bg-black rounded-lg shadow-lg overflow-hidden group aspect-w-16 aspect-h-9"
+                className="relative bg-black rounded-lg shadow-lg overflow-hidden group h-64"
               >
                 <video
                   src={video}
@@ -161,7 +161,7 @@ const TalentDashboard = () => {
             {media.posts.map((post, idx) => (
               <div
                 key={idx}
-                className="relative bg-white rounded-lg shadow-lg overflow-hidden group aspect-w-16 aspect-h-9"
+                className="relative bg-white rounded-lg shadow-lg overflow-hidden group h-64"
               >
                 <img
                   src={post}

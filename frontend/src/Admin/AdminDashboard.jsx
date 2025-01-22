@@ -11,7 +11,9 @@ const AdminDashboard = () => {
     >
       
       <aside className="w-64 bg-black bg-opacity-80  text-white h-screen pt-6 fixed shadow-lg">
+         <Link to="/">
         <h1 className="text-4xl font-bold mb-8 ml-8">ShowcaseX</h1>
+        </Link>
         <nav>
           <ul className="mt-16">
             <li className="mb-4">
@@ -71,7 +73,7 @@ const AdminDashboard = () => {
           </header>
 
           
-          <main className="p-6 bg-opacity-90  rounded-lg shadow-md mx-6 mt-6">
+          <main className="p-6 bg-opacity-30  bg-black rounded-lg shadow-md mx-6 mt-6">
             <Outlet />
           </main>
         </div>
