@@ -116,7 +116,7 @@ const TalentDashboard = () => {
           <div className="space-y-6 mt-14">
             <ProfileCard />
             <div className="bg-gray-200 p-6 rounded-lg shadow backdrop-blur-md mt-10">
-              <h2 className="text-xl font-bold mb-4">Showcase you talent</h2>
+              <h2 className="text-xl font-bold mb-4">Showcase your talent</h2>
               <select
                 value={uploadType}
                 onChange={(e) => setUploadType(e.target.value)}
