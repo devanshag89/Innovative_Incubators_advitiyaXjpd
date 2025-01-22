@@ -4,7 +4,7 @@ const hireRequestSchema = new mongoose.Schema({
   clientId: { type: mongoose.Schema.Types.ObjectId, ref: "Client", required: true },
   talentId: { type: mongoose.Schema.Types.ObjectId, ref: "Talent", required: true },
   message: { type: String, required: false },
-  status: { type: String, default: "pending" }, // pending, accepted, rejected
+  status: { type: String, default: "pending" },
 });
 
 module.exports = mongoose.model("HireRequest", hireRequestSchema);

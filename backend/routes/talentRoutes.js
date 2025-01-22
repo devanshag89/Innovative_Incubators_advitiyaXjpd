@@ -14,14 +14,14 @@ const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
 
-// Cloudinary configuration
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Multer configuration for Cloudinary
+
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -34,19 +34,18 @@ const upload = multer({ storage });
 
 const router = express.Router();
 
-// Talent Signup route
+
 router.post("/talentsignup", talentSignup);
 
-// Verify OTP route
+
 router.post("/talentverify-otp", verifyTalentOTP);
 
-// Talent Login route
 router.post("/talentlogin", talentLogin);
 
-// Add Talent profile with photo
-router.post("/addtalent",authMiddleware,addTalentProfile);
 
-// Get Talent by email
+router.post("/addtalent", authMiddleware, addTalentProfile);
+
+
 router.get("/gettalent", getTalent);
 
 module.exports = router;

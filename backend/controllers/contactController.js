@@ -1,12 +1,12 @@
 const Contact = require('../models/contact');
 const nodemailer = require('nodemailer');
 
-// Function to handle form submission
+
 exports.submitContactForm = async (req, res) => {
   const { fullName, email, message } = req.body;
 
   try {
-    // Create a new contact entry in the database
+
     const newContact = new Contact({
       fullName,
       email,
@@ -15,18 +15,18 @@ exports.submitContactForm = async (req, res) => {
 
     await newContact.save();
 
-    // Send an email notification to the admin
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL, // Your email
-        pass: process.env.EMAIL_PASSWORD, // Your email password (use environment variables for safety)
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL,
-      to: process.env.ADMIN_EMAIL, // Admin's email
+      to: process.env.ADMIN_EMAIL,
       subject: 'New Contact Form Submission',
       text: `You have received a new message from ${fullName}.\n\nEmail: ${email}\nMessage: ${message}`,
     };
@@ -45,13 +45,13 @@ exports.submitContactForm = async (req, res) => {
   }
 };
 
-exports.fetchContactMessages = async (req,res) => {
-  try{
+exports.fetchContactMessages = async (req, res) => {
+  try {
     const messages = await Contact.find();
     console.log(messages);
-    res.status(200).json({message: "messages fetched successfully", messages: messages});
+    res.status(200).json({ message: "messages fetched successfully", messages: messages });
   }
-  catch(err){
-    res.status(500).json({ message: 'Error fetching contact messages', error: err.message  })
-}
+  catch (err) {
+    res.status(500).json({ message: 'Error fetching contact messages', error: err.message })
+  }
 }

@@ -3,30 +3,30 @@ const HireRequest = require("../models/HireRequest");
 const Client = require("../models/Client");
 const Talent = require("../models/Talent");
 
-// Create a new hire request
+
 const sendHireRequest = async (req, res) => {
   try {
     const { clientEmail, talentId, message } = req.body;
 
-    // Check if the client and talent exist
-    const client = await Client.findOne({ email: clientEmail }); // Find by email
+
+    const client = await Client.findOne({ email: clientEmail });
     const talent = await Talent.findById(talentId);
 
     if (!client || !talent) {
       return res.status(404).json({ message: "Client or Talent not found" });
     }
 
-    // Create and save the hire request
+
     const hireRequest = new HireRequest({
-      clientId: client._id,  // Use the _id of the client after finding by email
+      clientId: client._id,
       talentId,
       message,
-      status: "pending", // Default status is pending
+      status: "pending",
     });
 
     await hireRequest.save();
 
-    // Send email notification to the admin
+
     sendEmailNotification(client, talent, hireRequest);
 
     res.status(201).json({ message: "Hire request sent successfully", hireRequest });
@@ -36,7 +36,7 @@ const sendHireRequest = async (req, res) => {
   }
 };
 
-// Email notification function
+
 const sendEmailNotification = async (client, talent, hireRequest) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -69,7 +69,7 @@ const sendEmailNotification = async (client, talent, hireRequest) => {
   }
 };
 
-// Get all pending hire requests for a talent
+
 const getHireRequests = async (req, res) => {
   try {
     const { talentId } = req.query;
@@ -81,7 +81,7 @@ const getHireRequests = async (req, res) => {
   }
 };
 
-// Respond to a hire request (accept/reject)
+
 const respondHireRequest = async (req, res) => {
   try {
     const { requestId, response } = req.body;

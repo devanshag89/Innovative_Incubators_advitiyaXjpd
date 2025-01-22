@@ -2,14 +2,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Talent = require("../models/Talent");
 const sendNotification = require("../utils/sendNotification");
-const nodemailer = require('nodemailer'); 
-const twilio = require('twilio'); 
+const nodemailer = require('nodemailer');
+const twilio = require('twilio');
 const crypto = require('crypto');
 
 
 
 
-// Configure Nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -18,7 +17,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Helper: Send Email Notification
+
 const sendEmail = async (to, subject, text) => {
   if (!to) {
     throw new Error("Recipient email is missing!");
@@ -40,7 +39,7 @@ const sendEmail = async (to, subject, text) => {
   }
 };
 
-// Helper: Send OTP
+
 const sendOTP = async (email) => {
   if (!email) {
     throw new Error("Email is required to send OTP!");
@@ -66,27 +65,27 @@ const sendOTP = async (email) => {
   }
 };
 
-// Talent Signup
+
 const talentSignup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Validate required fields
+
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check if email already exists
+
     const existingTalent = await Talent.findOne({ email });
     if (existingTalent) {
       return res.status(400).json({ message: "Talent already registered" });
     }
 
-    // Generate OTP and hash password
-    const { otp, otpExpiry } = await sendOTP(email); // Ensure sendOTP is implemented correctly
+
+    const { otp, otpExpiry } = await sendOTP(email);
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Save the new talent
+
     const newTalent = new Talent({
       name,
       email,
@@ -97,7 +96,7 @@ const talentSignup = async (req, res) => {
 
     await newTalent.save();
 
-    // Send a single success response
+
     return res.status(201).json({ message: "Talent registered. OTP sent to email." });
   } catch (error) {
     console.error("Signup Error:", error);
@@ -116,20 +115,20 @@ const verifyTalentOTP = async (req, res) => {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
 
-    // OTP verified, remove OTP fields
+
     talent.otp = undefined;
     talent.otpExpiry = undefined;
     talent.isOtpVerified = true;
     await talent.save();
 
-    // Generate JWT token
+
     const token = jwt.sign({ id: talent._id, email: talent.email }, process.env.JWT_SECRET, {
-      expiresIn: "1h", // Token expires in 1 hour
+      expiresIn: "1h",
     });
 
     res.status(200).json({
       message: "OTP verified. Signup complete.",
-      token, // Include the JWT token in the response
+      token,
     });
   } catch (error) {
     console.error("OTP Verification Error:", error);
@@ -137,7 +136,7 @@ const verifyTalentOTP = async (req, res) => {
   }
 };
 
-// Talent Login
+
 const talentLogin = async (req, res) => {
   const { email, password } = req.body;
 
@@ -148,7 +147,7 @@ const talentLogin = async (req, res) => {
     }
 
 
-    // Check if the user is verified
+
     if (!talent.isOtpVerified) {
       return res.status(400).json({ message: "Please verify your OTP before logging in." });
     }
@@ -165,7 +164,7 @@ const talentLogin = async (req, res) => {
       message: "Login successful",
       token,
       email,
-      isProfileComplete: talent.isProfileComplete,  
+      isProfileComplete: talent.isProfileComplete,
     });
     console.log({ message: "Login successful", token, email });
   } catch (error) {
@@ -173,7 +172,6 @@ const talentLogin = async (req, res) => {
   }
 };
 
-// Add Talent Profile
 
 const addTalentProfile = async (req, res) => {
   const { email, phone, bio, profilePicture, selectedSubSkills } = req.body;
@@ -197,9 +195,9 @@ const addTalentProfile = async (req, res) => {
     user.personalDescription = bio;
     user.profilePhoto = profilePicture;
     user.skills = selectedSubSkills;
-  
-     user.isProfileComplete = true;
-     
+
+    user.isProfileComplete = true;
+
     // Save the updated user to the database
     const updatedUser = await user.save();
 
@@ -213,7 +211,7 @@ const addTalentProfile = async (req, res) => {
     res.status(200).json({
       message: "Profile updated successfully",
       isProfileComplete: updatedUser.isProfileComplete,
-      
+
       user: updatedUser, // Return updated user details
     });
   } catch (err) {
@@ -223,7 +221,6 @@ const addTalentProfile = async (req, res) => {
 };
 
 
-// Get Talent by Email
 const getTalent = async (req, res) => {
   const { email } = req.query;
 
