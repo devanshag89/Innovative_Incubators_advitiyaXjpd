@@ -1,15 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/TalentContext";
 
 
+
+
 function TalentNavbar() {
-  const navigate = useNavigate();
-   const {email}=useAuth();
+  const {email,logout}=useAuth();
   // Handle logout action
   const handleLogout = () => {
-    localStorage.clear(); // Clear authentication data if stored
-    navigate("/"); // Redirect to the homepage
+    logout();
   };
 
   return (
@@ -21,7 +20,9 @@ function TalentNavbar() {
         {/* Right Section: Email and Logout */}
         <div className="flex items-center space-x-8">
           <h1 className="text-sm text-gray-300 font-medium">
-       {email}
+
+            {email}
+
           </h1>
           <button
             onClick={handleLogout}
@@ -34,5 +35,6 @@ function TalentNavbar() {
     </nav>
   );
 }
+
 
 export default TalentNavbar;

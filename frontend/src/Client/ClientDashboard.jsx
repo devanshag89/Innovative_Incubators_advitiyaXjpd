@@ -38,7 +38,7 @@ const ClientDashboard = () => {
     <div
       className="min-h-screen flex bg-cover bg-center"
       style={{
-        backgroundImage: `url('../images/Home-img.png')`, // Replace with the actual path to your image
+        backgroundImage: `url('../images/Home-img.png')`, 
       }}
     >
       {/* Sidebar */}
