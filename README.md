@@ -183,6 +183,7 @@ The backend folder contains the server-side logic and API implementation.
 
 
 ##  📸**Glimpse of our website**
+![image](https://github.com/user-attachments/assets/2b9b0bc4-6ce6-45dc-bdc9-7b02b7513f4c)
 ![image](https://github.com/user-attachments/assets/d093ad8e-98a7-4815-aacb-db2c656f75ae)
 ![image](https://github.com/user-attachments/assets/d67c76c6-8e9b-47bf-904c-511e2daddbf7)
 ![image](https://github.com/user-attachments/assets/1a5127da-0d21-41e2-a9a2-eb49b814ef57)
