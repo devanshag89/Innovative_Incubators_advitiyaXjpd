@@ -1,13 +1,15 @@
 const express = require("express");
-const { clientSignup, clientLogin, hireTalent } = require("../controllers/clientController");
+const { clientSignup, clientLogin, hireTalent, verifyClientOTP } = require("../controllers/clientController");
 
 const router = express.Router();
 
 // Client Signup route
-router.post("/clientsignup", clientSignup);
+router.post("/client-signup", clientSignup);
 
 // Client Login route
-router.post("/clientlogin", clientLogin);
+router.post("/client-login", clientLogin);
+
+router.post("/verify-client-otp", verifyClientOTP)
 
 // Hire Talent route
 router.post("/hire", hireTalent);

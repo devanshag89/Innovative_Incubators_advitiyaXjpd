@@ -2,35 +2,134 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Client = require("../models/Client");
 const HireRequest = require("../models/HireRequest");
-const Talent =require('../models/Talent')
+const nodemailer = require('nodemailer'); 
+const crypto = require('crypto');
+
 const sendNotification = require("../utils/sendNotification");
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL, // Sender's email address (should be in .env)
+    pass: process.env.EMAIL_PASSWORD, // App password or email password (should be in .env)
+  },
+});
+
+// const sendEmail = async (to, subject, text) => {
+//   if (!to) {
+//     throw new Error("Recipient email is missing!");
+//   }
+//   console.log(process.env.EMAIL)
+//   const mailOptions = {
+//     from: process.env.EMAIL,  // Sender's email address
+//     to,  // Recipient email (ensure it's not undefined)
+//     subject,
+//     text,
+//   };
+
+//   try {
+//     await transporter.sendMail(mailOptions);
+//     console.log(`Email sent to ${to}`);
+//   } catch (error) {
+//     console.error("Error sending email:", error);
+//     throw new Error("Error sending email");
+//   }
+// };
+
 // Client Registration
-const clientSignup = async (req, res) => {
-  const { name, email, password, phone } = req.body;
+const sendOTP = async (email) => {
+  if (!email) {
+    throw new Error("Email is required to send OTP!");
+  }
+
+  const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
+  const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
+
+  const mailOptions = {
+    from: process.env.EMAIL, // Sender's email address
+    to: email, // Recipient email
+    subject: "Your OTP for Talent Registration",
+    text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
+  };
+
   try {
-    // Check if client already exists
-    const existingClient = await Client.findOne({ email });
-    if (existingClient) {
-      return res.status(400).json({ message: "Client already exists" });
+    await transporter.sendMail(mailOptions);
+    console.log(`OTP sent to ${email}: ${otp}`);
+    return { otp, otpExpiry };
+  } catch (error) {
+    console.error("Failed to send OTP:", error);
+    throw new Error("Failed to send OTP. Please try again.");
+  }
+};
+
+//client Signup
+const clientSignup = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    // Validate required fields
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Hash the password
+    // Check if email already exists
+    const existingClient = await Client.findOne({ email });
+    if (existingClient) {
+      return res.status(400).json({ message: "Talent already registered" });
+    }
+
+    // Generate OTP and hash password
+    const { otp, otpExpiry } = await sendOTP(email); // Ensure sendOTP is implemented correctly
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Create new client
+    // Save the new talent
     const newClient = new Client({
       name,
       email,
       password: hashedPassword,
-      phone,
+      otp,
+      otpExpiry,
     });
+
     await newClient.save();
 
-    // Send success response
-    res.status(201).json({ message: "Client registered successfully" });
+    // Send a single success response
+    return res.status(201).json({ message: "Client registered. OTP sent to email." });
   } catch (error) {
-    res.status(500).json({ message: "Error during registration", error: error.message });
+    console.error("Signup Error:", error);
+    return res.status(500).json({ message: "Error during signup", error: error.message });
+  }
+};
+
+
+const verifyClientOTP = async (req, res) => {
+  const { email, otp } = req.body;
+
+  try {
+    const client = await Client.findOne({ email });
+
+    if (!client || client.otp !== otp || new Date() > client.otpExpiry) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    // OTP verified, remove OTP fields
+    client.otp = undefined;
+    client.otpExpiry = undefined;
+    client.isOtpVerified = true;
+    await client.save();
+
+    // Generate JWT token
+    const token = jwt.sign({ id: client._id, email: client.email }, process.env.JWT_SECRET, {
+      expiresIn: "1h", // Token expires in 1 hour
+    });
+
+    res.status(200).json({
+      message: "OTP verified. Signup complete.",
+      token, // Include the JWT token in the response
+    });
+  } catch (error) {
+    console.error("OTP Verification Error:", error);
+    res.status(500).json({ message: "Error verifying OTP", error: error.message });
   }
 };
 
@@ -97,4 +196,4 @@ const hireTalent = async (req, res) => {
 
 
 
-module.exports = { clientSignup, clientLogin, hireTalent };
+module.exports = { clientSignup, clientLogin, hireTalent,verifyClientOTP };
