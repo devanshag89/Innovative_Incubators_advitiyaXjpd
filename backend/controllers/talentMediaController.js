@@ -1,8 +1,8 @@
 const Talent = require('../models/Talent');
 
- 
+
 exports.saveMedia = async (req, res) => {
-  const { email, mediaUrl, type } = req.body;  
+  const { email, mediaUrl, type } = req.body;
 
   try {
     const talent = await Talent.findOne({ email });
@@ -12,9 +12,9 @@ exports.saveMedia = async (req, res) => {
 
     // Save media URLs
     if (type === "video") {
-      talent.skillVideos.push(mediaUrl);  
+      talent.skillVideos.push(mediaUrl);
     } else if (type === "post") {
-      talent.posts.push(mediaUrl);  
+      talent.posts.push(mediaUrl);
     }
 
     await talent.save();
@@ -25,7 +25,7 @@ exports.saveMedia = async (req, res) => {
   }
 };
 
-// Get media (videos and posts) for a talent
+
 exports.getMedia = async (req, res) => {
   const { email } = req.query;
 
@@ -45,9 +45,8 @@ exports.getMedia = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-// Delete media (videos or posts)
 
-// Delete media (videos or posts)
+
 exports.deleteMedia = async (req, res) => {
   const { email, type, url } = req.body;
 

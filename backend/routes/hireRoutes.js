@@ -1,4 +1,4 @@
-// In your hireRoutes.js file
+
 const express = require('express');
 const router = express.Router();
 const { sendHireRequest, getHireRequests, respondHireRequest } = require('../controllers/hireController');

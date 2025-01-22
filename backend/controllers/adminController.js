@@ -1,23 +1,23 @@
 const Talent = require("../models/Talent");
-const nodemailer = require('nodemailer'); 
+const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL, // Sender's email address (should be in .env)
-    pass: process.env.EMAIL_PASSWORD, // App password or email password (should be in .env)
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-// Helper: Send Email Notification
+
 const sendEmail = async (to, subject, text) => {
   if (!to) {
     throw new Error("Recipient email is missing!");
   }
 
   const mailOptions = {
-    from: process.env.EMAIL,  // Sender's email address
-    to,  // Recipient email (ensure it's not undefined)
+    from: process.env.EMAIL,
+    to,
     subject,
     text,
   };
@@ -99,7 +99,7 @@ const getPendingTalents = async (req, res) => {
     // Fetch all records where status is "approved"
     const approvedTalents = await Talent.find({ approvalStatus: "pending" });
     // Send the retrieved records as a response
-    res.status(200).json({talents: approvedTalents});
+    res.status(200).json({ talents: approvedTalents });
   } catch (error) {
     console.error("Error fetching approved talents:", error);
     res.status(500).json({
@@ -111,4 +111,4 @@ const getPendingTalents = async (req, res) => {
 
 
 
-module.exports = { approveTalent,rejectTalent, getApprovedTalents, getPendingTalents };
+module.exports = { approveTalent, rejectTalent, getApprovedTalents, getPendingTalents };

@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Client = require("../models/Client");
 const HireRequest = require("../models/HireRequest");
-const nodemailer = require('nodemailer'); 
+const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 const sendNotification = require("../utils/sendNotification");
@@ -10,44 +10,23 @@ const sendNotification = require("../utils/sendNotification");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL, // Sender's email address (should be in .env)
-    pass: process.env.EMAIL_PASSWORD, // App password or email password (should be in .env)
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
-// const sendEmail = async (to, subject, text) => {
-//   if (!to) {
-//     throw new Error("Recipient email is missing!");
-//   }
-//   console.log(process.env.EMAIL)
-//   const mailOptions = {
-//     from: process.env.EMAIL,  // Sender's email address
-//     to,  // Recipient email (ensure it's not undefined)
-//     subject,
-//     text,
-//   };
 
-//   try {
-//     await transporter.sendMail(mailOptions);
-//     console.log(`Email sent to ${to}`);
-//   } catch (error) {
-//     console.error("Error sending email:", error);
-//     throw new Error("Error sending email");
-//   }
-// };
-
-// Client Registration
 const sendOTP = async (email) => {
   if (!email) {
     throw new Error("Email is required to send OTP!");
   }
 
-  const otp = crypto.randomInt(100000, 999999).toString(); // Generate 6-digit OTP
-  const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP expires in 10 minutes
+  const otp = crypto.randomInt(100000, 999999).toString();
+  const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
   const mailOptions = {
-    from: process.env.EMAIL, // Sender's email address
-    to: email, // Recipient email
+    from: process.env.EMAIL,
+    to: email,
     subject: "Your OTP for Talent Registration",
     text: `Your OTP is ${otp}. It will expire in 10 minutes.`,
   };
@@ -62,27 +41,27 @@ const sendOTP = async (email) => {
   }
 };
 
-//client Signup
+
 const clientSignup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Validate required fields
+
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check if email already exists
+
     const existingClient = await Client.findOne({ email });
     if (existingClient) {
       return res.status(400).json({ message: "Client already registered" });
     }
 
-    // Generate OTP and hash password
-    const { otp, otpExpiry } = await sendOTP(email); // Ensure sendOTP is implemented correctly
+
+    const { otp, otpExpiry } = await sendOTP(email);
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Save the new talent
+
     const newClient = new Client({
       name,
       email,
@@ -93,7 +72,7 @@ const clientSignup = async (req, res) => {
 
     await newClient.save();
 
-    // Send a single success response
+
     return res.status(201).json({ message: "Client registered. OTP sent to email." });
   } catch (error) {
     console.error("Signup Error:", error);
@@ -136,7 +115,7 @@ const verifyClientOTP = async (req, res) => {
 // Client Login
 const clientLogin = async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     // Find client by email
     const client = await Client.findOne({ email });
@@ -149,12 +128,12 @@ const clientLogin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
-     
+
 
     // Generate JWT token
     const token = jwt.sign({ id: client._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-  
-    res.status(200).json({ message: "Login successful", email ,token});
+
+    res.status(200).json({ message: "Login successful", email, token });
   } catch (error) {
     res.status(500).json({ message: "Error during login", error: error.message });
   }
@@ -196,4 +175,4 @@ const hireTalent = async (req, res) => {
 
 
 
-module.exports = { clientSignup, clientLogin, hireTalent,verifyClientOTP };
+module.exports = { clientSignup, clientLogin, hireTalent, verifyClientOTP };
