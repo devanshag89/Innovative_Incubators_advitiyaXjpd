@@ -62,13 +62,40 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 ## 🚀 **Getting Started**  
 
 ### **1. Prerequisites**  
-- **Backend:** Node.js, Express.js  
-- **Frontend:** React.js  
-- **Database:** MongoDB  
-- **Notifications:** nodemailer to send emails.
-- **Images/Videos Upload:** Cloudinary API  
 
----
+**MERN Technology Stack with Tailwind CSS** 🌐
+This project leverages the MERN stack (MongoDB, Express.js, React.js, Node.js) combined with Tailwind CSS, providing a robust, modern, and scalable solution for web development.
+
+*Frontend:*
+
+* React.js: Build interactive and dynamic user interfaces.
+* Vite: Superfast build tool for optimized performance.
+* Tailwind CSS: Utility-first CSS framework for custom, responsive designs.
+* Framer Motion: Add animations and transitions for a smooth user experience.
+* React Router: Simplify routing and navigation across pages.
+* Axios: Manage API requests effortlessly.
+* Chart.js & react-chartjs-2: Create stunning and interactive data visualizations.
+* React Icons: Access a comprehensive library of icons.
+* React Scroll & Intersection Observer: Implement scrolling effects and lazy loading for an immersive UI.
+  
+*Backend:*
+
+* Node.js: Efficient server-side runtime for scalable applications.
+* Express.js: Lightweight framework for building robust APIs.
+* MongoDB with Mongoose: Schema-based NoSQL database for data management.
+* JWT (JSON Web Tokens): Ensure secure, stateless authentication.
+* Nodemailer: Enable email notifications and alerts.
+* Multer & Cloudinary: Manage file uploads and integrate cloud storage.
+* Validator: Secure the app with robust input validation.
+  
+*Development Tools:*
+
+* Nodemon: Automatic server restarts for efficient development.
+* PostCSS & Autoprefixer: Ensure CSS compatibility across all browsers.
+
+### **File Structure**
+ 
+
 
 ###  **2. Installation**  
 
@@ -135,6 +162,17 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 ## 🔁 **Work Flow Diagram**
 
  ![image](https://github.com/user-attachments/assets/cfe6d2fc-0ff0-4a33-b075-a72b25fe0810)
+
+ ## **Future Scope**
+ * In-App Chat and Notifications
+   Enable real-time messaging between talents and clients for smoother communication.
+
+ * Advanced Talent Recommendations
+   Implement a recommendation engine to suggest relevant talents to clients based on their preferences and previous searches.
+
+ * Ratings and Reviews
+   Enable clients to leave reviews and rate talents after a hiring session.
+   Ratings are visible on the talent's profile to enhance credibility.
 
 
 
