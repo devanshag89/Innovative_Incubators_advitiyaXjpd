@@ -1,9 +1,42 @@
 import React from "react";
+import { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const TalentDescription = () => {
   const location = useLocation();
   const { talent } = location.state || {}; // Retrieve talent from state
+  const [media, setMedia] = useState({ skillVideos: [], posts: [] }); // State for media
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMedia = async () => {
+      try {
+        if (!talent?.email) {
+          setLoading(false);
+          return;
+        }
+
+        const response = await fetch(`http://localhost:4000/api/v1/getMedia?email=${talent.email}`);
+        const data = await response.json();
+        console.log(data);
+        if (response.ok) {
+          setMedia({
+            skillVideos: data.skillVideos || [],
+            posts: data.posts || [],
+          });
+        } else {
+          console.error("Error fetching media:", data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching media:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMedia();
+  }, [talent]);
 
   if (!talent) {
     return (
@@ -84,37 +117,45 @@ const TalentDescription = () => {
         </div>
 
         {/* Media Section */}
+       
         <div className="mt-8">
           <h2 className="text-2xl font-semibold text-orange-700 mb-4 animate-slideInRight">
             Media
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {talent.media?.length > 0 ? (
-              talent.media.map((media, index) =>
-                media.type === "image" ? (
-                  <img
-                    key={index}
-                    src={media.url}
-                    alt={`Media ${index + 1}`}
-                    className="rounded-lg shadow-md animate-fadeIn"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  />
-                ) : media.type === "video" ? (
-                  <video
-                    key={index}
-                    controls
-                    className="rounded-lg shadow-md animate-fadeIn"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <source src={media.url} type="video/mp4" />
-                  </video>
-                ) : null
-              )
-            ) : (
-              <p className="text-gray-600">No media available.</p>
-            )}
-          </div>
+          {loading ? (
+            <p className="text-gray-600">Loading media...</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Render Videos */}
+              {media.skillVideos.map((videoUrl, index) => (
+                <video
+                  key={`video-${index}`}
+                  controls
+                  className="rounded-lg shadow-md animate-fadeIn"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                </video>
+              ))}
+
+              {/* Render Posts */}
+              {media.posts.map((postUrl, index) => (
+                <img
+                  key={`post-${index}`}
+                  src={postUrl}
+                  alt={`Post ${index + 1}`}
+                  className="rounded-lg shadow-md animate-fadeIn"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                />
+              ))}
+
+              {media.skillVideos.length === 0 && media.posts.length === 0 && (
+                <p className="text-gray-600">No media available.</p>
+              )}
+            </div>
+          )}
         </div>
+
 
         {/* Contact Section */}
         <div className="mt-8">

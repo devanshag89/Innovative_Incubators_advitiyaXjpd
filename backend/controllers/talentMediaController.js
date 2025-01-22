@@ -1,8 +1,8 @@
 const Talent = require('../models/Talent');
 
-// Save media (videos or posts)
+ 
 exports.saveMedia = async (req, res) => {
-  const { email, mediaUrl, type } = req.body; // Media type can be "video" or "post"
+  const { email, mediaUrl, type } = req.body;  
 
   try {
     const talent = await Talent.findOne({ email });
@@ -12,9 +12,9 @@ exports.saveMedia = async (req, res) => {
 
     // Save media URLs
     if (type === "video") {
-      talent.skillVideos.push(mediaUrl); // Add video URL to the skillVideos array
+      talent.skillVideos.push(mediaUrl);  
     } else if (type === "post") {
-      talent.posts.push(mediaUrl); // Add post URL to the posts array
+      talent.posts.push(mediaUrl);  
     }
 
     await talent.save();
