@@ -211,7 +211,8 @@ The backend folder contains the server-side logic and API implementation.
    Enable clients to leave reviews and rate talents after a hiring session.
    Ratings are visible on the talent's profile to enhance credibility.
 
-
+## **Video Link for project**
+ https://drive.google.com/file/d/1pgWKI6u1P5oBbLXYH8hC-j04o5fEmw9A/view?usp=sharing
 
 
 
