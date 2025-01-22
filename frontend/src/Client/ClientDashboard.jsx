@@ -31,7 +31,7 @@ const ClientDashboard = () => {
   const handleLogout = () => {
     // Clear client email and redirect to login
     logout()
-    navigate('/client/login');
+    navigate('/');
   };
 
   // Filter talents by subcategory
@@ -56,9 +56,11 @@ const ClientDashboard = () => {
       {/* Sidebar */}
       <aside className="w-72 h-screen fixed shadow-lg bg-black bg-opacity-80">
         <div className="relative z-10 p-6">
+          <Link to="/">
           <h1 className="text-4xl text-orange-500 font-bold mb-8 ml-2 hover:text-orange-800 transition duration-200 cursor-pointer">
             ShowcaseX
           </h1>
+          </Link>
           <nav>
             <h2 className="text-2xl font-semibold mb-4 text-orange-300">
               Talent Categories

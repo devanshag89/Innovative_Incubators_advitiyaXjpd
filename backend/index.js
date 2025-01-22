@@ -23,5 +23,7 @@ const server = () => {
     db();
   });
 };
+const hireRoutes = require('./routes/hireRoutes');
+app.use('/api/v1', hireRoutes); // Make sure this line exists
 
 server();
