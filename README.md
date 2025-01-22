@@ -9,6 +9,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 ---
 
+
 ## 🛠️ **Features**  
 
 ### 1. **Talent Registration & Admin Approval**  
@@ -57,6 +58,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 ---
 
+
 ## 🚀 **Getting Started**  
 
 ### **1. Prerequisites**  
@@ -68,7 +70,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 ---
 
-### **2. Installation**  
+### ⚙️ **2. Installation**  
 
 1. **Clone the repository:**  
    ```bash
@@ -81,6 +83,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
    ```
    
 3. **Set up environment variables in a .env file**
+```bash
   PORT=4000
   CLOUDINARY_CLOUD_NAME=dhicut2yg
   CLOUDINARY_API_KEY=481536193739991
@@ -91,18 +94,22 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
   ADMIN_PHONE_NUMBER=6394330610
   ADMIN_EMAIL=suppports2345@gmail.com
   MONGO_URI=mongodb://localhost:27017/talentsphere
+```
 
-## **3. Running the Application**
+---
+
+
+## ▶️ **3. Running the Application**
 
 1. **Development Mode:**
    ```bash
-   npm run dev
+      npm run dev
    ```
 
 2. **Production Mode:**
   ```bash
-   npm start
-```
+     npm start
+  ```
 
 
 ## 📋 **Usage** 
