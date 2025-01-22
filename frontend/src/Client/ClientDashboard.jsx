@@ -31,7 +31,7 @@ const ClientDashboard = () => {
   const handleLogout = () => {
     // Clear client email and redirect to login
     logout()
-    navigate('/client/login');
+    navigate('/');
   };
 
   // Filter talents by subcategory

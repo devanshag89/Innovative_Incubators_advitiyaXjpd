@@ -1,14 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useClient } from "../contexts/ClientContext";
 const TalentCard = ({ talent }) => {
-  
+
+  const {clientEmail} = useClient();
+  console.log(clientEmail);
   const navigate=useNavigate();
   const handleViewProfile = () => {
-    
-    navigate(`/description/${talent._id}`, {
-      state: { talent },  
-    });
+    if(!clientEmail){
+      navigate('/client/login')
+    }
+    else{
+      navigate(`/description/${talent._id}`, {
+        state: { talent },  
+      });
+    }
   };
 
   return (
