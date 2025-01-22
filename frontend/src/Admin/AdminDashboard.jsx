@@ -9,7 +9,7 @@ const AdminDashboard = () => {
         backgroundImage: `url('../images/Home-img.png')`, 
       }}
     >
-      {/* Sidebar */}
+      
       <aside className="w-64 bg-black bg-opacity-80  text-white h-screen pt-6 fixed shadow-lg">
         <h1 className="text-4xl font-bold mb-8 ml-8">ShowcaseX</h1>
         <nav>
@@ -50,14 +50,14 @@ const AdminDashboard = () => {
         </nav>
       </aside>
 
-      {/* Main Content */}
+      
       <div className="flex-1 ml-64 relative">
-        {/* Black Overlay */}
+        
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
-        {/* Content Wrapper */}
+        
         <div className="relative z-10">
-          {/* Header */}
+          
           <header className="shadow-lg p-4 flex justify-between items-center sticky top-0 bg-white rounded-lg mx-6 mt-6">
             <h3 className="text-3xl text-orange-600 font-semibold">Admin Dashboard</h3>
             <div className="flex items-center space-x-4">
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
             </div>
           </header>
 
-          {/* Main Section */}
+          
           <main className="p-6 bg-opacity-90  rounded-lg shadow-md mx-6 mt-6">
             <Outlet />
           </main>
