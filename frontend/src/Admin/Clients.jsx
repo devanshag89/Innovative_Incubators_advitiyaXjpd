@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const ClientCard = ({ item }) => {
   return (
-    <div className="max-w-sm bg-black bg-opacity-60 border rounded-lg shadow-xl p-6 text-left border-orange-500">
+    <div className="w-96 bg-black bg-opacity-60 border rounded-lg shadow-xl p-6 text-left border-orange-500">
       <div className="flex items-center space-x-2">
         <h3 className="text-2xl font-semibold text-white">
           Name:

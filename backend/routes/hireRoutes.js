@@ -1,8 +1,10 @@
-const express = require("express");
+// In your hireRoutes.js file
+const express = require('express');
 const router = express.Router();
-const { sendHireRequest } = require("../controllers/hireController");
+const { sendHireRequest, getHireRequests, respondHireRequest } = require('../controllers/hireController');
 
-// Route to send a hire request
-router.post("/sendHireRequest", sendHireRequest);
+router.post('/sendHireRequest', sendHireRequest);
+router.get('/getHireRequests', getHireRequests);
+router.post('/respondHireRequest', respondHireRequest);
 
 module.exports = router;

@@ -1,14 +1,38 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useClient } from "../contexts/ClientContext"; 
+
 const TalentCard = ({ talent }) => {
-  
-  const navigate=useNavigate();
+  const { clientEmail } = useClient(); 
+  const navigate = useNavigate();
+
   const handleViewProfile = () => {
-    
     navigate(`/description/${talent._id}`, {
-      state: { talent },  
+      state: { talent },
     });
+  };
+
+  const handleHireRequest = async () => {
+    console.log("clientEmail:", clientEmail); 
+    console.log("talentId:", talent._id); 
+  
+    if (!clientEmail || !talent._id) {
+      alert("Please Login first");
+      return;
+    }
+  
+    try {
+      const response = await axios.post("http://localhost:4000/api/v1/sendHireRequest", {
+        clientEmail: clientEmail, // Use client email instead of clientId
+        talentId: talent._id,
+        message: "I'm interested in hiring you!",
+      });
+      alert("Hire request sent successfully. Admin has been notified.");
+    } catch (error) {
+      console.error("Error sending hire request:", error);
+      alert("Error sending hire request.");
+    }
   };
 
   return (
@@ -42,20 +66,18 @@ const TalentCard = ({ talent }) => {
           ))
         ) : (
           <span className="text-sm text-black">No skills listed</span>
-        )
-        
-        }
+        )}
       </div>
 
       <div className="mt-6 flex flex-col gap-3">
-      <button
-          onClick={handleViewProfile} // Navigate when clicked
+        <button
+          onClick={handleViewProfile} 
           className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           View Profile
         </button>
-      <button
-          
+        <button
+          onClick={handleHireRequest} 
           className="w-full py-2 text-white text-xl bg-green-700 rounded-md text-center hover:bg-orange-600 transition"
         >
           Hire
