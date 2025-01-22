@@ -86,7 +86,7 @@ const TalentCard = ({ talent }) => {
 
         <button
           onClick={handleHireRequest} // Trigger hire request on click
-          className="w-full py-2 text-white text-xl bg-green-700 rounded-md text-center hover:bg-green-800 transition"
+          className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           Hire
         </button>
