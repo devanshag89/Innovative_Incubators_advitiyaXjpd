@@ -19,6 +19,7 @@ import ClientSignup from './Client/ClientSignup';
 
 import ProtectedRoute from './contexts/ProtectedRoute'; // Import ProtectedRoute
 import TalentDescription from './Client/TalentDescription';
+import MessageBox from './Admin/MessageBox';
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
             <Route path="talents" element={<ApprovedTalentsList />} />
             <Route path="clients" element={<Clients />} />
             <Route path="requests" element={<RequestCandidateList />} />
+            <Route path="messagebox" element={<MessageBox />} />
           </Route>
 
     

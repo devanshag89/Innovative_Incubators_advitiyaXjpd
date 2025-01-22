@@ -38,6 +38,14 @@ const AdminDashboard = () => {
                 Requests
               </Link>
             </li>
+            <li className="mb-4">
+              <Link
+                to="messagebox"
+                className="block p-3 hover:bg-gray-100 hover:text-orange-600 text-white cursor-pointer font-semibold text-2xl text-center w-full transition-all duration-300"
+              >
+                Message Box
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>
