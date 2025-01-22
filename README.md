@@ -194,6 +194,7 @@ The backend folder contains the server-side logic and API implementation.
 
 * All sensitive data is encrypted and stored securely.
 * Designed with scalability in mind to handle a growing user base and additional features in the future.
+* Protected URLs. 
 
 ## 🔁 **Work Flow Diagram**
 
