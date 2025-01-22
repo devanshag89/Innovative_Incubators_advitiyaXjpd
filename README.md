@@ -21,7 +21,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 **Admin Review System:**  
 - Profiles remain hidden from clients until approved by an admin.  
-- Admin receives real-time notifications via email or WhatsApp for new registrations.  
+- Admin receives real-time notifications via email for new registrations.  
 - Admin can approve/reject profiles via an intuitive dashboard.  
 
 ---
@@ -44,7 +44,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 **Hire Request Form:**  
   - Client Information  
   - Selected Talent  
-- Admin is notified of hire requests via WhatsApp.  
+- Admin is notified of hire requests.  
 
 ---
 
