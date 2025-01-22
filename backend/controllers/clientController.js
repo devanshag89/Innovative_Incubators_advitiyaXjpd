@@ -75,7 +75,7 @@ const clientSignup = async (req, res) => {
     // Check if email already exists
     const existingClient = await Client.findOne({ email });
     if (existingClient) {
-      return res.status(400).json({ message: "Talent already registered" });
+      return res.status(400).json({ message: "Client already registered" });
     }
 
     // Generate OTP and hash password
@@ -120,7 +120,7 @@ const verifyClientOTP = async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign({ id: client._id, email: client.email }, process.env.JWT_SECRET, {
-      expiresIn: "1h", // Token expires in 1 hour
+      expiresIn: "5m", // Token expires in 1 hour
     });
 
     res.status(200).json({
@@ -154,7 +154,7 @@ const clientLogin = async (req, res) => {
     // Generate JWT token
     const token = jwt.sign({ id: client._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
   
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful", email ,token});
   } catch (error) {
     res.status(500).json({ message: "Error during login", error: error.message });
   }

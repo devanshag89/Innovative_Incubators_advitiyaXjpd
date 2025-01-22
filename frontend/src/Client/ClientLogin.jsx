@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../contexts/TalentContext";
+import { useClient } from "../contexts/ClientContext";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useClient();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,16 +17,16 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/talentlogin",
+        "http://localhost:4000/api/v1/client-login",
         formData
       );
 
       if (response.status === 200) {
-        const { token, email, isProfileComplete } = response.data;
-        login(token, email, isProfileComplete);
+        const { token, email} = response.data;
+        console.log(response.data);
+        login(token, email);
 
-        if (isProfileComplete) navigate("/talent-dashboard");
-        else navigate("/completeprofile");
+        navigate("/client");
       }
     } catch (err) {
       console.error("Login Error:", err);
