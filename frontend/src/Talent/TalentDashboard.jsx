@@ -106,7 +106,7 @@ const TalentDashboard = () => {
         }}
       >
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
-        <main className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 py-10 px-6 relative z-10 ">
+        <main className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 py-10 px-6 relative z-10">
           {/* Left Section */}
           <div className="space-y-6 mt-14">
             <ProfileCard />
@@ -115,42 +115,39 @@ const TalentDashboard = () => {
               <select
                 value={uploadType}
                 onChange={(e) => setUploadType(e.target.value)}
-                className="w-full mb-4 p-2 border border-gray-300 rounded opacity-95"
+                className="w-full mb-4 p-2 border border-gray-300 rounded"
               >
-                <option className="bg-white opacity-40"value="">Select Type</option>
+                <option value="">Select Type</option>
                 <option value="video">Video</option>
                 <option value="post">Post</option>
               </select>
-              
+
               <input
                 type="file"
                 onChange={handleFileChange}
-                className="w-full mb-4 p-2 border border-white rounded bg-white"
+                className="w-full mb-4 p-2 border border-gray-300 rounded bg-white"
               />
               <button
                 onClick={handleUpload}
-                className="bg-orange-500 text-white px-4 py-2 rounded w-32 text-xl hover:bg-orange-600"
+                className="bg-orange-500 text-white px-4 py-2 rounded text-xl hover:bg-orange-600 flex items-center gap-2"
               >
-                <div className="flex flex-row">
-                <div className="mt-1"><MdUpload /></div> 
-                <p className="text-lg ml-1">Upload</p>
-                </div>
+                <MdUpload className="text-2xl" />
+                Upload
               </button>
-              
             </div>
           </div>
 
           {/* Right Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  h-80 mt-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-14 h-1/2">
             {media.skillVideos.map((video, idx) => (
               <div
                 key={idx}
-                className="relative bg-black opacity-90 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden group"
+                className="relative bg-black rounded-lg shadow-lg overflow-hidden group aspect-w-16 aspect-h-9"
               >
                 <video
                   src={video}
                   controls
-                  className="w-full h-40 object-cover rounded-t-3xl"
+                  className="w-full h-full object-cover"
                 />
                 <button
                   onClick={() => handleDelete("video", video)}
@@ -164,12 +161,12 @@ const TalentDashboard = () => {
             {media.posts.map((post, idx) => (
               <div
                 key={idx}
-                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden group"
+                className="relative bg-white rounded-lg shadow-lg overflow-hidden group aspect-w-16 aspect-h-9"
               >
                 <img
                   src={post}
                   alt={`Post ${idx}`}
-                  className="w-full h-40 object-cover rounded-t-3xl"
+                  className="w-full h-full object-cover"
                 />
                 <button
                   onClick={() => handleDelete("post", post)}

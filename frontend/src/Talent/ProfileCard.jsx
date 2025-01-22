@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/TalentContext";
 import axios from "axios";
-import { FaCheck, FaTimes } from "react-icons/fa"; // Importing icons for accept and reject
+import { FaCheck, FaTimes, FaBell } from "react-icons/fa";
 
 const ProfileCard = () => {
   const [user, setUser] = useState({ skills: [], hireRequest: null });
   const [hireRequests, setHireRequests] = useState([]); // Store hire requests
   const [selectedRequest, setSelectedRequest] = useState(null); // Selected request for detailed view
+  const [newRequest, setNewRequest] = useState(false); // Track if new requests have arrived
   const { email } = useAuth();
 
   useEffect(() => {
@@ -28,7 +29,10 @@ const ProfileCard = () => {
         const response = await axios.get("http://localhost:4000/api/v1/getHireRequests", {
           params: { talentId: user._id }, // Use actual talent ID
         });
-        setHireRequests(response.data.requests);
+        const newRequests = response.data.requests.filter((req) => req.status === "pending");
+        console.log(newRequests)
+        setHireRequests(newRequests);
+        setNewRequest(newRequests.length > 0); // Set newRequest if there are new requests
       } catch (err) {
         console.error("Error fetching hire requests:", err);
       }
@@ -59,6 +63,28 @@ const ProfileCard = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative">
+      {/* Notification Bell */}
+      <div className="absolute top-4 right-4 flex items-center">
+        <div className="relative">
+          <FaBell
+            className={`text-2xl cursor-pointer ${
+              newRequest ? "text-blue-500" : "text-gray-700"
+            }`}
+            onClick={() => {
+              if (hireRequests.length > 0) {
+                setSelectedRequest(hireRequests[0]); // Open the first request
+                setNewRequest(false); // Mark as viewed
+              }
+            }}
+          />
+          {hireRequests.length > 0 && (
+            <span className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+              {hireRequests.length}
+            </span>
+          )}
+        </div>
+      </div>
+
       {/* Header Section */}
       <div className="flex items-center space-x-4">
         <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-orange-500">
@@ -82,41 +108,29 @@ const ProfileCard = () => {
         <p className="text-sm"><strong>Phone:</strong> {user.phoneNo || "N/A"}</p>
       </div>
 
-      {/* Hire Request Notification */}
-      <div className="fixed top-10 right-5 bg-blue-500 text-white p-4 rounded shadow-md">
-        {hireRequests.length > 0 && (
-          <>
-            <p>{hireRequests.length} new hire request(s)</p>
-            <button
-              className="mt-2 underline"
-              onClick={() => setSelectedRequest(hireRequests[0])}
-            >
-              View Request
-            </button>
-          </>
-        )}
-      </div>
-
-      {/* Detailed Hire Request */}
+      {/* Hire Request Message */}
       {selectedRequest && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-            <h2 className="text-xl font-bold">{selectedRequest.clientName}</h2>
-            <p>{selectedRequest.message}</p>
-            <div className="mt-4 flex justify-between">
-              <button
-                onClick={() => handleRequestResponse("accept")}
-                className="bg-green-500 text-white px-4 py-2 rounded flex items-center"
-              >
-                <FaCheck className="mr-2" /> Accept
-              </button>
-              <button
-                onClick={() => handleRequestResponse("reject")}
-                className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
-              >
-                <FaTimes className="mr-2" /> Reject
-              </button>
-            </div>
+        <div className="mt-6 bg-gray-100 p-4 rounded-lg shadow-inner">
+          <h3 className="text-lg font-bold text-gray-800 mb-2">Hire Request</h3>
+          <p
+            className="text-sm text-gray-700 truncate hover:overflow-visible hover:whitespace-normal"
+            title={selectedRequest.message} // Show full message on hover
+          >
+            {selectedRequest.message}
+          </p>
+          <div className="mt-4 flex justify-end gap-2">
+            <button
+              onClick={() => handleRequestResponse("accept")}
+              className="bg-green-500 text-white p-2 rounded-full flex items-center justify-center"
+            >
+              <FaCheck />
+            </button>
+            <button
+              onClick={() => handleRequestResponse("reject")}
+              className="bg-red-500 text-white p-2 rounded-full flex items-center justify-center"
+            >
+              <FaTimes />
+            </button>
           </div>
         </div>
       )}
