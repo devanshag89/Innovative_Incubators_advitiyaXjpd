@@ -27,18 +27,19 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 ---
 
 ### 2. **Talent Profile Dashboard**  
-- Display only approved profiles to clients.  
+- Only the approved talents can access their dashboard.  
 - Profile details include:  
   - Profile Photo  
   - Name  
   - Skills and Expertise  
   - Brief Personal Description  
-- User-friendly interface with search and filter options.  
+- It includes a section to add their post, videos aur certifications to showcase their talents.
+- It also includes a section to see hire requests.
 
 ---
 
 ### 3. **Client Dashboard**  
-- Clients can browse talent profiles without registration.  
+- Clients can browse approved talent profiles without registration.  
 - To send a hire request, clients must register or log in.  
 **Hire Request Form:**  
   - Client Information  
@@ -48,7 +49,8 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 ---
 
 ### 4. **Admin Notifications**  
-- Real-time WhatsApp API integration for notifications:  
+- Real-time email integration for notifications:
+  - Otp varification for registered email by client or talents.
   - New talent registrations.  
   - Hire requests from clients.  
 - Notifications include all relevant details for efficient action.  
@@ -61,7 +63,8 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 - **Backend:** Node.js, Express.js  
 - **Frontend:** React.js  
 - **Database:** MongoDB  
-- **Notifications:** Twilio or WhatsApp Business API for notifications  
+- **Notifications:** nodemailer to send emails.
+- **Images/Videos Upload:** Cloudinary API  
 
 ---
 
