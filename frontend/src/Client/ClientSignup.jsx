@@ -93,7 +93,7 @@ const SignupForm = () => {
               {step === 1 && (
                 <>
                   <h1 className="text-xl text-center font-normal mt-4 text-orange-500">
-                    Signup as a Talent
+                    Signup as a Client
                   </h1>
                   <form
                     className="form-horizontal w-3/4 mx-auto"

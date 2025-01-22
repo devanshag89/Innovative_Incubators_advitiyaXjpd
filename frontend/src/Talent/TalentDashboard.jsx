@@ -16,7 +16,7 @@ const TalentDashboard = () => {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1//getMedia", {
+        const response = await axios.get("http://localhost:4000/api/v1/getMedia", {
           params: { email },
         });
         setMedia(response.data);

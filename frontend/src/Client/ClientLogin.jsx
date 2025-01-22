@@ -52,7 +52,7 @@ const LoginForm = () => {
               ShowcaseX
             </h1>
             <h2 className="text-xl text-orange-500 text-center mt-4">
-              Login as a Talent
+              Login as a Client
             </h2>
             <form
               className="w-3/4 mx-auto mt-6"
