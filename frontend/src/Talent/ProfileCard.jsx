@@ -49,10 +49,10 @@ const ProfileCard = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-gray-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
       {/* Header Section */}
       <div className="flex items-center space-x-4">
-        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-blue-500">
+        <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-orange-500">
           <img
             src={user.profilePhoto || "https://via.placeholder.com/150"}
             alt="Profile"
@@ -113,14 +113,14 @@ const ProfileCard = () => {
       )}
 
       {/* Skills Section */}
-      <div className="mt-6">
+      <div className="mt-6 bg-gray-200">
         <h3 className="text-gray-800 font-semibold">Skills</h3>
         <div className="flex flex-wrap mt-3 gap-3">
           {user.skills && user.skills.length > 0 ? (
             user.skills.map((skill, index) => (
               <span
                 key={index}
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-800 rounded-full shadow-sm hover:bg-gray-200 transition duration-200"
+                className="px-4 py-2 text-sm bg-orange-300 text-gray-800 rounded-full shadow-sm hover:bg-gray-200 transition duration-200"
               >
                 {skill}
               </span>
@@ -135,7 +135,7 @@ const ProfileCard = () => {
       {user.hireRequest === null && (
         <div className="mt-4">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-orange-500 text-white px-4 py-2 rounded"
             onClick={handleHireRequest}
           >
             Hire This Talent

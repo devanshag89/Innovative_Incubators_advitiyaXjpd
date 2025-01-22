@@ -85,7 +85,7 @@ const TalentDashboard = () => {
 
         setMedia((prev) => ({
           ...prev,
-          [type === "video" ? "skillVideos" : "posts"]: prev[ 
+          [type === "video" ? "skillVideos" : "posts"]: prev[
             type === "video" ? "skillVideos" : "posts"
           ].filter((item) => item !== url),
         }));
@@ -100,47 +100,57 @@ const TalentDashboard = () => {
     <>
       <TalentNavbar />
       <div
-        className="min-h-screen bg-cover bg-center"
+        className="min-h-screen bg-cover bg-center relative"
         style={{
           backgroundImage: "url('/images/Services-img.png')",
-          backgroundColor: "rgba(0, 0, 0, 0.9)",
         }}
       >
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
-        <main className="container mx-auto py-10 px-6">
-          <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 bg-black bg-opacity-90 p-6 rounded-lg backdrop-blur-md">
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
+        <main className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 py-10 px-6 relative z-10 ">
+          {/* Left Section */}
+          <div className="space-y-6 mt-14">
             <ProfileCard />
-            <div className="bg-white p-8 rounded shadow backdrop-blur-md">
+            <div className="bg-gray-200 p-6 rounded-lg shadow backdrop-blur-md mt-10">
               <h2 className="text-xl font-bold mb-4">Upload Media</h2>
               <select
                 value={uploadType}
                 onChange={(e) => setUploadType(e.target.value)}
-                className="w-full mb-4"
+                className="w-full mb-4 p-2 border border-gray-300 rounded opacity-95"
               >
-                <option value="">Select Type</option>
+                <option className="bg-white opacity-40"value="">Select Type</option>
                 <option value="video">Video</option>
                 <option value="post">Post</option>
               </select>
-              <input type="file" onChange={handleFileChange} className="w-full mb-4" />
+              
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="w-full mb-4 p-2 border border-white rounded bg-white"
+              />
               <button
                 onClick={handleUpload}
-                className="bg-purple-500 text-white px-4 py-2 rounded"
+                className="bg-orange-500 text-white px-4 py-2 rounded w-32 text-xl hover:bg-orange-600"
               >
-                <MdUpload /> Upload
+                <div className="flex flex-row">
+                <div className="mt-1"><MdUpload /></div> 
+                <p className="text-lg ml-1">Upload</p>
+                </div>
               </button>
+              
             </div>
-          </section>
+          </div>
 
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Right Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  h-80 mt-14">
             {media.skillVideos.map((video, idx) => (
               <div
                 key={idx}
-                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
+                className="relative bg-black opacity-90 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden group"
               >
                 <video
                   src={video}
                   controls
-                  className="w-full h-52 object-cover rounded-t-3xl"
+                  className="w-full h-40 object-cover rounded-t-3xl"
                 />
                 <button
                   onClick={() => handleDelete("video", video)}
@@ -154,12 +164,12 @@ const TalentDashboard = () => {
             {media.posts.map((post, idx) => (
               <div
                 key={idx}
-                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
+                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl overflow-hidden group"
               >
                 <img
                   src={post}
                   alt={`Post ${idx}`}
-                  className="w-full h-52 object-cover rounded-t-3xl"
+                  className="w-full h-40 object-cover rounded-t-3xl"
                 />
                 <button
                   onClick={() => handleDelete("post", post)}
@@ -169,7 +179,7 @@ const TalentDashboard = () => {
                 </button>
               </div>
             ))}
-          </section>
+          </div>
         </main>
       </div>
     </>

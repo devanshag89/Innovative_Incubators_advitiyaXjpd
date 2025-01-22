@@ -23,7 +23,7 @@ const TalentCard = ({ talent }) => {
       <div className="relative w-24 h-24 mx-auto">
         <img
           src={talent.profilePhoto || "/default-profile.png"}
-          alt={talent.name || "Profile"}
+          
           className="w-full h-full rounded-full object-cover border-4 border-white shadow-md"
         />
       </div>
@@ -54,7 +54,7 @@ const TalentCard = ({ talent }) => {
         }
       </div>
 
-      <div className="mt-6 flex flex-col gap-3">
+      <div className="mt-6 flex flex-row gap-3">
       <button
           onClick={handleViewProfile} // Navigate when clicked
           className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
@@ -63,7 +63,7 @@ const TalentCard = ({ talent }) => {
         </button>
       <button
           
-          className="w-full py-2 text-white text-xl bg-green-700 rounded-md text-center hover:bg-orange-600 transition"
+          className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           Hire
         </button>
