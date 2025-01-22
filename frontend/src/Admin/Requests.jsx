@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 
-const CandidateCard = ({ candidate }) => {
+const CandidateCard = ({ candidate, onApprove, onReject }) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl p-4 text-center">
       <div className="relative w-24 h-24 mx-auto">
         <img
-          src={candidate.profilePic || "https://via.placeholder.com/150"}
+          src={candidate.profilePhoto || "https://via.placeholder.com/150"}
           className="w-full h-full rounded-full object-cover border-4 border-orange-400 shadow-md"
         />
       </div>

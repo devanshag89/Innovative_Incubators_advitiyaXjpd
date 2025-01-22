@@ -85,7 +85,7 @@ const TalentDashboard = () => {
 
         setMedia((prev) => ({
           ...prev,
-          [type === "video" ? "skillVideos" : "posts"]: prev[
+          [type === "video" ? "skillVideos" : "posts"]: prev[ 
             type === "video" ? "skillVideos" : "posts"
           ].filter((item) => item !== url),
         }));
@@ -99,11 +99,18 @@ const TalentDashboard = () => {
   return (
     <>
       <TalentNavbar />
-      <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-100 to-white">
+      <div
+        className="min-h-screen bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/Services-img.png')",
+          backgroundColor: "rgba(0, 0, 0, 0.9)",
+        }}
+      >
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
         <main className="container mx-auto py-10 px-6">
-          <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 bg-black bg-opacity-90 p-6 rounded-lg backdrop-blur-md">
             <ProfileCard />
-            <div className="bg-white p-8 rounded shadow">
+            <div className="bg-white p-8 rounded shadow backdrop-blur-md">
               <h2 className="text-xl font-bold mb-4">Upload Media</h2>
               <select
                 value={uploadType}
@@ -115,52 +122,54 @@ const TalentDashboard = () => {
                 <option value="post">Post</option>
               </select>
               <input type="file" onChange={handleFileChange} className="w-full mb-4" />
-              <button onClick={handleUpload} className="bg-purple-500 text-white px-4 py-2 rounded">
+              <button
+                onClick={handleUpload}
+                className="bg-purple-500 text-white px-4 py-2 rounded"
+              >
                 <MdUpload /> Upload
               </button>
             </div>
           </section>
 
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-  {media.skillVideos.map((video, idx) => (
-    <div
-      key={idx}
-      className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
-    >
-      <video
-        src={video}
-        controls
-        className="w-full h-52 object-cover rounded-t-3xl"
-      />
-      <button
-        onClick={() => handleDelete("video", video)}
-        className="absolute top-3 right-3 bg-red-500 text-white p-3 rounded-full shadow-md hover:bg-red-600 transition-opacity opacity-0 group-hover:opacity-100"
-      >
-        <FaTrashAlt />
-      </button>
-    </div>
-  ))}
+            {media.skillVideos.map((video, idx) => (
+              <div
+                key={idx}
+                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
+              >
+                <video
+                  src={video}
+                  controls
+                  className="w-full h-52 object-cover rounded-t-3xl"
+                />
+                <button
+                  onClick={() => handleDelete("video", video)}
+                  className="absolute top-3 right-3 bg-red-500 text-white p-3 rounded-full shadow-md hover:bg-red-600 transition-opacity opacity-0 group-hover:opacity-100"
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
+            ))}
 
-  {media.posts.map((post, idx) => (
-    <div
-      key={idx}
-      className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
-    >
-      <img
-        src={post}
-        alt={`Post ${idx}`}
-        className="w-full h-52 object-cover rounded-t-3xl"
-      />
-      <button
-        onClick={() => handleDelete("post", post)}
-        className="absolute top-3 right-3 bg-red-500 text-white p-3 rounded-full shadow-md hover:bg-red-600 transition-opacity opacity-0 group-hover:opacity-100"
-      >
-        <FaTrashAlt />
-      </button>
-    </div>
-  ))}
-</section>
-
+            {media.posts.map((post, idx) => (
+              <div
+                key={idx}
+                className="relative bg-white/80 backdrop-blur-lg rounded-3xl shadow-xl border border-purple-200 overflow-hidden group hover:shadow-2xl hover:scale-105 transition-all"
+              >
+                <img
+                  src={post}
+                  alt={`Post ${idx}`}
+                  className="w-full h-52 object-cover rounded-t-3xl"
+                />
+                <button
+                  onClick={() => handleDelete("post", post)}
+                  className="absolute top-3 right-3 bg-red-500 text-white p-3 rounded-full shadow-md hover:bg-red-600 transition-opacity opacity-0 group-hover:opacity-100"
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
+            ))}
+          </section>
         </main>
       </div>
     </>
