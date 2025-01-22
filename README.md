@@ -93,7 +93,7 @@ This project leverages the MERN stack (MongoDB, Express.js, React.js, Node.js) c
 * Nodemon: Automatic server restarts for efficient development.
 * PostCSS & Autoprefixer: Ensure CSS compatibility across all browsers.
 
-### **File Structure**
+### **2. File Structure**
 
 *Frontend*
 The frontend folder contains the client-side application built using React.js.
@@ -126,7 +126,7 @@ The backend folder contains the server-side logic and API implementation.
 * .gitignore: Defines files and folders to exclude from version control.
 
 
-###  **2. Installation**  
+###  **3. Installation**  
 
 1. **Clone the repository:**  
    ```bash
@@ -135,7 +135,10 @@ The backend folder contains the server-side logic and API implementation.
 
 2. **Install dependencies:**  
    ```bash
+   cd frontend
    npm install
+   cd ../backend
+   npm install
    ```
    
 3. **Set up environment variables in a .env file**
@@ -155,17 +158,13 @@ The backend folder contains the server-side logic and API implementation.
 ---
 
 
-##  **3. Running the Application**
-
-1. **Development Mode:**
-   ```bash
-      npm run dev
-   ```
-
-2. **Production Mode:**
-   ```bash
-     npm start
-   ```
+##  **4. Start the Development Servers**
+    ```bash
+    cd frontend
+    npm run dev
+    cd ../backend
+    npm start
+    ```
 
 
 ## 📋 **Usage** 
@@ -181,6 +180,21 @@ The backend folder contains the server-side logic and API implementation.
 3. **Client Interaction**
 * Clients can view approved profiles and send hire requests after logging in.
 * Notifications are sent to the admin for further action.
+
+##  📸**Glimpse of our website**
+
+    ![image](https://github.com/user-attachments/assets/748961d4-69c0-45dd-9e2b-7ba017044757) 
+    ![image](https://github.com/user-attachments/assets/8fe11b09-e185-4cc3-bfad-2b7181e5060b)
+    ![image](https://github.com/user-attachments/assets/d8d4cb28-7069-4893-91ee-1f29f4b60a64)
+    ![image](https://github.com/user-attachments/assets/db4d088b-7410-410e-882c-7f2ef6ca1bcf)
+    ![Uploading image.png…]()
+    
+
+
+
+
+    
+
 
 
 ## 🛡️ **Security and Scalability**
