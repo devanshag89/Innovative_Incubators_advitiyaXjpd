@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/TalentContext";
 import axios from "axios";
 
 const ProfileCard = () => {
-  const [user, setUser] = useState({ skills: [] }); // Initialize skills as an empty array
+  const [user, setUser] = useState({ skills: [], hireRequest: null }); // Added hireRequest state
   const { email } = useAuth();
 
   useEffect(() => {
@@ -22,6 +22,31 @@ const ProfileCard = () => {
 
     fetchUserName();
   }, [email]);
+
+  const handleHireRequest = async () => {
+    try {
+      // Send hire request to the backend
+      await axios.post("http://localhost:4000/api/v1/hiretalent", {
+        email: user.email,
+      });
+      setUser({ ...user, hireRequest: "pending" }); // Update hireRequest state to pending
+    } catch (err) {
+      console.error("Error sending hire request:", err);
+    }
+  };
+
+  const handleRequestResponse = async (response) => {
+    try {
+      // Send the response to the backend (accept or reject)
+      await axios.post("http://localhost:4000/api/v1/respondhire", {
+        email: user.email,
+        response: response,
+      });
+      setUser({ ...user, hireRequest: response === "accept" ? "hired" : "rejected" }); // Update status based on response
+    } catch (err) {
+      console.error("Error responding to hire request:", err);
+    }
+  };
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -54,6 +79,39 @@ const ProfileCard = () => {
         </div>
       </div>
 
+      {/* Hire Request Notification */}
+      {user.hireRequest === "pending" && (
+        <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-lg shadow-sm">
+          <p>Client has sent a hire request!</p>
+          <div className="mt-2 flex space-x-4">
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded"
+              onClick={() => handleRequestResponse("accept")}
+            >
+              Accept
+            </button>
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded"
+              onClick={() => handleRequestResponse("reject")}
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      )}
+
+      {user.hireRequest === "hired" && (
+        <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-lg shadow-sm">
+          <p>You have been hired by the client!</p>
+        </div>
+      )}
+
+      {user.hireRequest === "rejected" && (
+        <div className="mt-4 p-4 bg-red-100 text-red-800 rounded-lg shadow-sm">
+          <p>You have rejected the hire request.</p>
+        </div>
+      )}
+
       {/* Skills Section */}
       <div className="mt-6">
         <h3 className="text-gray-800 font-semibold">Skills</h3>
@@ -72,6 +130,18 @@ const ProfileCard = () => {
           )}
         </div>
       </div>
+
+      {/* Hire Button */}
+      {user.hireRequest === null && (
+        <div className="mt-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={handleHireRequest}
+          >
+            Hire This Talent
+          </button>
+        </div>
+      )}
     </div>
   );
 };
