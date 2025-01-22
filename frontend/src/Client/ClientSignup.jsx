@@ -29,7 +29,7 @@ const SignupForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/talentsignup",
+        "http://localhost:4000/api/v1/client-signup",
         {
           name: formData.name,
           email: formData.email,
@@ -52,7 +52,7 @@ const SignupForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/talentverify-otp",
+        "http://localhost:4000/api/v1/verify-client-otp",
         {
           email: formData.email,
           otp,
@@ -63,7 +63,7 @@ const SignupForm = () => {
 
       if (response.status === 200) {
         setStep(3); // Move to success step
-        navigate('/talent/login')
+        navigate('/client/login')
       }
     } catch (error) {
       setMessage(
