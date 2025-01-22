@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import axios from 'axios'; // Import Axios for making API requests
-import { motion } from 'framer-motion'; // Import motion from framer-motion
-import { useInView } from 'react-intersection-observer'; // Import intersection observer hook
+import React, { useState } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Contact = ({ id }) => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    message: ''
+    fullName: "",
+    email: "",
+    message: "",
   });
-  const [statusMessage, setStatusMessage] = useState(''); // For showing success or error message
+  const [statusMessage, setStatusMessage] = useState("");
 
-  // Hook to detect if the component is in view
   const { ref, inView } = useInView({
-    triggerOnce: true, // Trigger animation only once when it comes into view
-    threshold: 0.5, // Trigger when 50% of the element is in the viewport
+    triggerOnce: true,
+    threshold: 0.5,
   });
 
-  // Handle form field change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,21 +24,22 @@ const Contact = ({ id }) => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Make a POST request to the backend API
-      const response = await axios.post('http://localhost:4000/api/v1/submit', formData);
-      setStatusMessage('Your message has been sent successfully!');
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/submit",
+        formData
+      );
+      setStatusMessage("Your message has been sent successfully!");
       setFormData({
-        fullName: '',
-        email: '',
-        message: ''
+        fullName: "",
+        email: "",
+        message: "",
       });
     } catch (error) {
-      setStatusMessage('Something went wrong. Please try again.');
+      setStatusMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -50,21 +49,20 @@ const Contact = ({ id }) => {
         Contact Us
       </h3>
       <div className="min-h-screen flex items-center justify-center relative">
-        {/* Background Image */}
         <div className="shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-5xl relative z-10">
-          {/* Left Column: Image and Contact Info */}
           <motion.div
-            ref={ref} // Attach intersection observer to this element
+            ref={ref}
             className="md:w-1/2 p-6 flex flex-col justify-between relative bg-cover bg-center shadow-lg bg-black"
-            style={{ backgroundImage: 'url(/images/Home-img.png)' }}
-            initial={{ opacity: 0, x: -50 }} // Initial state
-            animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -50 }}  // Animate when in view
-            transition={{ duration: 0.8, type: "spring" }} // Animation settings
+            style={{ backgroundImage: "url(/images/Home-img.png)" }}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -50 }}
+            transition={{ duration: 0.8, type: "spring" }}
           >
             <div className="bg-black bg-opacity-50 p-4 rounded-lg">
               <h2 className="text-xl font-bold mb-4 text-white">Location</h2>
               <p className="text-gray-200">
-                123 Main Street, City, Country Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, quo!
+                123 Main Street, City, Country Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Cupiditate, quo!
               </p>
             </div>
             <div className="mt-6 bg-black bg-opacity-50 p-4 rounded-lg">
@@ -79,18 +77,22 @@ const Contact = ({ id }) => {
             </div>
           </motion.div>
 
-          {/* Right Column: Contact Form */}
           <motion.div
-            ref={ref} // Attach intersection observer to this element
+            ref={ref}
             className="p-6 bg-white md:w-1/2"
-            initial={{ opacity: 0, x: 50 }} // Initial state
-            animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : 50 }}  // Animate when in view
-            transition={{ duration: 0.8, type: "spring" }} // Animation settings
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : 50 }}
+            transition={{ duration: 0.8, type: "spring" }}
           >
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Form</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              Contact Form
+            </h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="fullName" className="block text-gray-700 font-medium">
+                <label
+                  htmlFor="fullName"
+                  className="block text-gray-700 font-medium"
+                >
                   Full Name
                 </label>
                 <input
@@ -104,7 +106,10 @@ const Contact = ({ id }) => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-gray-700 font-medium">
+                <label
+                  htmlFor="email"
+                  className="block text-gray-700 font-medium"
+                >
                   Email
                 </label>
                 <input
@@ -118,7 +123,10 @@ const Contact = ({ id }) => {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-gray-700 font-medium">
+                <label
+                  htmlFor="message"
+                  className="block text-gray-700 font-medium"
+                >
                   Comment or message
                 </label>
                 <textarea
@@ -139,7 +147,6 @@ const Contact = ({ id }) => {
               </button>
             </form>
 
-            {/* Display status message after submission */}
             {statusMessage && (
               <div className="mt-4 text-center text-gray-800">
                 <p>{statusMessage}</p>

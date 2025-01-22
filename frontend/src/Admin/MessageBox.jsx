@@ -7,11 +7,12 @@ const ContactMessages = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch messages from the backend
     const fetchMessages = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/fetch-messages"); // Update the endpoint URL if needed
-        setMessages(response.data.messages); // Assuming the backend returns messages in `response.data.messages`
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/fetch-messages"
+        );
+        setMessages(response.data.messages);
         setLoading(false);
       } catch (err) {
         setError(err.response?.data?.message || "An error occurred");
@@ -33,7 +34,10 @@ const ContactMessages = () => {
       ) : (
         <ul>
           {messages.map((message, index) => (
-            <li key={index} className="bg-gray-200 border border-gray-300 p-4 my-4 rounded-md">
+            <li
+              key={index}
+              className="bg-gray-200 border border-gray-300 p-4 my-4 rounded-md"
+            >
               <p>
                 <strong>Name:</strong> {message.fullName}
               </p>

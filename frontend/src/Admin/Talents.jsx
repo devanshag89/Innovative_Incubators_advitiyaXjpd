@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
- 
+
 import { useNavigate } from "react-router-dom";
 const CandidateCard = ({ candidate }) => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   console.log(candidate);
   const handleViewProfile = () => {
     navigate(`/description/${candidate._id}`, {
-      state: { talent: candidate },  
+      state: { talent: candidate },
     });
   };
   return (
@@ -43,13 +43,17 @@ const CandidateCard = ({ candidate }) => {
       </div>
 
       <div className="mt-6">
-        <p className="text-sm text-gray-500">{candidate.email || "No email provided"}</p>
-        <p className="text-sm text-gray-500">{candidate.phoneNo || "No phone number provided"}</p>
+        <p className="text-sm text-gray-500">
+          {candidate.email || "No email provided"}
+        </p>
+        <p className="text-sm text-gray-500">
+          {candidate.phoneNo || "No phone number provided"}
+        </p>
       </div>
 
       <div className="mt-6 flex flex-col gap-3">
-      <button
-          onClick={handleViewProfile} // Navigate when clicked
+        <button
+          onClick={handleViewProfile}
           className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           View Profile
@@ -59,7 +63,6 @@ const CandidateCard = ({ candidate }) => {
   );
 };
 
-
 const ApprovedTalentsList = () => {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +71,9 @@ const ApprovedTalentsList = () => {
   useEffect(() => {
     const fetchApprovedTalents = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/get-approved-talents");
+        const response = await fetch(
+          "http://localhost:4000/api/v1/get-approved-talents"
+        );
         const data = await response.json();
 
         if (response.ok) {

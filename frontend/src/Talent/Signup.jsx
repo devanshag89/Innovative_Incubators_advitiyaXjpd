@@ -3,22 +3,21 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
-  const [step, setStep] = useState(1); // Tracks which step of the process we're on
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [otp, setOtp] = useState(""); // OTP input field
-  const [message, setMessage] = useState(""); // Feedback message to user
+  const [otp, setOtp] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -38,7 +37,7 @@ const SignupForm = () => {
       );
 
       setMessage(response.data.message);
-      setStep(2); // Move to OTP verification step
+      setStep(2);
     } catch (error) {
       setMessage(
         error.response?.data?.message || "An error occurred during signup."
@@ -46,7 +45,6 @@ const SignupForm = () => {
     }
   };
 
-  // Handle OTP verification form submission
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
 
@@ -62,24 +60,25 @@ const SignupForm = () => {
       setMessage(response.data.message);
 
       if (response.status === 200) {
-        setStep(3); // Move to success step
-        navigate('/talent-login')
+        setStep(3);
+        navigate("/talent-login");
       }
     } catch (error) {
       setMessage(
-        error.response?.data?.message || "An error occurred during OTP verification."
+        error.response?.data?.message ||
+          "An error occurred during OTP verification."
       );
     }
   };
 
   return (
     <div
-    className="bg-cover bg-center min-h-screen flex items-center justify-center"
-    style={{
-      backgroundImage: `url('/images/Services-img.png')`, // Replace with your actual background image path
-    }}
-  >
-    <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+      className="bg-cover bg-center min-h-screen flex items-center justify-center"
+      style={{
+        backgroundImage: `url('/images/Services-img.png')`,
+      }}
+    >
+      <div className="absolute inset-0 bg-black bg-opacity-70"></div>
       <div className="flex flex-col items-center flex-1 h-full justify-center px-4 sm:px-0 opacity-90">
         <div
           className="flex rounded-lg shadow-2xl w-full sm:w-3/4 lg:w-1/2 bg-white sm:mx-0"
@@ -205,7 +204,7 @@ const SignupForm = () => {
           </div>
           <div>
             <img
-              src="/images/login-img.png"
+              src="/images/Login-img.png"
               alt="A welcoming login illustration"
               className="w-full h-full  rounded-r-lg"
             />

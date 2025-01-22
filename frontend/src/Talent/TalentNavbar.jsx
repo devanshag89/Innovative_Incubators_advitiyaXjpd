@@ -1,12 +1,9 @@
 import React from "react";
 import { useAuth } from "../contexts/TalentContext";
 
-
-
-
 function TalentNavbar() {
-  const {email,logout}=useAuth();
-  // Handle logout action
+  const { email, logout } = useAuth();
+
   const handleLogout = () => {
     logout();
   };
@@ -14,10 +11,10 @@ function TalentNavbar() {
   return (
     <nav className="bg-black bg-opacity-70 fixed top-0 left-0 w-full z-50 shadow-none mb-96">
       <div className="container mx-auto px-6 flex justify-between items-center py-4">
-        {/* Logo Section */}
-        <h1 className="cursor-pointer text-white font-bold text-3xl opacity-100" >Showcase<span className="text-orange-500">X</span></h1>
-        
-        {/* Right Section: Email and Logout */}
+        <h1 className="cursor-pointer text-white font-bold text-3xl opacity-100">
+          Showcase<span className="text-orange-500">X</span>
+        </h1>
+
         <div className="flex items-center space-x-8">
           <h1 className="text-md text-white font-medium opacity-100">
             {email}
@@ -33,6 +30,5 @@ function TalentNavbar() {
     </nav>
   );
 }
-
 
 export default TalentNavbar;

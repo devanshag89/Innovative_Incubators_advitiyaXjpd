@@ -30,7 +30,9 @@ const LoginForm = () => {
       }
     } catch (err) {
       console.error("Login Error:", err);
-      setError(err.response?.data?.message || "Login failed. Please try again.");
+      setError(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 
@@ -38,15 +40,13 @@ const LoginForm = () => {
     <div
       className="bg-cover bg-center min-h-screen flex items-center justify-center"
       style={{
-        backgroundImage: `url('/images/Services-img.png')`, // Replace with your actual background image path
+        backgroundImage: `url('/images/Services-img.png')`,
       }}
     >
-      {/* Black overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
       <div className="relative z-10 w-full sm:w-3/4 lg:w-1/2 bg-white rounded-lg shadow-lg">
         <div className="flex flex-col md:flex-row">
-          {/* Left section */}
           <div className="w-full md:w-1/2 p-6 flex flex-col justify-center">
             <h1 className="text-4xl font-bold text-orange-600 text-center">
               ShowcaseX
@@ -54,10 +54,7 @@ const LoginForm = () => {
             <h2 className="text-xl text-orange-500 text-center mt-4">
               Login as a Talent
             </h2>
-            <form
-              className="w-3/4 mx-auto mt-6"
-              onSubmit={handleSubmit}
-            >
+            <form className="w-3/4 mx-auto mt-6" onSubmit={handleSubmit}>
               <div className="flex flex-col mt-4">
                 <input
                   id="email"
@@ -82,14 +79,9 @@ const LoginForm = () => {
                   required
                 />
               </div>
-              {error && (
-                <p className="text-red-500 text-sm mt-2">{error}</p>
-              )}
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               <div className="text-right mt-2">
-                <a
-                  href="#"
-                  className="text-xs text-orange-500 hover:underline"
-                >
+                <a href="#" className="text-xs text-orange-500 hover:underline">
                   Forgot Your Password?
                 </a>
               </div>
@@ -110,10 +102,9 @@ const LoginForm = () => {
             </p>
           </div>
 
-          {/* Right section */}
           <div className="hidden md:block md:w-1/2 rounded-r-lg">
             <img
-              src="/images/login-img.png"
+              src="/images/Login-img.png"
               alt="Login illustration"
               className="w-full h-full  rounded-r-lg"
             />

@@ -15,9 +15,12 @@ const TalentDashboard = () => {
   useEffect(() => {
     const fetchMedia = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/getMedia", {
-          params: { email },
-        });
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/getMedia",
+          {
+            params: { email },
+          }
+        );
         setMedia(response.data);
       } catch (error) {
         console.error("Error fetching media:", error);
@@ -75,17 +78,20 @@ const TalentDashboard = () => {
 
   const handleDelete = async (type, url) => {
     try {
-      const response = await axios.delete("http://localhost:4000/api/v1/deleteMedia", {
-        data: { email, type, url },
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.delete(
+        "http://localhost:4000/api/v1/deleteMedia",
+        {
+          data: { email, type, url },
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.status === 200) {
         alert(response.data.message);
 
         setMedia((prev) => ({
           ...prev,
-          [type === "video" ? "skillVideos" : "posts"]: prev[ 
+          [type === "video" ? "skillVideos" : "posts"]: prev[
             type === "video" ? "skillVideos" : "posts"
           ].filter((item) => item !== url),
         }));
@@ -107,11 +113,10 @@ const TalentDashboard = () => {
       >
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
         <main className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 py-10 px-6 relative z-10">
-          {/* Left Section */}
           <div className="space-y-6 mt-14">
             <ProfileCard />
             <div className="bg-gray-200 p-6 rounded-lg shadow backdrop-blur-md mt-10">
-              <h2 className="text-xl font-bold mb-4">Upload Media</h2>
+              <h2 className="text-xl font-bold mb-4">Showcase you talent</h2>
               <select
                 value={uploadType}
                 onChange={(e) => setUploadType(e.target.value)}
@@ -137,7 +142,6 @@ const TalentDashboard = () => {
             </div>
           </div>
 
-          {/* Right Section */}
           <div className="grid lg:grid-cols-2 gap-8 mt-14">
             {media.skillVideos.map((video, idx) => (
               <div

@@ -4,28 +4,20 @@ const ClientCard = ({ item }) => {
   return (
     <div className="w-96 bg-black bg-opacity-60 border rounded-lg shadow-xl p-6 text-left border-orange-500">
       <div className="flex items-center space-x-2">
-        <h3 className="text-2xl font-semibold text-white">
-          Name:
-        </h3>
+        <h3 className="text-2xl font-semibold text-white">Name:</h3>
         <p className="text-2xl font-medium text-white">
           {item.name || "Unknown"}
         </p>
       </div>
       <div className="mt-4 flex items-center space-x-2">
-  <h3 className="text-lg font-semibold text-white">
-    Mail Id:
-  </h3>
-  <p className="text-lg text-gray-300">
-    {item.email || "No email provided"}
-  </p>
-</div>
-
+        <h3 className="text-lg font-semibold text-white">Mail Id:</h3>
+        <p className="text-lg text-gray-300">
+          {item.email || "No email provided"}
+        </p>
+      </div>
     </div>
   );
 };
-
-
-
 
 const Clients = () => {
   const [client, setClient] = useState([]);
@@ -35,7 +27,9 @@ const Clients = () => {
   useEffect(() => {
     const fetchApprovedTalents = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/get-approved-talents");
+        const response = await fetch(
+          "http://localhost:4000/api/v1/get-approved-talents"
+        );
         const data = await response.json();
 
         if (response.ok) {

@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import motion from framer-motion
+import { motion } from "framer-motion";
 
 const Services = ({ id }) => {
   const purposes = [
@@ -37,7 +37,6 @@ const Services = ({ id }) => {
 
   return (
     <div id={id} className="relative">
-      {/* Background image */}
       <img
         src="/images/Services-img.png"
         alt="background image"
@@ -45,37 +44,34 @@ const Services = ({ id }) => {
       />
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
 
-      {/* Title */}
-      <motion.h3
-        className="text-5xl font-bold text-center mb-5 pt-20 text-orange-500 opacity-75"
-        
-      >
+      <motion.h3 className="text-5xl font-bold text-center mb-5 pt-20 text-orange-500 opacity-75">
         Our Services
       </motion.h3>
 
-     
       <div className="flex flex-wrap justify-center gap-14  p-9">
         {purposes.map((purpose, index) => (
           <motion.div
             key={index}
             className="purpose-section max-w-xs w-1/3 rounded overflow-hidden shadow-lg border bg-white opacity-75 transition-all duration-500 transform hover:scale-105 cursor-pointer"
-            initial={{ opacity: 0, y: 5 }} 
-            animate={{ opacity: 1, y: 5 }}  
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 5 }}
             transition={{
               duration: 0.8,
-              delay: 0.2 + index * 0.2, 
-              type: "spring", 
+              delay: 0.2 + index * 0.2,
+              type: "spring",
             }}
             whileHover={{
-              scale: 1.05,  
-              boxShadow: "0 15px 25px rgba(0, 0, 0, 0.2)", 
-              transition: { duration: 0.2, ease: "easeInOut" },  
+              scale: 1.05,
+              boxShadow: "0 15px 25px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.2, ease: "easeInOut" },
             }}
           >
             <div
               className={`bg-orange-500 h-16 relative flex justify-center items-center shadow-2xl border-orange-500`}
             >
-              <h3 className="text-xl font-semibold text-white">{purpose.title}</h3>
+              <h3 className="text-xl font-semibold text-white">
+                {purpose.title}
+              </h3>
             </div>
             <div className="p-4">
               <p className="text-gray-600">{purpose.description}</p>

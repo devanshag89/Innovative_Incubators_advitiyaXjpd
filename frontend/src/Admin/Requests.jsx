@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 const CandidateCard = ({ candidate, onApprove, onReject }) => {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl p-4 text-center">
@@ -36,8 +35,12 @@ const CandidateCard = ({ candidate, onApprove, onReject }) => {
       </div>
 
       <div className="mt-6">
-        <p className="text-sm text-gray-500">{candidate.email || "No email provided"}</p>
-        <p className="text-sm text-gray-500">{candidate.phoneNo || "No phone number provided"}</p>
+        <p className="text-sm text-gray-500">
+          {candidate.email || "No email provided"}
+        </p>
+        <p className="text-sm text-gray-500">
+          {candidate.phoneNo || "No phone number provided"}
+        </p>
       </div>
 
       <div className="mt-6 flex flex-rol gap-3 ml-20">
@@ -66,7 +69,9 @@ const RequestCandidateList = () => {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/get-pending-talents"); // Replace with your actual backend endpoint
+        const response = await fetch(
+          "http://localhost:4000/api/v1/get-pending-talents"
+        );
         const data = await response.json();
 
         if (response.ok) {
@@ -86,17 +91,21 @@ const RequestCandidateList = () => {
 
   const handleApprove = async (id) => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/approve-talent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ talentId: id }), // Send the talentId in the request body
-      });
-  
+      const response = await fetch(
+        "http://localhost:4000/api/v1/approve-talent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ talentId: id }),
+        }
+      );
+
       if (response.ok) {
-        // Remove the approved candidate from the local state
-        setCandidates((prev) => prev.filter((candidate) => candidate._id !== id));
+        setCandidates((prev) =>
+          prev.filter((candidate) => candidate._id !== id)
+        );
         alert("Talent approved successfully!");
       } else {
         const errorData = await response.json();
@@ -107,20 +116,24 @@ const RequestCandidateList = () => {
       alert("An error occurred while approving the talent.");
     }
   };
-  
+
   const handleReject = async (id) => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/reject-talent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ talentId: id }), // Send the talentId in the request body
-      });
-  
+      const response = await fetch(
+        "http://localhost:4000/api/v1/reject-talent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ talentId: id }),
+        }
+      );
+
       if (response.ok) {
-        // Remove the rejected candidate from the local state
-        setCandidates((prev) => prev.filter((candidate) => candidate._id !== id));
+        setCandidates((prev) =>
+          prev.filter((candidate) => candidate._id !== id)
+        );
         alert("Talent rejected successfully!");
       } else {
         const errorData = await response.json();
@@ -131,7 +144,6 @@ const RequestCandidateList = () => {
       alert("An error occurred while rejecting the talent.");
     }
   };
-  
 
   if (loading) {
     return <p className="text-center mt-8">Loading candidates...</p>;

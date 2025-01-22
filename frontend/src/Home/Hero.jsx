@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
 const Hero = ({ id }) => {
   return (
@@ -75,9 +75,7 @@ const Hero = ({ id }) => {
           transition={{ duration: 1, delay: 0.8 }}
         >
           <Link to="/admin/login" className="w-full h-full flex items-center">
-            <span className="font-medium group-hover:text-white">
-              Admin
-            </span>
+            <span className="font-medium group-hover:text-white">Admin</span>
           </Link>
         </motion.div>
       </div>

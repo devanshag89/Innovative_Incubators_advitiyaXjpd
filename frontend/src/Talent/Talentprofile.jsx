@@ -4,14 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const CompleteProfile = () => {
   const navigate = useNavigate();
-  const {email,token} = useAuth();
+  const { email, token } = useAuth();
 
-  const [SelectedSkills, setSelectedSkills] = useState(""); // Tracks the currently selected category
+  const [SelectedSkills, setSelectedSkills] = useState("");
   const [profilePreview, setProfilePreview] = useState(null);
   const [name, setName] = useState("");
 
   useEffect(() => {
-    // Function to fetch user name by email
     const fetchUserName = async () => {
       if (!email) {
         setError("Email not found");
@@ -20,13 +19,16 @@ const CompleteProfile = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/gettalent", {
-          params: {
-            email: email,  // Pass email as a query parameter
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/gettalent",
+          {
+            params: {
+              email: email,
+            },
+          }
+        );
         console.log(response.data);
-        setName(response.data.talent.name); // Set the user's name in the state
+        setName(response.data.talent.name);
       } catch (err) {
         console.error("Error fetching user data:", err);
         setError("Failed to fetch user data");
@@ -38,13 +40,12 @@ const CompleteProfile = () => {
     fetchUserName();
   }, [email]);
 
-
   const [formData, setFormData] = useState({
     userEmail: email,
     phone: "",
     bio: "",
     profilePicture: null,
-    selectedSubSkills: [], // Track selected subcategories globally
+    selectedSubSkills: [],
   });
 
   const categories = {
@@ -214,26 +215,22 @@ const CompleteProfile = () => {
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "ShowCaseX"); // Replace with your Cloudinary upload preset
-      formData.append("cloud_name", "dmxznaplt"); // Replace with your Cloudinary cloud name
-  
+      formData.append("upload_preset", "ShowCaseX");
+      formData.append("cloud_name", "dmxznaplt");
+
       try {
-        // Upload the image to Cloudinary
         const response = await axios.post(
           "https://api.cloudinary.com/v1_1/dmxznaplt/image/upload",
           formData
         );
-  
-        // Get the uploaded image URL
+
         const imageUrl = response.data.secure_url;
-  
-        // Update the formData state with the image URL
+
         setFormData((prevData) => ({
           ...prevData,
-          profilePicture: imageUrl, // Store the URL in state
+          profilePicture: imageUrl,
         }));
-  
-        // Set the preview image
+
         setProfilePreview(imageUrl);
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -241,7 +238,6 @@ const CompleteProfile = () => {
       }
     }
   };
-  
 
   const handleCategoryChange = (e) => {
     setSelectedSkills(e.target.value);
@@ -251,7 +247,6 @@ const CompleteProfile = () => {
     setFormData((prevData) => {
       const selectedSubSkills = [...prevData.selectedSubSkills];
 
-      // Toggle the subSkill
       if (selectedSubSkills.includes(subSkill)) {
         return {
           ...prevData,
@@ -279,44 +274,53 @@ const CompleteProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (!formData.phone || !formData.bio || !formData.profilePicture || formData.selectedSubSkills.length === 0) {
+
+    if (
+      !formData.phone ||
+      !formData.bio ||
+      !formData.profilePicture ||
+      formData.selectedSubSkills.length === 0
+    ) {
       alert("Please fill out all fields and select at least one subcategory.");
       return;
     }
-  
+
     try {
       const payload = {
-        email, // Comes from useAuth()
+        email,
         phone: formData.phone,
         bio: formData.bio,
         profilePicture: formData.profilePicture,
         selectedSubSkills: formData.selectedSubSkills,
       };
-  
-      const response = await axios.post("http://localhost:4000/api/v1/addtalent", payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
+
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/addtalent",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (response.status === 200 && response.data.isProfileComplete) {
         alert("Profile Updated Successfully!");
         console.log("Updated User Data:", response.data.user);
-        navigate("/talent-dashboard"); // Navigate only if the profile is complete
+        navigate("/talent-dashboard");
       } else {
         alert("Failed to update profile. Please try again.");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("An error occurred while updating your profile. Please try again later.");
+      alert(
+        "An error occurred while updating your profile. Please try again later."
+      );
     }
   };
-  
 
   return (
-
-     <div
+    <div
       className="flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-orange-200 to-orange-300 p-8"
       style={{
         backgroundImage: `url("/images/Services-img.png")`,
@@ -325,7 +329,9 @@ const CompleteProfile = () => {
         backgroundRepeat: "no-repeat",
         opacity: "0.9",
       }}
-    > <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+    >
+      {" "}
+      <div className="absolute inset-0 bg-black bg-opacity-70"></div>
       <div className="flex flex-col items-center p-6 bg-gray-200 rounded-lg shadow-lg lg:w-1/3 opacity-90">
         <div className="relative w-32 h-32">
           <img
@@ -355,12 +361,11 @@ const CompleteProfile = () => {
           <p className="text-gray-700">{email}</p>
         </div>
       </div>
-
-      {/* Right Section */}
       <div className="p-6 bg-gray-200 rounded-lg shadow-lg lg:w-2/3 mt-6 lg:mt-0 lg:ml-6 opacity-90">
-        <h1 className="text-2xl font-bold mb-4 text-center text-orange-600">Complete Your Profile</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center text-orange-600">
+          Complete Your Profile
+        </h1>
         <form onSubmit={handleSubmit}>
-          {/* Phone Number */}
           <div className="mb-4">
             <label htmlFor="phone" className="block text-gray-700 mb-2">
               Phone Number
@@ -379,7 +384,6 @@ const CompleteProfile = () => {
             />
           </div>
 
-          {/* Category Dropdown */}
           <div className="mb-4">
             <label htmlFor="category" className="block text-gray-700 mb-2">
               Talent Category
@@ -399,7 +403,6 @@ const CompleteProfile = () => {
             </select>
           </div>
 
-          {/* Subcategories for Selected Category */}
           {SelectedSkills && (
             <div className="mb-4">
               <h2 className="text-lg font-semibold mb-2 text-gray-700">
@@ -411,9 +414,7 @@ const CompleteProfile = () => {
                     <input
                       type="checkbox"
                       value={subSkill}
-                      checked={formData.selectedSubSkills.includes(
-                        subSkill
-                      )}
+                      checked={formData.selectedSubSkills.includes(subSkill)}
                       onChange={() => handlesubSkillChange(subSkill)}
                     />
                     <span>{subSkill}</span>
@@ -423,7 +424,6 @@ const CompleteProfile = () => {
             </div>
           )}
 
-          {/* Display Selected Subcategories */}
           {formData.selectedSubSkills.length > 0 && (
             <div className="mb-4">
               <h2 className="text-gray-700 mb-2">Selected Subcategories:</h2>
@@ -447,7 +447,6 @@ const CompleteProfile = () => {
             </div>
           )}
 
-          {/* Bio */}
           <div className="mb-4">
             <label htmlFor="bio" className="block text-gray-700 mb-2">
               Short Bio

@@ -9,10 +9,9 @@ const ClientDashboard = () => {
   const [talents, setTalents] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const { clientEmail, logout } = useClient(); // Assuming setClientEmail is provided in context
+  const { clientEmail, logout } = useClient();
   const navigate = useNavigate();
 
-  // Fetch talents data
   useEffect(() => {
     const fetchTalents = async () => {
       try {
@@ -27,20 +26,16 @@ const ClientDashboard = () => {
     fetchTalents();
   }, []);
 
-  // Handle logout
   const handleLogout = () => {
-    // Clear client email and redirect to login
-    logout()
-    navigate('/');
+    logout();
+    navigate("/");
   };
 
-  // Filter talents by subcategory
   const filterTalents = () => {
     return talents.filter((talent) =>
       selectedSubcategory
         ? talent.skills.some(
-            (skill) =>
-              skill.toLowerCase() === selectedSubcategory.toLowerCase()
+            (skill) => skill.toLowerCase() === selectedSubcategory.toLowerCase()
           )
         : true
     );
@@ -53,13 +48,12 @@ const ClientDashboard = () => {
         backgroundImage: `url('../images/Home-img.png')`,
       }}
     >
-      {/* Sidebar */}
       <aside className="w-72 h-screen fixed shadow-lg bg-black bg-opacity-80">
         <div className="relative z-10 p-6">
           <Link to="/">
-          <h1 className="text-4xl text-orange-500 font-bold mb-8 ml-2 hover:text-orange-800 transition duration-200 cursor-pointer">
-            ShowcaseX
-          </h1>
+            <h1 className="text-4xl text-orange-500 font-bold mb-8 ml-2 hover:text-orange-800 transition duration-200 cursor-pointer">
+              ShowcaseX
+            </h1>
           </Link>
           <nav>
             <h2 className="text-2xl font-semibold mb-4 text-orange-300">
@@ -104,12 +98,9 @@ const ClientDashboard = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 ml-72 relative">
-        {/* Black overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-70"></div>
 
-        {/* Content Wrapper */}
         <div className="relative z-10 p-6">
           <header className="flex justify-between items-center bg-white p-4 rounded-lg shadow-md sticky top-0 z-10">
             <h3 className="text-3xl font-bold text-orange-600">
