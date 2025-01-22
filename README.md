@@ -158,7 +158,7 @@ The backend folder contains the server-side logic and API implementation.
 ---
 
 
-##  **4. Start the Development Servers**
+4. **Start the Development Servers**
     ```bash
     cd frontend
     npm run dev
@@ -187,7 +187,8 @@ The backend folder contains the server-side logic and API implementation.
     ![image](https://github.com/user-attachments/assets/8fe11b09-e185-4cc3-bfad-2b7181e5060b)
     ![image](https://github.com/user-attachments/assets/d8d4cb28-7069-4893-91ee-1f29f4b60a64)
     ![image](https://github.com/user-attachments/assets/db4d088b-7410-410e-882c-7f2ef6ca1bcf)
-    ![Uploading image.png…]()
+     
+    
     
 
 
