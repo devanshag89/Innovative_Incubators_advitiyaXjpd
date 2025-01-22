@@ -181,12 +181,14 @@ The backend folder contains the server-side logic and API implementation.
 * Clients can view approved profiles and send hire requests after logging in.
 * Notifications are sent to the admin for further action.
 
-##  📸**Glimpse of our website**
 
-    ![image](https://github.com/user-attachments/assets/748961d4-69c0-45dd-9e2b-7ba017044757) 
-    ![image](https://github.com/user-attachments/assets/8fe11b09-e185-4cc3-bfad-2b7181e5060b)
-    ![image](https://github.com/user-attachments/assets/d8d4cb28-7069-4893-91ee-1f29f4b60a64)
-    ![image](https://github.com/user-attachments/assets/db4d088b-7410-410e-882c-7f2ef6ca1bcf)
+##  📸**Glimpse of our website**
+![image](https://github.com/user-attachments/assets/d093ad8e-98a7-4815-aacb-db2c656f75ae)
+![image](https://github.com/user-attachments/assets/d67c76c6-8e9b-47bf-904c-511e2daddbf7)
+![image](https://github.com/user-attachments/assets/1a5127da-0d21-41e2-a9a2-eb49b814ef57)
+
+
+
      
     
     
