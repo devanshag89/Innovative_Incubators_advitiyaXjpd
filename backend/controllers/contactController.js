@@ -44,3 +44,14 @@ exports.submitContactForm = async (req, res) => {
     res.status(500).json({ message: 'Error saving contact form data', error: error.message });
   }
 };
+
+exports.fetchContactMessages = async (req,res) => {
+  try{
+    const messages = await Contact.find();
+    console.log(messages);
+    res.status(200).json({message: "messages fetched successfully", messages: messages});
+  }
+  catch(err){
+    res.status(500).json({ message: 'Error fetching contact messages', error: err.message  })
+}
+}

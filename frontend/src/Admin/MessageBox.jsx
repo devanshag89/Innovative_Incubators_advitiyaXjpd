@@ -1,11 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const MessageBox = () => {
+const ContactMessages = () => {
+  const [messages, setMessages] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch messages from the backend
+    const fetchMessages = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/fetch-messages"); // Update the endpoint URL if needed
+        setMessages(response.data.messages); // Assuming the backend returns messages in `response.data.messages`
+        setLoading(false);
+      } catch (err) {
+        setError(err.response?.data?.message || "An error occurred");
+        setLoading(false);
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
+  if (loading) return <div>Loading messages...</div>;
+  if (error) return <div style={{ color: "red" }}>{error}</div>;
+
   return (
     <div>
-      
+      <h2>Contact Messages</h2>
+      {messages.length === 0 ? (
+        <p>No messages found.</p>
+      ) : (
+        <ul>
+          {messages.map((message, index) => (
+            <li key={index} style={{ border: "1px solid #ccc", padding: "10px", margin: "10px 0" }}>
+              <p>
+                <strong>Name:</strong> {message.fullName}
+              </p>
+              <p>
+                <strong>Email:</strong> {message.email}
+              </p>
+              <p>
+                <strong>Message:</strong> {message.message}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default MessageBox
+export default ContactMessages;

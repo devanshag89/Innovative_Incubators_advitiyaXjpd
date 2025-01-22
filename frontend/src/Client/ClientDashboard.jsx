@@ -31,7 +31,7 @@ const ClientDashboard = () => {
   const handleLogout = () => {
     // Clear client email and redirect to login
     logout()
-    navigate('/client/login');
+    navigate('/');
   };
 
   // Filter talents by subcategory
@@ -144,7 +144,7 @@ const ClientDashboard = () => {
           </header>
 
           <main className=" bg-opacity-90 p-6 rounded-lg shadow-md mt-6">
-            <h2 className="text-3xl font-bold text-orange-600 mb-4">
+            <h2 className="text-4xl font-bold text-orange-600 mb-6 -mt-6">
               {selectedSubcategory
                 ? `${selectedSubcategory} Talents`
                 : "All Talents"}

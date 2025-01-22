@@ -68,6 +68,18 @@ const Hero = ({ id }) => {
             </span>
           </Link>
         </motion.div>
+        <motion.div
+          className="bg-transparent text-orange-500 border border-orange-500 shadow-md hover:bg-orange-500 hover:text-white transition-all py-3 px-6 rounded-lg flex items-center gap-4 cursor-pointer transform hover:scale-105 group-hover:text-white"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+        >
+          <Link to="/admin/login" className="w-full h-full flex items-center">
+            <span className="font-medium group-hover:text-white">
+              Admin
+            </span>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
