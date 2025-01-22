@@ -9,6 +9,8 @@ const talentSchema = new mongoose.Schema(
     skills: { type: [String], required: false },
     personalDescription: { type: String, required: false },
     profilePhoto: { type: Object, required: false },
+    skillVideos: { type: [String], default: [] }, 
+    posts: { type: [String], default: [] }, 
     password: { type: String, required: true },
     otp: { type: String, required: false },
     otpExpiry: { type: Date, required: false },
