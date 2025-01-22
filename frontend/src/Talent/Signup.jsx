@@ -205,7 +205,7 @@ const SignupForm = () => {
           </div>
           <div>
             <img
-              src="/images/login-img.png"
+              src="/images/Login-img.png"
               alt="A welcoming login illustration"
               className="w-full h-full  rounded-r-lg"
             />
