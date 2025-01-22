@@ -1,4 +1,4 @@
-# **Innovative_Incubators_advitiyaXjpd**  
+# **Innovative Incubators 💡 Advitiya x JPD Hub**  
 ## **Talent Module for JPD Hub**  
 
 ---
@@ -70,7 +70,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 ---
 
-### ⚙️ **2. Installation**  
+###  **2. Installation**  
 
 1. **Clone the repository:**  
    ```bash
@@ -99,7 +99,7 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 ---
 
 
-## ▶️ **3. Running the Application**
+##  **3. Running the Application**
 
 1. **Development Mode:**
    ```bash
