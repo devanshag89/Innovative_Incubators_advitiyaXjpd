@@ -106,9 +106,9 @@ const TalentDashboard = () => {
           backgroundColor: "rgba(0, 0, 0, 0.9)",
         }}
       >
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
         <main className="container mx-auto py-10 px-6">
-          <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 bg-black bg-opacity-90 p-6 rounded-lg backdrop-blur-md">
+          <section className="mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 bg-black bg-opacity-40 p-6 rounded-lg backdrop-blur-md">
             <ProfileCard />
             <div className="bg-white p-8 rounded shadow backdrop-blur-md">
               <h2 className="text-xl font-bold mb-4">Upload Media</h2>
