@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { talentCategories } from "./CategoryData";
 import TalentCard from "./TalentCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useClient } from "../contexts/ClientContext";
 
 const ClientDashboard = () => {
   const [talents, setTalents] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const { clientEmail, logout } = useClient(); // Assuming setClientEmail is provided in context
+  const navigate = useNavigate();
 
+  // Fetch talents data
   useEffect(() => {
     const fetchTalents = async () => {
       try {
@@ -23,6 +27,14 @@ const ClientDashboard = () => {
     fetchTalents();
   }, []);
 
+  // Handle logout
+  const handleLogout = () => {
+    // Clear client email and redirect to login
+    logout()
+    navigate('/client/login');
+  };
+
+  // Filter talents by subcategory
   const filterTalents = () => {
     return talents.filter((talent) =>
       selectedSubcategory
@@ -38,7 +50,7 @@ const ClientDashboard = () => {
     <div
       className="min-h-screen flex bg-cover bg-center"
       style={{
-        backgroundImage: `url('../images/Home-img.png')`, 
+        backgroundImage: `url('../images/Home-img.png')`,
       }}
     >
       {/* Sidebar */}
@@ -102,16 +114,32 @@ const ClientDashboard = () => {
               Client Dashboard
             </h3>
             <div className="flex space-x-4">
-              <Link to="/client/login">
-                <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
-                  Login
-                </button>
-              </Link>
-              <Link to="/client/signup">
-                <button className="px-4 py-2 border-2 border-orange-500 text-orange-500 rounded-lg hover:bg-orange-100">
-                  Signup
-                </button>
-              </Link>
+              {clientEmail ? (
+                <>
+                  <span className="text-orange-500 font-semibold mt-2">
+                    {clientEmail}
+                  </span>
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/client/login">
+                    <button className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                      Login
+                    </button>
+                  </Link>
+                  <Link to="/client/signup">
+                    <button className="px-4 py-2 border-2 border-orange-500 text-orange-500 rounded-lg hover:bg-orange-100">
+                      Signup
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           </header>
 

@@ -12,6 +12,7 @@ import ApprovedTalentsList from './Admin/Talents';
 import Clients from './Admin/Clients';
 import RequestCandidateList from './Admin/Requests';
 import AuthProvider from './contexts/TalentContext';
+import ClientProvider from './contexts/ClientContext';
 import ClientDashboard from './Client/ClientDashboard';
 import ClientLogin from './Client/ClientLogin';
 import ClientSignup from './Client/ClientSignup';
@@ -22,6 +23,7 @@ import ProtectedRoute from './contexts/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
   return (
+    <ClientProvider>
     <AuthProvider>
       <Router>
         <Routes>
@@ -74,6 +76,7 @@ function App() {
         </Routes>
       </Router>
     </AuthProvider>
+    </ClientProvider>
   );
 }
 
