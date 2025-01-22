@@ -9,7 +9,7 @@ const AdminLogin = () => {
     const handleLogin=(e)=>{
         e.preventDefault();
         if(email=="admin.1234@gmail.com" && password=="1234"){
-            navigate("/admin");
+            navigate("/admin/talents");
         }
         else{
             alert("Invalid Email Id and Password");
