@@ -1,32 +1,46 @@
 import React, { useEffect, useState } from "react";
 
-const CandidateCard = ({ candidate, onApprove, onReject }) => {
+
+const CandidateCard = ({ candidate }) => {
   return (
-    <div className="bg-white border border-gray-300 rounded-lg shadow-md max-w-sm mx-auto p-6 space-y-4">
-      <div className="flex items-center space-x-4">
+    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl p-4 text-center">
+      <div className="relative w-24 h-24 mx-auto">
         <img
-          src={candidate.profilePic || "https://via.placeholder.com/150"} // Default profile picture if none is provided
-          alt={`${candidate.name}'s profile`}
-          className="w-16 h-16 rounded-full object-cover"
+          src={candidate.profilePic || "https://via.placeholder.com/150"}
+          className="w-full h-full rounded-full object-cover border-4 border-orange-400 shadow-md"
         />
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">{candidate.name}</h2>
-          <p className="text-sm text-gray-500">{candidate.email}</p>
-          <p className="text-sm text-gray-500">{candidate.phoneNo}</p>
-        </div>
       </div>
-      <p className="text-gray-700">
-        <span className="font-medium">Description:</span> {candidate.personalDescription}
+
+      <h3 className="mt-4 text-2xl font-semibold text-black">
+        {candidate.name || "Unknown"}
+      </h3>
+
+      <p className="mt-4 text-sm text-black">
+        {candidate.personalDescription ||
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut est et velit ornare ultrices."}
       </p>
-      <div>
-        <h3 className="font-medium text-gray-800">Skills:</h3>
-        <ul className="list-disc list-inside text-gray-700">
-          {candidate.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
-        </ul>
+
+      <div className="mt-4 flex flex-wrap justify-center gap-2">
+        {candidate.skills?.length > 0 ? (
+          candidate.skills.map((skill, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 bg-orange-200 text-black text-sm font-semibold rounded-full"
+            >
+              {skill}
+            </span>
+          ))
+        ) : (
+          <span className="text-sm text-black">No skills listed</span>
+        )}
       </div>
-      <div className="flex space-x-4">
+
+      <div className="mt-6">
+        <p className="text-sm text-gray-500">{candidate.email || "No email provided"}</p>
+        <p className="text-sm text-gray-500">{candidate.phoneNo || "No phone number provided"}</p>
+      </div>
+
+      <div className="mt-6 flex flex-rol gap-3 ml-20">
         <button
           onClick={() => onApprove(candidate._id)}
           className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md"

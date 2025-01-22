@@ -1,10 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const TalentCard = ({ talent }) => {
-  const handleSaveForLater = () => {
-    alert(`You saved ${talent.name} for later!`);
-    // Add your "save for later" logic here
-  };
+  
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
@@ -14,20 +12,17 @@ const TalentCard = ({ talent }) => {
           alt={talent.name || "Profile"}
           className="w-full h-full rounded-full object-cover border-4 border-white shadow-md"
         />
-        </div>
+      </div>
 
-     
       <h3 className="mt-4 text-2xl font-semibold text-black">
         {talent.name || "Unknown"}
       </h3>
-      
-      {/* Description */}
+
       <p className="mt-4 text-sm text-black">
         {talent.personalDescription ||
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut est et velit ornare ultrices."}
       </p>
 
-      {/* Skills Section */}
       <div className="mt-4 flex flex-wrap justify-center gap-2">
         {talent.skills?.length > 0 ? (
           talent.skills.map((skill, index) => (
@@ -43,13 +38,14 @@ const TalentCard = ({ talent }) => {
         )}
       </div>
 
-      {/* Action Button */}
-      <button
-        onClick={handleSaveForLater}
-        className="mt-6 w-full py-1  text-white text-xl bg-orange-500 rounded-md hover:bg-orange-600 transition"
-      >
-        Hire
-      </button>
+      <div className="mt-6 flex flex-col gap-3">
+        <Link
+          to={`/description/${talent._id}`}
+          className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
+        >
+          View Profile
+        </Link>
+      </div>
     </div>
   );
 };

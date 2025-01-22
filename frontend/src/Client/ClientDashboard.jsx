@@ -17,7 +17,7 @@ const ClientDashboard = () => {
     const fetchTalents = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/get-pending-talents"
+          "http://localhost:4000/api/v1/get-approved-talents"
         );
         setTalents(response.data.talents);
       } catch (error) {

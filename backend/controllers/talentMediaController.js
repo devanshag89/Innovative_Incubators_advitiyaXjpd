@@ -45,3 +45,42 @@ exports.getMedia = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+// Delete media (videos or posts)
+
+// Delete media (videos or posts)
+exports.deleteMedia = async (req, res) => {
+  const { email, type, url } = req.body;
+
+  try {
+    const talent = await Talent.findOne({ email });
+    if (!talent) {
+      return res.status(404).json({ message: "Talent not found" });
+    }
+
+    if (type === "video") {
+      const index = talent.skillVideos.indexOf(url.trim());
+      if (index > -1) {
+        talent.skillVideos.splice(index, 1);
+        talent.markModified("skillVideos");
+      }
+    } else if (type === "post") {
+      const index = talent.posts.indexOf(url.trim());
+      if (index > -1) {
+        talent.posts.splice(index, 1);
+        talent.markModified("posts");
+      }
+    }
+
+    await talent.save();
+    res.status(200).json({ message: "Media deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting media:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+
+
+
+
