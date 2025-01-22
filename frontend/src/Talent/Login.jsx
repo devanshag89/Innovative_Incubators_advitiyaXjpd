@@ -113,7 +113,7 @@ const LoginForm = () => {
           {/* Right section */}
           <div className="hidden md:block md:w-1/2 rounded-r-lg">
             <img
-              src="/images/Login-img.png"
+              src="/images/login-img.png"
               alt="Login illustration"
               className="w-full h-full  rounded-r-lg"
             />

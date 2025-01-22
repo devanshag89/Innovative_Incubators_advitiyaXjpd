@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+ 
+import { useNavigate } from "react-router-dom";
 const CandidateCard = ({ candidate }) => {
+  const navigate=useNavigate();
+  console.log(candidate);
+  const handleViewProfile = () => {
+    navigate(`/description/${candidate._id}`, {
+      state: { talent: candidate },  
+    });
+  };
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-xl p-6 text-center">
       <div className="relative w-24 h-24 mx-auto">
@@ -41,16 +48,17 @@ const CandidateCard = ({ candidate }) => {
       </div>
 
       <div className="mt-6 flex flex-col gap-3">
-        <Link
-          to={`/messagebox/${candidate._id}`}
+      <button
+          onClick={handleViewProfile} // Navigate when clicked
           className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           View Profile
-        </Link>
+        </button>
       </div>
     </div>
   );
 };
+
 
 const ApprovedTalentsList = () => {
   const [candidates, setCandidates] = useState([]);
