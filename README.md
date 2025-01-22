@@ -94,7 +94,36 @@ This project leverages the MERN stack (MongoDB, Express.js, React.js, Node.js) c
 * PostCSS & Autoprefixer: Ensure CSS compatibility across all browsers.
 
 ### **File Structure**
- 
+
+*Frontend*
+The frontend folder contains the client-side application built using React.js.
+
+* public/: Stores static files, including index.html, which serves as the entry point for the React app.
+* src/: Contains the source code for the React application.
+* Admin/: Holds components and pages related to the admin panel.
+* Client/: Contains components and pages for client-side user functionality.
+* contexts/: Includes React Context files for managing global state.
+* Home/: Contains the main homepage components and related files.
+* Talent/: Stores files and components related to talent management.
+* App.jsx: The root component rendering browser routes and views.
+* main.jsx: Entry point for the React app that renders App.jsx.
+* index.css: Global CSS file for styling.
+* package.json: Lists dependencies and scripts for the frontend.
+* .gitignore: Specifies files to ignore in version control.
+
+*Backend*
+The backend folder contains the server-side logic and API implementation.
+
+* AuthMiddlewares/: Contains middleware functions for authentication and authorization.
+* config/: Holds configuration files, such as database connection URIs and environment variables.
+* controllers/: Includes callback functions used by routes for handling requests and responses.
+* models/: Contains data models and schemas for MongoDB using Mongoose.
+* routes/: Defines HTTP paths and associates them with corresponding controller functions.
+* utils/: Utility files or helper functions for reusable logic.
+* index.js: Entry point for the server. Initializes the application and sets up routing.
+* package.json: Specifies backend dependencies and scripts for server operation.
+* .env: Contains sensitive environment variables.
+* .gitignore: Defines files and folders to exclude from version control.
 
 
 ###  **2. Installation**  
