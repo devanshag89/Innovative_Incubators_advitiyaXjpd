@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const TalentCard = ({ talent }) => {
   
+  const navigate=useNavigate();
+  const handleViewProfile = () => {
+    
+    navigate(`/description/${talent._id}`, {
+      state: { talent },  
+    });
+  };
 
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg p-6 text-center">
@@ -27,7 +34,7 @@ const TalentCard = ({ talent }) => {
         {talent.skills?.length > 0 ? (
           talent.skills.map((skill, index) => (
             <span
-              key={index}
+              key={`${skill}-${index}`}
               className="px-3 py-1 bg-orange-200 text-black text-sm font-semibold rounded-full"
             >
               {skill}
@@ -35,16 +42,24 @@ const TalentCard = ({ talent }) => {
           ))
         ) : (
           <span className="text-sm text-black">No skills listed</span>
-        )}
+        )
+        
+        }
       </div>
 
       <div className="mt-6 flex flex-col gap-3">
-        <Link
-          to={`/description/${talent._id}`}
+      <button
+          onClick={handleViewProfile} // Navigate when clicked
           className="w-full py-2 text-white text-xl bg-orange-500 rounded-md text-center hover:bg-orange-600 transition"
         >
           View Profile
-        </Link>
+        </button>
+      <button
+          
+          className="w-full py-2 text-white text-xl bg-green-700 rounded-md text-center hover:bg-orange-600 transition"
+        >
+          Hire
+        </button>
       </div>
     </div>
   );

@@ -34,6 +34,9 @@ function App() {
           {/* Home Routes */}
           <Route path="/" element={<Dashboard />} />
 
+           {/* Talent Description Route */}
+          <Route path="/description/:id" element={<TalentDescription />} />
+
           {/* Protected Talent Routes */}
           <Route
             path="/talent-dashboard"
@@ -71,6 +74,7 @@ function App() {
             <Route path="requests" element={<RequestCandidateList />} />
             <Route path="messagebox" element={<MessageBox />} />
           </Route>
+          
 
     
         </Routes>

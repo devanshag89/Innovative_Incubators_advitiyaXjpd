@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const TalentDescription = () => {
   const location = useLocation();
   const { talent } = location.state || {}; // Retrieve talent from state
-
+  
   if (!talent) {
     return <div>No talent found.</div>;
   }
