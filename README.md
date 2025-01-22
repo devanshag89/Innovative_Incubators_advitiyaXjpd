@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3df97c88-6a37-411f-b673-fddc1e8064d9)# **Innovative_Incubators_advitiyaXjpd**  
+# **Innovative_Incubators_advitiyaXjpd**  
 ## **Talent Module for JPD Hub**  
 
 ---
