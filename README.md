@@ -1,7 +1,5 @@
 # **Innovative Incubators 💡 Advitiya x JPD Hub**  
-## **Talent Module for JPD Hub**  
-## **Project: ShowcaseX**
-## **Where Talent Meets Opportunity — Redefining Your Next Hire!**
+## **Talent Module for JPD Hub : ShowcaseX**  
 
 ---
 
