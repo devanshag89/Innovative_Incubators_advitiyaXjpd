@@ -1,4 +1,4 @@
-# **Innovative_Incubators_advitiyaXjpd**  
+![image](https://github.com/user-attachments/assets/3df97c88-6a37-411f-b673-fddc1e8064d9)# **Innovative_Incubators_advitiyaXjpd**  
 ## **Talent Module for JPD Hub**  
 
 ---
@@ -82,10 +82,15 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
    
 3. **Set up environment variables in a .env file**
   PORT=4000
-  MONGO_URI=mongodb://localhost:27017/talentsphere
   CLOUDINARY_CLOUD_NAME=dhicut2yg
   CLOUDINARY_API_KEY=481536193739991
   CLOUDINARY_API_SECRET=_s3l6zPUe46eLZocypXSkopJN6g
+  JWT_SECRET=4e35bcd0af5d1cfeba67859a7c73e3206c88e21759251df4fa7b998f1ec9bde67c2347b90a36f325882758df17986b32
+  EMAIL=akshayyadav5862@gmail.com
+  EMAIL_PASSWORD=rtze ulnb gzzm psxo
+  ADMIN_PHONE_NUMBER=6394330610
+  ADMIN_EMAIL=suppports2345@gmail.com
+  MONGO_URI=mongodb://localhost:27017/talentsphere
 
 ## **3. Running the Application**
 
@@ -119,6 +124,12 @@ This project is designed to develop a Talent Module for the JPD Hub platform, en
 
 * All sensitive data is encrypted and stored securely.
 * Designed with scalability in mind to handle a growing user base and additional features in the future.
+
+## 🔁 **Work Flow Diagram**
+
+ ![image](https://github.com/user-attachments/assets/cfe6d2fc-0ff0-4a33-b075-a72b25fe0810)
+
+
 
 
 
