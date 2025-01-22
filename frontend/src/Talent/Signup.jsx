@@ -63,7 +63,7 @@ const SignupForm = () => {
 
       if (response.status === 200) {
         setStep(3); // Move to success step
-        navigate('/talent/login')
+        navigate('/talent-login')
       }
     } catch (error) {
       setMessage(
