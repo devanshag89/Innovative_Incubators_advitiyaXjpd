@@ -142,18 +142,7 @@ The backend folder contains the server-side logic and API implementation.
    ```
    
 3. **Set up environment variables in a .env file**
-   ```bash
-   PORT=4000
-   CLOUDINARY_CLOUD_NAME=dhicut2yg
-   CLOUDINARY_API_KEY=481536193739991
-   CLOUDINARY_API_SECRET=_s3l6zPUe46eLZocypXSkopJN6g
-   JWT_SECRET=4e35bcd0af5d1cfeba67859a7c73e3206c88e21759251df4fa7b998f1ec9bde67c2347b90a36f325882758df17986b32
-   EMAIL=akshayyadav5862@gmail.com
-   EMAIL_PASSWORD=rtze ulnb gzzm psxo
-   ADMIN_PHONE_NUMBER=6394330610
-   ADMIN_EMAIL=suppports2345@gmail.com
-   MONGO_URI=mongodb://localhost:27017/talentsphere
-   ```
+   
 
 ---
 
